@@ -1,4 +1,4 @@
-package model;
+package top.graduation.rs.model;
 
 /**
  * Created by Joanna Pakosh on Июль, 2018
@@ -7,21 +7,21 @@ public class Dish {
     private final int id;
     private final String name;
     private final int price;
-    private final Menu menu;
+    private final Restaurant restaurant;
 
-    public Dish(int id, String name, int price, Menu menu) {
+    public Dish(int id, String name, int price, Restaurant restaurant) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.menu = menu;
+        this.restaurant = restaurant;
     }
 
     public String getName() {
         return name;
     }
 
-    public Menu getMenu() {
-        return menu;
+    public Restaurant getRestaurant() {
+        return restaurant;
     }
 
     public int getPrice() {
