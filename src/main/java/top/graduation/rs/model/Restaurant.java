@@ -1,5 +1,7 @@
 package top.graduation.rs.model;
 
+import java.util.Set;
+
 /**
  * Created by Joanna Pakosh on Июль, 2018
  */
@@ -7,13 +9,13 @@ public class Restaurant {
     private final int id;
     private final String title;
     private final String location;
-    private final Menu menu;
+    private final Set<Dish> dishes;
 
-    public Restaurant(int id, String title, String location, Menu menu) {
+    public Restaurant(int id, String title, String location, Set<Dish> dishes) {
         this.id = id;
         this.title = title;
         this.location = location;
-        this.menu = menu;
+        this.dishes = dishes;
     }
 
     public int getId() {
@@ -26,5 +28,9 @@ public class Restaurant {
 
     public String getLocation() {
         return location;
+    }
+
+    public Set<Dish> getDishes() {
+        return dishes;
     }
 }
