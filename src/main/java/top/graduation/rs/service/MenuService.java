@@ -5,3 +5,4 @@ package top.graduation.rs.service;
  */
 public interface MenuService {
 }
+
