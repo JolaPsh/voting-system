@@ -1,17 +1,22 @@
 package top.graduation.rs.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 /**
  * Created by Joanna Pakosh on Июль, 2018
  */
+
+@SuppressWarnings("JpaQlInspection")
+@NamedQueries({
+        @NamedQuery(name = Restaurant.ALL, query = "SELECT r FROM Restaurant r ORDER BY r.id DESC")
+})
 @Entity
 @Table(name = "restaurants")
 public class Restaurant {
+    public static final String ALL = "Restaurant.getAll";
+
     @Column(name = "id", nullable = false)
     private final int id;
     @Column(name = "title", nullable = false)
