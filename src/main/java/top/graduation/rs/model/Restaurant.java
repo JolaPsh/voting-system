@@ -12,6 +12,7 @@ import javax.validation.constraints.Size;
  */
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
 @Entity
 @Table(name = "restaurants")
 public class Restaurant {

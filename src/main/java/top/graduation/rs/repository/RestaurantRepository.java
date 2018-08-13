@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import top.graduation.rs.model.Restaurant;
 
+import java.util.List;
+
 /**
  * Created by Joanna Pakosh on Авг., 2018
  */
