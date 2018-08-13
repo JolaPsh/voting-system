@@ -1,6 +1,5 @@
 package top.graduation.rs.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import top.graduation.rs.model.User;
 
 import java.util.List;
@@ -8,7 +7,7 @@ import java.util.List;
 /**
  * Created by Joanna Pakosh on Авг., 2018
  */
-public interface UserRepository extends JpaRepository {
+public interface UserRepository {
     // null if not found
     User get(int id);
 

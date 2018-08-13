@@ -1,20 +1,18 @@
 package top.graduation.rs.model;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 
 /**
  * Created by Joanna Pakosh on Авг., 2018
  */
 
 @MappedSuperclass
+@Access(AccessType.FIELD)
 public abstract class AbstractBaseEntity {
     public static final int START_SEQ = 1000;
-
     @Id
     @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
     protected Integer id;
 
     protected AbstractBaseEntity() {

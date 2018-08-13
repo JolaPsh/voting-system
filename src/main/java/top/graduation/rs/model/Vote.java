@@ -4,8 +4,11 @@ package top.graduation.rs.model;
  * Created by Joanna Pakosh on Июль, 2018
  */
 public class Vote {
-    private final User user;
-    private final Restaurant restaurant;
+    private User user;
+    private Restaurant restaurant;
+
+    public Vote() {
+    }
 
     public Vote(User user, Restaurant restaurant) {
         this.user = user;

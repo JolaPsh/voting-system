@@ -1,11 +1,13 @@
 package top.graduation.rs.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.Set;
 
 /**
  * Created by Joanna Pakosh on Июль, 2018
@@ -24,22 +26,21 @@ public class User extends AbstractNamedEntity {
     @Column(name = "password", nullable = false)
     @NotBlank
     private String password;
-    @Enumerated(EnumType.STRING)
+/*    @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
-    private Set<Role> roles;
-    private Set<Vote> userVotes;
+    private Set<Role> roles;*/
 
     public User() {
     }
-    public User(Integer id, String name, String email, LocalDate registered, String password, Set<Role> roles, Set<Vote> userVotes) {
+
+    public User(Integer id, String name, String email, LocalDate registered, String password/*, Set<Role> roles*//*, Set<Vote> userVotes*/) {
         super(id, name);
         this.email = email;
         this.registered = registered;
         this.password = password;
-        this.roles = roles;
-        this.userVotes = userVotes;
+        /*    this.roles = roles;  */
     }
 
     public String getEmail() {
@@ -66,19 +67,11 @@ public class User extends AbstractNamedEntity {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
+/*    public Set<Role> getRoles() {
         return roles;
     }
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
-    }
-
-    public Set<Vote> getUserVotes() {
-        return userVotes;
-    }
-
-    public void setUserVotes(Set<Vote> userVotes) {
-        this.userVotes = userVotes;
-    }
+    }*/
 }

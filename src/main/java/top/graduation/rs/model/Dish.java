@@ -13,15 +13,13 @@ import javax.persistence.Table;
 public class Dish extends AbstractNamedEntity {
     @Column(name = "price", nullable = false)
     private int price;
-    private Restaurant restaurant;
 
     public Dish() {
     }
 
-    public Dish(Integer id, String name, int price, Restaurant restaurant) {
+    public Dish(Integer id, String name, int price) {
         super(id, name);
         this.price = price;
-        this.restaurant = restaurant;
     }
 
     public int getPrice() {
@@ -32,11 +30,4 @@ public class Dish extends AbstractNamedEntity {
         this.price = price;
     }
 
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
-
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
 }
