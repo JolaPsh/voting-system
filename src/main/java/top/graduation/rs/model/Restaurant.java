@@ -2,8 +2,10 @@ package top.graduation.rs.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 /**
  * Created by Joanna Pakosh on Июль, 2018
@@ -18,9 +20,11 @@ public class Restaurant {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(name = "title", nullable = false)
+    @Size(min = 2, max = 50)
     @NotBlank
     private String title;
     @Column(name = "location", nullable = false)
+    @Size(min = 2, max = 70)
     @NotBlank
     private String location;
 
