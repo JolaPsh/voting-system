@@ -1,5 +1,9 @@
-DELETE FROM restraurants;
+DELETE FROM restaurants;
 DELETE FROM users;
+DELETE FROM user_roles;
+DELETE FROM dishes;
+DELETE FROM votes;
+
 ALTER SEQUENCE global_seq
 RESTART WITH 1000;
 
@@ -18,9 +22,9 @@ INSERT INTO users (name, email, password) VALUES
   ('Dominik', 'dominik@gmail.com', '12345678');
 
 INSERT INTO user_roles (user_id, role) VALUES
-  (1002, 'ROLE_USER'),
-  (1001, 'ROLE_USER'),
-  (1000, 'ROLE_ADMIN');
+  (1009, 'ROLE_USER'),
+  (1008, 'ROLE_USER'),
+  (1007, 'ROLE_ADMIN');
 
 INSERT INTO dishes (name, price) VALUES
   ('Calamari', 33),
@@ -40,11 +44,11 @@ INSERT INTO dishes (name, price) VALUES
   ('Cutlet + spaghetti', 62);
 
 INSERT INTO votes (user_id, restaurant_id) VALUES
-  (1001, 1),
-  (1002, 1),
-  (1000, 2),
-  (1001, 1),
-  (1001, 7),
-  (1002, 4),
-  (1001, 4);
+  (1007, 1001),
+  (1008, 1001),
+  (1009, 1002),
+  (1007, 1001),
+  (1009, 1006),
+  (1008, 1004),
+  (1007, 1004);
 

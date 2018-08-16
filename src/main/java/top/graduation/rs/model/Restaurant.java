@@ -15,12 +15,12 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "restaurants")
-public class Restaurant {
-    @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    @Column(name = "title", nullable = false)
+public class Restaurant extends AbstractBaseEntity {
+    /*    @Id
+        @Column(name = "id", nullable = false)
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        private int id;*/
+    @Column(name = "title", nullable = false, unique = true)
     @Size(min = 2, max = 50)
     @NotBlank
     private String title;
@@ -33,13 +33,9 @@ public class Restaurant {
     }
 
     public Restaurant(int id, String title, String location) {
-        this.id = id;
+        super(id);
         this.title = title;
         this.location = location;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getTitle() {
@@ -48,5 +44,13 @@ public class Restaurant {
 
     public String getLocation() {
         return location;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

@@ -10,15 +10,16 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "votes")
 public class Vote extends AbstractBaseEntity {
-    @ManyToOne
-    @JoinColumn
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     @NotNull
     private User user;
-    @ManyToOne
-    @JoinColumn
-    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    /*@NotNull*/
     private Restaurant restaurant;
-    @Column(name = "dateTime")
+    @Column(name = "dateTime", unique = true)
+    /*@NotNull*/
     private LocalDateTime dateTime;
 
     public Vote() {
