@@ -71,7 +71,7 @@ public class RestaurantAdminController {
         log.info("create restaurant {}", restaurant);
         repo.save(restaurant);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/restaurants/{id}").buildAndExpand(restaurant.getId()).toUri());
+        headers.setLocation(ucBuilder.path(REST_URL + "/{id}").buildAndExpand(restaurant.getId()).toUri());
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 }
