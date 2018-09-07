@@ -26,22 +26,22 @@ INSERT INTO user_roles (user_id, role) VALUES
   (1008, 'ROLE_USER'),
   (1007, 'ROLE_ADMIN');
 
-INSERT INTO dishes (name, price) VALUES
-  ('Calamari', 33),
-  ('Meat balls + Deruny', 112),
-  ('Cabbage rolls', 52),
-  ('Black tea', 10),
-  ('Grape juice', 11),
-  ('Cocoa', 15),
-  ('Omelette', 27),
-  ('Casserole', 72),
-  ('Coffe', 12),
-  ('Fish and chips', 108),
-  ('Mint tea', 25),
-  ('Champagne', 50),
-  ('Pizza', 45),
-  ('French fries', 30),
-  ('Cutlet + spaghetti', 62);
+INSERT INTO dishes (name, price, restaurant_id) VALUES
+  ('Calamari', 33, 1000),
+  ('Meat balls + Deruny', 112, 1004),
+  ('Cabbage rolls', 52, 1002),
+  ('Black tea', 10, 1002),
+  ('Grape juice', 11, 1004),
+  ('Cocoa', 15, 1000),
+  ('Omelette', 27, 1002),
+  ('Casserole', 72, 1006),
+  ('Coffe', 12, 1000),
+  ('Fish and chips', 108, 1002),
+  ('Mint tea', 25, 1003),
+  ('Champagne', 50, 1005),
+  ('Pizza', 45, 1002),
+  ('French fries', 30, 1001),
+  ('Cutlet + spaghetti', 62, 1003);
 
 INSERT INTO votes (user_id, restaurant_id) VALUES
   (1007, 1001),
