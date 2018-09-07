@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -20,21 +21,23 @@ import java.util.Optional;
  */
 
 @RestController
-public class RestaurantController {
+@RequestMapping(value = RestaurantAdminController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+public class RestaurantAdminController {
 
-    private static final Logger log = LoggerFactory.getLogger(RestaurantController.class);
+    private static final Logger log = LoggerFactory.getLogger(RestaurantAdminController.class);
+    static final String REST_URL = "rest/admin/restaurants";
 
     @Autowired
     private RestaurantRepository repo;
 
-    @GetMapping("/restaurants")
+    @GetMapping
     public List<Restaurant> getAll() {
         log.info("get all restaurants");
         return repo.findAll();
     }
 
-    @GetMapping("/restaurants/{id}")
-    public Restaurant retrieveOne(@PathVariable int id) throws ResourceNotFoundException {
+    @GetMapping("/{id}")
+    public Restaurant retrieve(@PathVariable("id") int id) throws ResourceNotFoundException {
         log.info("get restaurant with id {}", id);
         Optional<Restaurant> restaurantOptional = repo.findById(id);
         if (!restaurantOptional.isPresent()) {
@@ -43,26 +46,28 @@ public class RestaurantController {
         return restaurantOptional.get();
     }
 
-    @DeleteMapping("/restaurants/{id}")
-    public void delete(@PathVariable int id) {
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") int id) {
         log.info("delete restaurant with id {} ", id);
         repo.deleteById(id);
     }
 
-    @PutMapping("/restaurants/{id}")
-    public ResponseEntity<?> updateOne(@RequestBody Restaurant restaurant, @PathVariable int id) {
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Restaurant update(@RequestBody Restaurant newRestaurant, @PathVariable("id") int id) {
         log.info("update restaurant with id {}", id);
-        Optional<Restaurant> restaurantOptional = repo.findById(id);
-        if (!restaurantOptional.isPresent()) {
-            throw new ResourceNotFoundException("Not Found");
-        }
-
-        repo.save(restaurant);
-        return new ResponseEntity<Restaurant>(restaurant, HttpStatus.OK);
+        return repo.findById(id).map(restaurant -> {
+            restaurant.setLocation(newRestaurant.getLocation());
+            restaurant.setTitle(newRestaurant.getTitle());
+            return repo.save(restaurant);
+        }).
+                orElseGet(() -> {
+                    newRestaurant.setId(id);
+                    return repo.save(newRestaurant);
+                });
     }
 
-    @PostMapping("/restaurants")
-    public ResponseEntity<?> createOne(@RequestBody Restaurant restaurant, UriComponentsBuilder ucBuilder) {
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> create(@RequestBody Restaurant restaurant, UriComponentsBuilder ucBuilder) {
         log.info("create restaurant {}", restaurant);
         repo.save(restaurant);
         HttpHeaders headers = new HttpHeaders();

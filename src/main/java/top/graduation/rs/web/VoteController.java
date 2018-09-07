@@ -8,5 +8,5 @@ import org.slf4j.LoggerFactory;
  */
 public class VoteController {
 
-    private static final Logger log = LoggerFactory.getLogger(RestaurantController.class);
+    private static final Logger log = LoggerFactory.getLogger(RestaurantAdminController.class);
 }
