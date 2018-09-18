@@ -8,7 +8,7 @@
     <packaging>jar</packaging>
 
     <name>Voting App</name>
-    <url>http://topjava.herokuapp.com/</url>
+    <url>http://voting.herokuapp.com/</url>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

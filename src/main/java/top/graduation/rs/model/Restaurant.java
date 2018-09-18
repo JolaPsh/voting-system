@@ -16,10 +16,6 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "restaurants")
 public class Restaurant extends AbstractBaseEntity {
-    /*    @Id
-        @Column(name = "id", nullable = false)
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        private int id;*/
     @Column(name = "title", nullable = false, unique = true)
     @Size(min = 2, max = 50)
     @NotBlank

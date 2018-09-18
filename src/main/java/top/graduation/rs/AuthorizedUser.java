@@ -1,8 +1,6 @@
 package top.graduation.rs;
 
-import org.springframework.security.core.GrantedAuthority;
-
-import java.util.Collection;
+import top.graduation.rs.model.User;
 
 /**
  * Created by Joanna Pakosh on Сент., 2018
@@ -10,7 +8,22 @@ import java.util.Collection;
 public class AuthorizedUser extends org.springframework.security.core.userdetails.User {
     private static final long serialVersionUID = 1L;
 
-    public AuthorizedUser(String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
-        super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
+    private User user;
+
+    public AuthorizedUser(User user) {
+        super(user.getEmail(), user.getPassword(), user.isEnabled(), true, true, true, user.getRoles());
+    }
+
+    public int getId() {
+        return user.getId();
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    @Override
+    public String toString() {
+        return user.toString();
     }
 }

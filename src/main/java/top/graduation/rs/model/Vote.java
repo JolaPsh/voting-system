@@ -18,7 +18,7 @@ public class Vote extends AbstractBaseEntity {
     @JoinColumn(name = "restaurant_id", nullable = false)
     @NotNull
     private Restaurant restaurant;
-    @Column(name = "dateTime", unique = true)
+    @Column(name = "date_time", unique = true)
     @NotNull
     private LocalDateTime dateTime;
 

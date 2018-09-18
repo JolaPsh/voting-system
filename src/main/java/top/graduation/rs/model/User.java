@@ -1,10 +1,15 @@
 package top.graduation.rs.model;
 
+import org.springframework.util.CollectionUtils;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.EnumSet;
 import java.util.Set;
 
 /**
@@ -35,6 +40,11 @@ public class User extends AbstractNamedEntity {
     public User() {
     }
 
+    public User(User u) {
+        this(u.getId(), u.getName(), u.getEmail(), u.getRegistered(), u.getPassword(), u.isEnabled(), u.getRoles());
+    }
+
+
     public User(Integer id, String name, String email, LocalDate registered, String password, boolean enabled, Set<Role> roles) {
         super(id, name);
         this.email = email;
@@ -42,6 +52,15 @@ public class User extends AbstractNamedEntity {
         this.password = password;
         this.enabled = enabled;
         this.roles = roles;
+    }
+
+    public User(Integer id, String name, String email, LocalDate registered, String password, boolean enabled, Collection<Role> roles) {
+        super(id, name);
+        this.email = email;
+        this.registered = registered;
+        this.password = password;
+        this.enabled = enabled;
+        setRoles(roles);
     }
 
     public String getEmail() {
@@ -80,7 +99,19 @@ public class User extends AbstractNamedEntity {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRoles(Collection<Role> roles) {
+        this.roles = CollectionUtils.isEmpty(roles) ? Collections.emptySet() : EnumSet.copyOf(roles);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", registered=" + registered +
+                ", password='" + password + '\'' +
+                ", enabled=" + enabled +
+                ", roles=" + roles +
+                ", id=" + id +
+                '}';
     }
 }
