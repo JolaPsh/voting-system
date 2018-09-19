@@ -1,25 +1,12 @@
 package top.graduation.rs.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import top.graduation.rs.model.User;
-
-import java.util.List;
 
 /**
  * Created by Joanna Pakosh on Авг., 2018
  */
-public interface UserRepository {
+public interface UserRepository extends JpaRepository<User, Integer> {
 
-    User get(int id);
-
-    User save(User user);
-
-    boolean delete(int id);
-
-    User getByEmail(String email);
-
-    List<User> getAll();
-
-    default User test(int id) {
-        throw new UnsupportedOperationException();
-    }
+    User findUserByEmail(String email);
 }
