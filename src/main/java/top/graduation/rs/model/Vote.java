@@ -2,6 +2,7 @@ package top.graduation.rs.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -20,16 +21,22 @@ public class Vote extends AbstractBaseEntity {
     private Restaurant restaurant;
     @Column(name = "date_time", unique = true)
     @NotNull
-    private LocalDateTime dateTime;
+    private LocalDate date;
 
     public Vote() {
     }
 
-    public Vote(Integer id, User user, Restaurant restaurant, LocalDateTime dateTime) {
+    public Vote(Integer id, User user, Restaurant restaurant, LocalDate date) {
         super(id);
         this.user = user;
         this.restaurant = restaurant;
-        this.dateTime = dateTime;
+        this.date = date;
+    }
+
+    public Vote(User user, Restaurant restaurant, LocalDate date) {
+        this.user = user;
+        this.restaurant = restaurant;
+        this.date = date;
     }
 
     public User getUser() {
@@ -40,7 +47,23 @@ public class Vote extends AbstractBaseEntity {
         return restaurant;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public boolean isNew() {
+        return super.isNew();
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

@@ -7,10 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Joanna Pakosh on Июль, 2018
@@ -37,7 +34,13 @@ public class User extends AbstractNamedEntity {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
+    // private List<Vote> voteHistory;
+
     public User() {
+    }
+
+    public User(Integer id, String name) {
+        super(id, name);
     }
 
     public User(User u) {
@@ -106,12 +109,12 @@ public class User extends AbstractNamedEntity {
     @Override
     public String toString() {
         return "User{" +
+                "id=" + id +
                 "email='" + email + '\'' +
                 ", registered=" + registered +
                 ", password='" + password + '\'' +
                 ", enabled=" + enabled +
                 ", roles=" + roles +
-                ", id=" + id +
                 '}';
     }
 }
