@@ -49,4 +49,13 @@ public class Restaurant extends AbstractBaseEntity {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", location='" + location + '\'' +
+                '}';
+    }
 }

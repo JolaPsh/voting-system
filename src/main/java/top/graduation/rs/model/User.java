@@ -110,7 +110,7 @@ public class User extends AbstractNamedEntity {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                "email='" + email + '\'' +
+                ", email='" + email + '\'' +
                 ", registered=" + registered +
                 ", password='" + password + '\'' +
                 ", enabled=" + enabled +

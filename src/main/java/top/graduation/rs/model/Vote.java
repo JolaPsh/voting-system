@@ -66,4 +66,14 @@ public class Vote extends AbstractBaseEntity {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
+    @Override
+    public String toString() {
+        return "Vote{" +
+                "id=" + id +
+                ", user=" + user +
+                ", restaurant=" + restaurant +
+                ", date=" + date +
+                '}';
+    }
 }
