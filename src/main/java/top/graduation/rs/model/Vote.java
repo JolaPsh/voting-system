@@ -3,7 +3,6 @@ package top.graduation.rs.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * Created by Joanna Pakosh on Июль, 2018
@@ -49,10 +48,6 @@ public class Vote extends AbstractBaseEntity {
 
     public LocalDate getDate() {
         return date;
-    }
-
-    public boolean isNew() {
-        return super.isNew();
     }
 
     public void setUser(User user) {

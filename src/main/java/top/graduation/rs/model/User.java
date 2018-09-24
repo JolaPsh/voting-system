@@ -34,8 +34,6 @@ public class User extends AbstractNamedEntity {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-    // private List<Vote> voteHistory;
-
     public User() {
     }
 
@@ -46,7 +44,6 @@ public class User extends AbstractNamedEntity {
     public User(User u) {
         this(u.getId(), u.getName(), u.getEmail(), u.getRegistered(), u.getPassword(), u.isEnabled(), u.getRoles());
     }
-
 
     public User(Integer id, String name, String email, LocalDate registered, String password, boolean enabled, Set<Role> roles) {
         super(id, name);
