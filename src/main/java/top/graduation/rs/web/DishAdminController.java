@@ -10,7 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import top.graduation.rs.AuthorizedUser;
 import top.graduation.rs.model.Dish;
 import top.graduation.rs.service.DishService;
 
@@ -33,7 +32,7 @@ public class DishAdminController {
     @GetMapping
     public ResponseEntity<List<Dish>> getAll() {
         log.info("get all dishes {}");
-        int userId = AuthorizedUser.id();
+        int userId = SecurityUtil.authUserId();
         return new ResponseEntity<>(service.getAll(userId), HttpStatus.OK);
     }
 

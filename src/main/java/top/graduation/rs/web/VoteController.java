@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import top.graduation.rs.AuthorizedUser;
 import top.graduation.rs.model.Restaurant;
 import top.graduation.rs.model.Vote;
 import top.graduation.rs.repository.datajpa.VoteRepository;
@@ -36,7 +35,7 @@ public class VoteController {
 
     @PostMapping(value = "/{id}")
     public ResponseEntity<Restaurant> vote(@PathVariable("id") Integer restaurantId) {
-        int userId = AuthorizedUser.id();
+        int userId = SecurityUtil.authUserId();
         boolean acceptVote = LocalTime.now().isAfter(TIME_EXPIRED);
         Vote vote = acceptVote ? voteService.create(userId, restaurantId) :
                 voteService.update(userId, restaurantId);
@@ -46,7 +45,7 @@ public class VoteController {
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Vote>> getUserVoteHistory() {
-        int userId = AuthorizedUser.id();
+        int userId = SecurityUtil.authUserId();
         return new ResponseEntity<>(voteService.getUserVoteHistory(userId), HttpStatus.OK);
     }
 

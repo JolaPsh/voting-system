@@ -1,14 +1,19 @@
 package top.graduation.rs.web;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import top.graduation.rs.AuthorizedUser;
+
+import static java.util.Objects.requireNonNull;
+
 /**
  * Created by Joanna Pakosh on Авг., 2018
  */
 public class SecurityUtil {
 
-    private SecurityUtil() {
-    }
+    private SecurityUtil() {  }
 
-  /*  public static AuthorizedUser safeGet() {
+    public static AuthorizedUser safeGet() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth == null) {
             return null;
@@ -25,5 +30,6 @@ public class SecurityUtil {
 
     public static int authUserId() {
         return get().getUser().getId();
-    }*/
+    }
+
 }

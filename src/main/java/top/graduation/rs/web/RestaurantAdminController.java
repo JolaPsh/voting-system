@@ -10,7 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import top.graduation.rs.AuthorizedUser;
 import top.graduation.rs.model.Restaurant;
 import top.graduation.rs.repository.datajpa.RestaurantRepository;
 import top.graduation.rs.service.RestaurantService;
@@ -43,14 +42,14 @@ public class RestaurantAdminController {
     @GetMapping
     public ResponseEntity<List<Restaurant>> getAll() {
         log.info("get all restaurants {}");
-        int userId = AuthorizedUser.id();
+        int userId = SecurityUtil.authUserId();
         return new ResponseEntity<>(restaurantService.getAll(userId), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public Optional<Restaurant> retrieve(@PathVariable("id") int id) throws NotFoundException {
         log.info("get restaurant with id {}", id);
-        int userId = AuthorizedUser.id();
+        int userId = SecurityUtil.authUserId();
         return restaurantService.get(id, userId);
     }
 

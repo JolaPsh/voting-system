@@ -5,9 +5,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import top.graduation.rs.AuthorizedUser;
 import top.graduation.rs.model.Dish;
 import top.graduation.rs.repository.datajpa.DishRepository;
+import top.graduation.rs.web.SecurityUtil;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -28,7 +28,7 @@ public class DishServiceImpl implements DishService {
 
     @Override
     public List<Dish> getAll(int userId) {
-        return repository.findAll().stream().filter(v -> AuthorizedUser.id() == userId).collect(Collectors.toList());
+        return repository.findAll().stream().filter(v -> SecurityUtil.authUserId() == userId).collect(Collectors.toList());
     }
 
     @Override
