@@ -1,5 +1,6 @@
 package top.graduation.rs.web;
 
+import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +10,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import top.graduation.rs.exceptions.ResourceNotFoundException;
+import top.graduation.rs.AuthorizedUser;
 import top.graduation.rs.model.Restaurant;
-import top.graduation.rs.repository.RestaurantRepository;
+import top.graduation.rs.repository.datajpa.RestaurantRepository;
+import top.graduation.rs.service.RestaurantService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,53 +28,50 @@ import java.util.Optional;
 public class RestaurantAdminController {
 
     private static final Logger log = LoggerFactory.getLogger(RestaurantAdminController.class);
-    static final String REST_URL = "rest/admin/restaurants";
+    static final String REST_URL = "/rest/admin/restaurants";
 
     @Autowired
     private RestaurantRepository repo;
+    @Autowired
+    private RestaurantService restaurantService;
+
+    @GetMapping(value = "/dishes", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Restaurant> getAllWithDishes() {
+        return repo.getAllWithDishes(LocalDate.now());
+    }
 
     @GetMapping
-    public List<Restaurant> getAll() {
-        log.info("get all restaurants");
-        return repo.findAll();
+    public ResponseEntity<List<Restaurant>> getAll() {
+        log.info("get all restaurants {}");
+        int userId = AuthorizedUser.id();
+        return new ResponseEntity<>(restaurantService.getAll(userId), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public Restaurant retrieve(@PathVariable("id") int id) throws ResourceNotFoundException {
+    public Optional<Restaurant> retrieve(@PathVariable("id") int id) throws NotFoundException {
         log.info("get restaurant with id {}", id);
-        Optional<Restaurant> restaurantOptional = repo.findById(id);
-        if (!restaurantOptional.isPresent()) {
-            throw new ResourceNotFoundException("Restaurant doesn't exists");
-        }
-        return restaurantOptional.get();
+        int userId = AuthorizedUser.id();
+        return restaurantService.get(id, userId);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") int id) {
+    public void delete(@PathVariable("id") int id) throws NotFoundException {
         log.info("delete restaurant with id {} ", id);
-        repo.deleteById(id);
-    }
-
-    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Restaurant update(@RequestBody Restaurant newRestaurant, @PathVariable("id") int id) {
-        log.info("update restaurant with id {}", id);
-        return repo.findById(id).map(restaurant -> {
-            restaurant.setLocation(newRestaurant.getLocation());
-            restaurant.setTitle(newRestaurant.getTitle());
-            return repo.save(restaurant);
-        }).
-                orElseGet(() -> {
-                    newRestaurant.setId(id);
-                    return repo.save(newRestaurant);
-                });
+        restaurantService.delete(id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> create(@RequestBody Restaurant restaurant, UriComponentsBuilder ucBuilder) {
         log.info("create restaurant {}", restaurant);
-        repo.save(restaurant);
+        restaurantService.create(restaurant);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path(REST_URL + "/{id}").buildAndExpand(restaurant.getId()).toUri());
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Restaurant update(@RequestBody Restaurant newRestaurant, @PathVariable("id") int id) throws NotFoundException {
+        log.info("update restaurant with id {}", id);
+        return restaurantService.update(newRestaurant, id);
     }
 }
