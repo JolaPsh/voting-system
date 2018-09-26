@@ -11,13 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import top.graduation.rs.model.Restaurant;
-import top.graduation.rs.repository.datajpa.RestaurantRepository;
 import top.graduation.rs.service.RestaurantService;
 import top.graduation.rs.web.SecurityUtil;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by Joanna Pakosh on Авг., 2018
@@ -31,14 +28,7 @@ public class RestaurantAdminController {
     public static final String REST_URL = "/rest/admin/restaurants";
 
     @Autowired
-    private RestaurantRepository repo;
-    @Autowired
     private RestaurantService restaurantService;
-
-    @GetMapping(value = "/dishes", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Restaurant> getAllWithDishes() {
-        return repo.getAllWithDishes(LocalDate.now());
-    }
 
     @GetMapping
     public ResponseEntity<List<Restaurant>> getAll() {
@@ -48,10 +38,9 @@ public class RestaurantAdminController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Restaurant> retrieve(@PathVariable("id") int id) throws NotFoundException {
+    public Restaurant retrieve(@PathVariable("id") int id) throws NotFoundException {
         log.info("get restaurant with id {}", id);
-        int userId = SecurityUtil.authUserId();
-        return restaurantService.get(id, userId);
+        return restaurantService.get(id).orElse(null);
     }
 
     @DeleteMapping("/{id}")

@@ -17,5 +17,5 @@ public interface VoteService {
 
     Vote update(int userId, int restaurantId);
 
-    List<Vote> getUserVoteHistory(Integer userId);
+    List<Vote> getUserVoteHistory(int userId);
 }

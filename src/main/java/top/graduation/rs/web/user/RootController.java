@@ -13,6 +13,7 @@ import top.graduation.rs.model.Restaurant;
 import top.graduation.rs.service.RestaurantService;
 import top.graduation.rs.web.SecurityUtil;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -24,7 +25,7 @@ import java.util.List;
 public class RootController {
 
     private static final Logger log = LoggerFactory.getLogger(RootController.class);
-    static final String REST_URL = "/rest/**/restaurants";
+    static final String REST_URL = "/rest/profile/restaurants";
 
     @Autowired
     private RestaurantService service;
@@ -34,5 +35,12 @@ public class RootController {
         log.info("get all restaurants {}");
         int userId = SecurityUtil.authUserId();
         return new ResponseEntity<>(service.getAll(userId), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/dishes")
+    public ResponseEntity<List<Restaurant>> getAllWithDishes(LocalDate localDate) {
+        log.info("get all restaurants with dishes {}, localDate ={}", localDate);
+        int userId = SecurityUtil.authUserId();
+        return new ResponseEntity<>(service.getAllWithDishes(localDate, userId), HttpStatus.OK);
     }
 }

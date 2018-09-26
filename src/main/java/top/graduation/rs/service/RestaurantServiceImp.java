@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import top.graduation.rs.model.Restaurant;
 import top.graduation.rs.repository.datajpa.RestaurantRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +31,7 @@ public class RestaurantServiceImp implements RestaurantService {
     }
 
     @Override
-    public Optional<Restaurant> get(int id, int userId) throws NotFoundException {
+    public Optional<Restaurant> get(int id) throws NotFoundException {
         log.info("get restaurant with id {}", id);
         Optional<Restaurant> restaurantOptional = repository.findById(id);
         if (!restaurantOptional.isPresent()) {
@@ -63,5 +64,11 @@ public class RestaurantServiceImp implements RestaurantService {
                     newRestaurant.setId(id);
                     return repository.save(newRestaurant);
                 });
+    }
+
+    @Override
+    public List<Restaurant> getAllWithDishes(LocalDate localDate, int userId) {
+        log.info("get all restaurants with dishes {}");
+        return repository.getAllWithDishes(localDate);
     }
 }
