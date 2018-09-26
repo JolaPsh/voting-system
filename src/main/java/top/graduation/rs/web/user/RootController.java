@@ -1,4 +1,4 @@
-package top.graduation.rs.web;
+package top.graduation.rs.web.user;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.graduation.rs.model.Restaurant;
 import top.graduation.rs.service.RestaurantService;
+import top.graduation.rs.web.SecurityUtil;
 
 import java.util.List;
 

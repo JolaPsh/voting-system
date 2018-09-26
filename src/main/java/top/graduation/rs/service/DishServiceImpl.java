@@ -28,36 +28,42 @@ public class DishServiceImpl implements DishService {
 
     @Override
     public List<Dish> getAll(int userId) {
-        return repository.findAll().stream().filter(v -> SecurityUtil.authUserId() == userId).collect(Collectors.toList());
+        log.info("get all dishes {}");
+        return repository.findAll().stream().filter(v -> SecurityUtil.authUserId() == userId)
+                .collect(Collectors.toList());
     }
 
     @Override
     public Optional<Dish> get(int id) throws NotFoundException {
+        log.info("get dish with id {}", id);
         return repository.findById(id);
     }
 
     @Override
     public void delete(int id) throws NotFoundException {
+        log.info("delete dish with id {}", id);
         repository.deleteById(id);
     }
 
     @Override
-    public Dish create(Dish dish) {
-        return repository.save(dish);
+    public Dish create(Dish newDish) {
+        log.info("create dish {}", newDish);
+        return repository.save(newDish);
     }
 
     @Override
-    public Dish update(Dish dish, int id) throws NotFoundException {
-        return repository.findById(dish.getId()).map(v -> {
-            dish.setName(v.getName());
-            dish.setPrice(v.getPrice());
-            dish.setRestaurant(v.getRestaurant());
-            dish.setDate(LocalDate.now());
-            return repository.save(dish);
+    public Dish update(Dish newDish, int id) throws NotFoundException {
+        log.info("update dish {} with id {}", newDish, id);
+        return repository.findById(newDish.getId()).map(v -> {
+            newDish.setName(v.getName());
+            newDish.setPrice(v.getPrice());
+            newDish.setRestaurant(v.getRestaurant());
+            newDish.setDate(LocalDate.now());
+            return repository.save(newDish);
         }).
                 orElseGet(() -> {
-                    dish.setId(id);
-                    return repository.save(dish);
+                    newDish.setId(id);
+                    return repository.save(newDish);
                 });
     }
 }

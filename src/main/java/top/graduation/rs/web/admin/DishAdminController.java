@@ -1,4 +1,4 @@
-package top.graduation.rs.web;
+package top.graduation.rs.web.admin;
 
 import javassist.NotFoundException;
 import org.slf4j.Logger;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import top.graduation.rs.model.Dish;
 import top.graduation.rs.service.DishService;
+import top.graduation.rs.web.SecurityUtil;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,8 +32,8 @@ public class DishAdminController {
 
     @GetMapping
     public ResponseEntity<List<Dish>> getAll() {
-        log.info("get all dishes {}");
         int userId = SecurityUtil.authUserId();
+        log.info("get all dishes {}");
         return new ResponseEntity<>(service.getAll(userId), HttpStatus.OK);
     }
 
@@ -49,18 +50,18 @@ public class DishAdminController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> create(@RequestBody Dish dish, UriComponentsBuilder ucBuilder){
-        log.info("create dish {}", dish);
-        service.create(dish);
+    public ResponseEntity<?> create(@RequestBody Dish newDish, UriComponentsBuilder ucBuilder){
+        log.info("create dish {}", newDish);
+        service.create(newDish);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path(REST_URL + "/{id}").buildAndExpand(dish.getId()).toUri());
+        headers.setLocation(ucBuilder.path(REST_URL + "/{id}").buildAndExpand(newDish.getId()).toUri());
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Dish update (@RequestBody Dish dish, @PathVariable("id") int id) throws NotFoundException {
-        log.info("update dish with id {}", id);
-        return service.update(dish, id);
+    public Dish update (@RequestBody Dish newDish, @PathVariable("id") int id) throws NotFoundException {
+        log.info("update dish {} with id {}", newDish, id);
+        return service.update(newDish, id);
     }
 }
 

@@ -1,4 +1,4 @@
-package top.graduation.rs.web;
+package top.graduation.rs.web.admin;
 
 import javassist.NotFoundException;
 import org.slf4j.Logger;
@@ -13,6 +13,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import top.graduation.rs.model.Restaurant;
 import top.graduation.rs.repository.datajpa.RestaurantRepository;
 import top.graduation.rs.service.RestaurantService;
+import top.graduation.rs.web.SecurityUtil;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -27,7 +28,7 @@ import java.util.Optional;
 public class RestaurantAdminController {
 
     private static final Logger log = LoggerFactory.getLogger(RestaurantAdminController.class);
-    static final String REST_URL = "/rest/admin/restaurants";
+    public static final String REST_URL = "/rest/admin/restaurants";
 
     @Autowired
     private RestaurantRepository repo;
@@ -70,7 +71,7 @@ public class RestaurantAdminController {
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Restaurant update(@RequestBody Restaurant newRestaurant, @PathVariable("id") int id) throws NotFoundException {
-        log.info("update restaurant with id {}", id);
+        log.info("update restaurant{} with id {}", newRestaurant, id);
         return restaurantService.update(newRestaurant, id);
     }
 }
