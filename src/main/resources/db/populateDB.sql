@@ -16,15 +16,21 @@ INSERT INTO restaurants (title, location) VALUES
   ('Shekspire', '17 Kosmonavtov street, Lviv'),
   ('Fransua', '44 Lenina street, Lviv');
 
+/*
+ *  Encrypted passwords(bcrypt algorithm):
+ *  herbert --> $2a$10$clfm6bvwKgyWFVG/tcbXh.MpIzd5GNZkJrcjfFrCv9KAxafTrRe7.
+ *  admin --> $2a$10$QYqxdmqBdAwjuBMa.opkzufsr4vZCRgRkVRnpI0Pc7BKZVPesxCpS
+ *  12345678 --> $2a$10$OUxYxa/tvEZqZikdR57ASuGthGKKKXcaY9O3sj8POVo2BOjTYDrLK
+ */
 INSERT INTO users (name, email, password) VALUES
-  ('Admin', 'admin@gmail.com', 'admin'),
-  ('Herbert', 'herbert@gmail.com', 'herbert'),
-  ('Dominik', 'dominik@gmail.com', '12345678');
+  ('Admin', 'admin@gmail.com', '$2a$10$QYqxdmqBdAwjuBMa.opkzufsr4vZCRgRkVRnpI0Pc7BKZVPesxCpS'),
+  ('Herbert', 'herbert@gmail.com', '$2a$10$clfm6bvwKgyWFVG/tcbXh.MpIzd5GNZkJrcjfFrCv9KAxafTrRe7.'),
+  ('Dominik', 'dominik@gmail.com', '$2a$10$OUxYxa/tvEZqZikdR57ASuGthGKKKXcaY9O3sj8POVo2BOjTYDrLK');
 
 INSERT INTO user_roles (user_id, role) VALUES
-  (1009, 'REGULAR_USER'),
-  (1008, 'REGULAR_USER'),
-  (1007, 'ADMIN');
+  (1009, 'ROLE_USER'),
+  (1008, 'ROLE_USER'),
+  (1007, 'ROLE_ADMIN');
 
 INSERT INTO dishes (name, price, restaurant_id) VALUES
   ('Calamari', 33, 1000),
