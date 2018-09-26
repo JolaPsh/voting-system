@@ -21,16 +21,15 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <!--Testing with JUnit-->
-        <junit.version>4.12</junit.version>
-        <!--hibernate-->
-        <hibernate.version>5.3.2.Final</hibernate.version>
-        <hibernate-validator.version>6.0.10.Final</hibernate-validator.version>
+        <!--Test with JUnit-->
+        <junit.jupiter.version>5.2.0</junit.jupiter.version>
         <!-- Logging -->
         <logback.version>1.2.3</logback.version>
         <slf4j.version>1.7.25</slf4j.version>
         <!--Database-->
         <hsqldb.version>2.4.1</hsqldb.version>
+        <postgresql.version>42.2.2</postgresql.version>
+
     </properties>
 
     <dependencies>
@@ -66,6 +65,10 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
         <!--security-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -78,23 +81,16 @@
             <version>${hsqldb.version}</version>
             <scope>runtime</scope>
         </dependency>
-        <!--- ORM -->
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>${hibernate.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.hibernate.validator</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>${hibernate-validator.version}</version>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
         </dependency>
         <!--JUnit-->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
