@@ -16,7 +16,7 @@ public class AuthorizedUser extends org.springframework.security.core.userdetail
 
     public AuthorizedUser(User user) {
         super(user.getEmail(), user.getPassword(), user.isEnabled(), true, true, true, user.getRoles());
-        this.user = user; //new User(user.getId(), user.getName(),  user.getEmail(), user.getRegistered(), user.getPassword(), user.isEnabled(), user.getRoles());
+        this.user = user;
     }
 
     public static AuthorizedUser safeGet() {
@@ -44,17 +44,4 @@ public class AuthorizedUser extends org.springframework.security.core.userdetail
                 "user=" + user.getId() + user.getName() + user.getPassword() +
                 '}';
     }
-
-    /*  public int getId() {
-        return user.getId();
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    @Override
-    public String toString() {
-        return user.toString();
-    }*/
 }
