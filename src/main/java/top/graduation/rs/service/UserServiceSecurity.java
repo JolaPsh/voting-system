@@ -32,7 +32,7 @@ public class UserServiceSecurity implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = repository.findByEmail(email.toLowerCase());
+        User user = repository.findByEmail(email.trim().toLowerCase());
         log.debug("Authenticating {}", email);
         if (user == null) {
             throw new UsernameNotFoundException("User with email" + email + " not found");
