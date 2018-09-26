@@ -64,7 +64,7 @@ public class Dish extends AbstractNamedEntity {
         return "Dish{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                "date=" + date +
+                ", date=" + date +
                 ", price=" + price +
                 ", restaurant=" + restaurant +
                 '}';
