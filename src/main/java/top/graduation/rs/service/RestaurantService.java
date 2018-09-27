@@ -23,7 +23,7 @@ public interface RestaurantService {
 
     Restaurant update(Restaurant restaurant, int id) throws NotFoundException;
 
-    default List<Restaurant> getAllWithDishes(LocalDate localDate, int userId) {
+    default List<Restaurant> getAllWithDishes(LocalDate localDate) {
         throw new UnsupportedOperationException();
     }
 }

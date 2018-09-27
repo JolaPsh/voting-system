@@ -41,6 +41,6 @@ public class RootController {
     public ResponseEntity<List<Restaurant>> getAllWithDishes(LocalDate localDate) {
         log.info("get all restaurants with dishes {}, localDate ={}", localDate);
         int userId = SecurityUtil.authUserId();
-        return new ResponseEntity<>(service.getAllWithDishes(localDate, userId), HttpStatus.OK);
+        return new ResponseEntity<>(service.getAllWithDishes(localDate), HttpStatus.OK);
     }
 }

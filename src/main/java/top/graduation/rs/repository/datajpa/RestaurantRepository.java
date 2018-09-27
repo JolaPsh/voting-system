@@ -23,5 +23,5 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
     List<Restaurant> findByTitle(@Param("title") String title);
 
     @Query("SELECT r.id, r.location, r.title, d.name, d.price FROM Dish d INNER JOIN d.restaurant r WHERE d.date=:date")
-    List<Restaurant> getAllWithDishes(@Param("date") LocalDate localDate, @Param("userId")int userId);
+    List<Restaurant> getAllWithDishes(@Param("date") LocalDate localDate);
 }

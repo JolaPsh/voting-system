@@ -53,21 +53,18 @@ public class RestaurantServiceImp implements RestaurantService {
     }
 
     @Override
-    public Restaurant update(Restaurant newRestaurant, int id) throws NotFoundException {
+    public Restaurant update(Restaurant newRestaurant, int id) throws IllegalArgumentException, NotFoundException {
         log.info("update restaurant {} with id {}", newRestaurant, id);
-        return repository.findById(newRestaurant.getId()).map(v -> {
-            newRestaurant.setTitle(v.getTitle());
-            newRestaurant.setLocation(v.getLocation());
-            return repository.save(newRestaurant);
-        }).
-                orElseGet(() -> {
-                    newRestaurant.setId(id);
-                    return repository.save(newRestaurant);
-                });
+        Optional<Restaurant> restaurantOptional = repository.findById(id);
+        if (!restaurantOptional.isPresent()) {
+            throw new NotFoundException("Restaurant not found");
+        }
+         newRestaurant.setId(id);
+        return repository.save(newRestaurant);
     }
 
     @Override
-    public List<Restaurant> getAllWithDishes(LocalDate localDate, int userId) {
+    public List<Restaurant> getAllWithDishes(LocalDate localDate) {
         log.info("get all restaurants with dishes {}");
         return repository.getAllWithDishes(localDate);
     }

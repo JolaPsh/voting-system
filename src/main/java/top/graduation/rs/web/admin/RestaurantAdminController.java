@@ -59,8 +59,9 @@ public class RestaurantAdminController {
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Restaurant update(@RequestBody Restaurant newRestaurant, @PathVariable("id") int id) throws NotFoundException {
+    public ResponseEntity<Restaurant> update(@RequestBody Restaurant newRestaurant, @PathVariable("id") int id) throws NotFoundException {
         log.info("update restaurant{} with id {}", newRestaurant, id);
-        return restaurantService.update(newRestaurant, id);
+        restaurantService.update(newRestaurant, id);
+        return ResponseEntity.noContent().build();
     }
 }
