@@ -9,7 +9,6 @@ import top.graduation.rs.model.Dish;
 import top.graduation.rs.repository.datajpa.DishRepository;
 import top.graduation.rs.web.SecurityUtil;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -52,18 +51,13 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public Dish update(Dish newDish, int id) throws NotFoundException {
+    public void update(Dish newDish, int id) throws NotFoundException {
         log.info("update dish {} with id {}", newDish, id);
-        return repository.findById(newDish.getId()).map(v -> {
-            newDish.setName(v.getName());
-            newDish.setPrice(v.getPrice());
-            newDish.setRestaurant(v.getRestaurant());
-            newDish.setDate(LocalDate.now());
-            return repository.save(newDish);
-        }).
-                orElseGet(() -> {
-                    newDish.setId(id);
-                    return repository.save(newDish);
-                });
+        Optional<Dish> restaurantOptional = repository.findById(id);
+        if (!restaurantOptional.isPresent()) {
+            throw new NotFoundException("Restaurant not found");
+        }
+        newDish.setId(id);
+        repository.save(newDish);
     }
 }

@@ -28,40 +28,41 @@ public class RestaurantAdminController {
     public static final String REST_URL = "/rest/admin/restaurants";
 
     @Autowired
-    private RestaurantService restaurantService;
+    private RestaurantService service;
 
     @GetMapping
     public ResponseEntity<List<Restaurant>> getAll() {
         log.info("get all restaurants {}");
         int userId = SecurityUtil.authUserId();
-        return new ResponseEntity<>(restaurantService.getAll(userId), HttpStatus.OK);
+        return new ResponseEntity<>(service.getAll(userId), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public Restaurant retrieve(@PathVariable("id") int id) throws NotFoundException {
         log.info("get restaurant with id {}", id);
-        return restaurantService.get(id).orElse(null);
+        return service.get(id).orElse(null);
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") int id) throws NotFoundException {
         log.info("delete restaurant with id {} ", id);
-        restaurantService.delete(id);
+        service.delete(id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> create(@RequestBody Restaurant restaurant, UriComponentsBuilder ucBuilder) {
         log.info("create restaurant {}", restaurant);
-        restaurantService.create(restaurant);
+        service.create(restaurant);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path(REST_URL + "/{id}").buildAndExpand(restaurant.getId()).toUri());
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Restaurant> update(@RequestBody Restaurant newRestaurant, @PathVariable("id") int id) throws NotFoundException {
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void update(@RequestBody Restaurant newRestaurant, @PathVariable("id") int id) throws NotFoundException {
         log.info("update restaurant{} with id {}", newRestaurant, id);
-        restaurantService.update(newRestaurant, id);
-        return ResponseEntity.noContent().build();
+        service.update(newRestaurant, id);
     }
 }

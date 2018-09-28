@@ -19,5 +19,5 @@ public interface DishService {
 
     Dish create(Dish dish);
 
-    Dish update(Dish dish, int id) throws NotFoundException;
+    void update(Dish dish, int id) throws NotFoundException;
 }

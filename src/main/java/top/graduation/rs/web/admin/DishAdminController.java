@@ -15,7 +15,6 @@ import top.graduation.rs.service.DishService;
 import top.graduation.rs.web.SecurityUtil;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by Joanna Pakosh on Сент., 2018
@@ -38,12 +37,13 @@ public class DishAdminController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Dish> retrieve(@PathVariable("id") int id) throws NotFoundException {
+    public Dish retrieve(@PathVariable("id") int id) throws NotFoundException {
         log.info("get dish with id {}", id);
-        return service.get(id);
+        return service.get(id).orElse(null);
     }
 
-    @DeleteMapping("{/id}")
+    @DeleteMapping("/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") int id) throws NotFoundException {
         log.info("delete dish with id {} ", id);
         service.delete(id);
@@ -59,9 +59,10 @@ public class DishAdminController {
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Dish update (@RequestBody Dish newDish, @PathVariable("id") int id) throws NotFoundException {
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void update (@RequestBody Dish newDish, @PathVariable("id") int id) throws NotFoundException {
         log.info("update dish {} with id {}", newDish, id);
-        return service.update(newDish, id);
+        service.update(newDish, id);
     }
 }
 

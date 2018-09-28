@@ -21,9 +21,8 @@ public interface RestaurantService {
 
     Restaurant create(Restaurant restaurant);
 
-    Restaurant update(Restaurant restaurant, int id) throws NotFoundException;
+    void update(Restaurant restaurant, int id) throws NotFoundException;
 
-    default List<Restaurant> getAllWithDishes(LocalDate localDate) {
-        throw new UnsupportedOperationException();
-    }
+    List<Restaurant> getAllWithDishes(LocalDate date);
+
 }

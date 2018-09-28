@@ -3,6 +3,7 @@ package top.graduation.rs.repository.datajpa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.transaction.annotation.Transactional;
 import top.graduation.rs.model.Restaurant;
 
@@ -23,5 +24,5 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
     List<Restaurant> findByTitle(@Param("title") String title);
 
     @Query("SELECT r.id, r.location, r.title, d.name, d.price FROM Dish d INNER JOIN d.restaurant r WHERE d.date=:date")
-    List<Restaurant> getAllWithDishes(@Param("date") LocalDate localDate);
+    List<Restaurant> getAllWithDishes(@Param("date") @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) LocalDate date);
 }

@@ -53,14 +53,14 @@ public class RestaurantServiceImp implements RestaurantService {
     }
 
     @Override
-    public Restaurant update(Restaurant newRestaurant, int id) throws IllegalArgumentException, NotFoundException {
+    public void update(Restaurant newRestaurant, int id) throws IllegalArgumentException, NotFoundException {
         log.info("update restaurant {} with id {}", newRestaurant, id);
         Optional<Restaurant> restaurantOptional = repository.findById(id);
         if (!restaurantOptional.isPresent()) {
             throw new NotFoundException("Restaurant not found");
         }
          newRestaurant.setId(id);
-        return repository.save(newRestaurant);
+         repository.save(newRestaurant);
     }
 
     @Override
