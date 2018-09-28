@@ -25,9 +25,9 @@ public class RestaurantServiceImp implements RestaurantService {
     private RestaurantRepository repository;
 
     @Override
-    public List<Restaurant> getAll(int userId) {
+    public List<Restaurant> getAll() {
         log.info("get all restaurants {}");
-        return repository.getAll(userId);
+        return repository.findAll();
     }
 
     @Override

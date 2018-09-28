@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import top.graduation.rs.model.Restaurant;
 import top.graduation.rs.service.RestaurantService;
-import top.graduation.rs.web.SecurityUtil;
 
 import java.util.List;
 
@@ -33,8 +32,7 @@ public class RestaurantAdminController {
     @GetMapping
     public ResponseEntity<List<Restaurant>> getAll() {
         log.info("get all restaurants {}");
-        int userId = SecurityUtil.authUserId();
-        return new ResponseEntity<>(service.getAll(userId), HttpStatus.OK);
+        return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

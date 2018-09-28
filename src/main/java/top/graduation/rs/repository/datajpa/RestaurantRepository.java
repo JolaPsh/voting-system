@@ -16,9 +16,6 @@ import java.util.List;
 
 public interface RestaurantRepository extends JpaRepository<Restaurant, Integer> {
 
-    @Query("SELECT r FROM Restaurant r")
-    List<Restaurant> getAll(@Param("userId") int userId);
-
     @Transactional(readOnly = true)
     @Query("SELECT r FROM Restaurant r WHERE r.title LIKE CONCAT('%',:title,'%')")
     List<Restaurant> findByTitle(@Param("title") String title);

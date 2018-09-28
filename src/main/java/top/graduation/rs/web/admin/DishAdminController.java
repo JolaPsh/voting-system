@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import top.graduation.rs.model.Dish;
 import top.graduation.rs.service.DishService;
-import top.graduation.rs.web.SecurityUtil;
 
 import java.util.List;
 
@@ -31,9 +30,8 @@ public class DishAdminController {
 
     @GetMapping
     public ResponseEntity<List<Dish>> getAll() {
-        int userId = SecurityUtil.authUserId();
         log.info("get all dishes {}");
-        return new ResponseEntity<>(service.getAll(userId), HttpStatus.OK);
+        return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

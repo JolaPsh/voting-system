@@ -4,14 +4,13 @@ import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import top.graduation.rs.model.Dish;
 import top.graduation.rs.repository.datajpa.DishRepository;
-import top.graduation.rs.web.SecurityUtil;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Created by Joanna Pakosh on Сент., 2018
@@ -26,13 +25,13 @@ public class DishServiceImpl implements DishService {
     private DishRepository repository;
 
     @Override
-    public List<Dish> getAll(int userId) {
+    public List<Dish> getAll() {
         log.info("get all dishes {}");
-        return repository.findAll().stream().filter(v -> SecurityUtil.authUserId() == userId)
-                .collect(Collectors.toList());
+        return repository.findAll();
     }
 
     @Override
+    @Secured("ROLE_ADMIN")
     public Optional<Dish> get(int id) throws NotFoundException {
         log.info("get dish with id {}", id);
         return repository.findById(id);

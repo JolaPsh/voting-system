@@ -24,9 +24,8 @@
         <!--Test with JUnit-->
         <junit.jupiter.version>5.2.0</junit.jupiter.version>
         <junit.platform.version>1.2.0</junit.platform.version>
-        <!-- Logging -->
-<!--       <logback.version>1.2.3</logback.version>
-        <slf4j.version>1.7.25</slf4j.version>-->
+        <!--JSON-->
+        <jackson-json.version>2.9.6</jackson-json.version>
         <!--Database-->
         <hsqldb.version>2.4.1</hsqldb.version>
         <postgresql.version>42.2.2</postgresql.version>
@@ -87,7 +86,24 @@
             <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
+        <!--JSON-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-json.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-hibernate5</artifactId>
+            <version>${jackson-json.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson-json.version}</version>
+        </dependency>
     </dependencies>
+
 
     <build>
         <plugins>
@@ -99,6 +115,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-surefire-provider</artifactId>
+                        <version>${junit.platform.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
