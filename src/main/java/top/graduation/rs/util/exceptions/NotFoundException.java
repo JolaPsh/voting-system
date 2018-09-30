@@ -1,4 +1,4 @@
-package top.graduation.rs.exceptions;
+package top.graduation.rs.util.exceptions;
 
 /**
  * Created by Joanna Pakosh on Авг., 2018

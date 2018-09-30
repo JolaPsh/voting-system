@@ -47,9 +47,14 @@ UPDATE dish: PUT
 curl -s -X PUT -d '{"id": 1015, "date":"2018-09-20", "name":"Cocoa", "price": 72, "restaurant": {"id": 1000, "title": "Local", "location": "33 Dark Spurt, Lviv"}}' -H 'Content-Type: application/json' http://localhost:8080/rest/admin/dishes/1015 --user admin@gmail.com:admin
 
 user actions:
-rest/profile/restaurants GET
-rest/profile/restaurants/dishes GET
-rest/profile/vote/1008 POST
-rest/profile/vote/1008 GET
+**vote**
+GET user vote history:
+curl -s http://localhost:8080/rest/profile/vote/1008 --user herbert@gmail.com:herbert
+GET all restaurants:
+curl -s http://localhost:8080/rest/profile/restaurants --user dominik@gmail.com:12345678
+GET all restaurant with today dishes today:
+curl -s http://localhost:8080/rest/profile/restaurants/dishes?date=2018-10-04 --user herbert@gmail.com:herbert
+POST add vote:
+curl -s -X POST -d ' {"user_id": 1009, "restaurant_id": 1002"} ' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/rest/profile/vote/1004 --user dominik@gmail.com:12345678
 
 **REST API/ Spring Boot / JPA / HSQL**

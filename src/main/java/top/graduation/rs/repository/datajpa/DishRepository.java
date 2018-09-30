@@ -1,6 +1,7 @@
 package top.graduation.rs.repository.datajpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import top.graduation.rs.model.Dish;
@@ -14,9 +15,9 @@ import java.util.List;
 
 public interface DishRepository extends JpaRepository<Dish, Integer> {
 
-    @Override
-        //  @Secured("ROLE_ADMIN")
-    Dish save(Dish dish);
+    @Modifying
+    @Query("DELETE FROM Dish d WHERE d.id=:id")
+    int delete(@Param("id") int id);
 
     @Query("SELECT d FROM Dish d WHERE d.restaurant=:restaurant")
     Dish findByRestaurant(@Param("restaurant") Restaurant restaurant);

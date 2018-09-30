@@ -12,6 +12,9 @@ import top.graduation.rs.repository.datajpa.DishRepository;
 import java.util.List;
 import java.util.Optional;
 
+import static top.graduation.rs.util.ValidationUtil.checkNotFoundWithId;
+
+
 /**
  * Created by Joanna Pakosh on Сент., 2018
  */
@@ -34,13 +37,13 @@ public class DishServiceImpl implements DishService {
     @Secured("ROLE_ADMIN")
     public Optional<Dish> get(int id) throws NotFoundException {
         log.info("get dish with id {}", id);
-        return repository.findById(id);
+        return checkNotFoundWithId(repository.findById(id), id);
     }
 
     @Override
     public void delete(int id) throws NotFoundException {
         log.info("delete dish with id {}", id);
-        repository.deleteById(id);
+        checkNotFoundWithId(repository.delete(id), id);
     }
 
     @Override
@@ -52,11 +55,7 @@ public class DishServiceImpl implements DishService {
     @Override
     public void update(Dish newDish, int id) throws NotFoundException {
         log.info("update dish {} with id {}", newDish, id);
-        Optional<Dish> restaurantOptional = repository.findById(id);
-        if (!restaurantOptional.isPresent()) {
-            throw new NotFoundException("Restaurant not found");
-        }
         newDish.setId(id);
-        repository.save(newDish);
+        checkNotFoundWithId(repository.save(newDish), id);
     }
 }

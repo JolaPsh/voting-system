@@ -12,6 +12,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import static top.graduation.rs.util.ValidationUtil.checkNotFoundWithId;
+
 /**
  * Created by Joanna Pakosh on Сент., 2018
  */
@@ -33,17 +35,13 @@ public class RestaurantServiceImp implements RestaurantService {
     @Override
     public Optional<Restaurant> get(int id) throws NotFoundException {
         log.info("get restaurant with id {}", id);
-        Optional<Restaurant> restaurantOptional = repository.findById(id);
-        if (!restaurantOptional.isPresent()) {
-            throw new NotFoundException("Restaurant not found");
-        }
-        return restaurantOptional;
+        return checkNotFoundWithId(repository.findById(id), id);
     }
 
     @Override
     public void delete(int id) throws NotFoundException {
         log.info("delete restaurant with id {}", id);
-        repository.deleteById(id);
+        checkNotFoundWithId(repository.delete(id), id);
     }
 
     @Override
@@ -55,17 +53,13 @@ public class RestaurantServiceImp implements RestaurantService {
     @Override
     public void update(Restaurant newRestaurant, int id) throws IllegalArgumentException, NotFoundException {
         log.info("update restaurant {} with id {}", newRestaurant, id);
-        Optional<Restaurant> restaurantOptional = repository.findById(id);
-        if (!restaurantOptional.isPresent()) {
-            throw new NotFoundException("Restaurant not found");
-        }
-         newRestaurant.setId(id);
-         repository.save(newRestaurant);
+        newRestaurant.setId(id);
+        checkNotFoundWithId(repository.save(newRestaurant), id);
     }
 
     @Override
-    public List<Restaurant> getAllWithDishes(LocalDate localDate) {
+    public List<Restaurant> getRestaurantsWithDishes(LocalDate date) {
         log.info("get all restaurants with dishes {}");
-        return repository.getAllWithDishes(localDate);
+        return repository.getRestaurantsWithDishes(date);
     }
 }
