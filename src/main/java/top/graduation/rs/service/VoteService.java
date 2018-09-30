@@ -12,13 +12,15 @@ import java.util.Optional;
  */
 public interface VoteService {
 
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     Optional<Vote> getTodayUserVote(int userId, LocalDate localDate);
 
     @Secured({"ROLE_USER"})
-    Vote create(int userId, int restaurantId);
+    Vote create(int userId, Integer restaurantId);
 
     @Secured({"ROLE_USER"})
-    Vote update(int userId, int restaurantId);
+    Vote update(int userId, Integer restaurantId);
 
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     List<Vote> getUserVoteHistory(int userId);
 }

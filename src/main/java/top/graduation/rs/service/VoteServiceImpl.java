@@ -19,7 +19,7 @@ import java.util.Optional;
  */
 
 @Service
-public class VoteServiceImpl implements VoteService{
+public class VoteServiceImpl implements VoteService {
     private static final Logger log = LoggerFactory.getLogger(VoteServiceImpl.class);
 
     @Autowired
@@ -33,27 +33,26 @@ public class VoteServiceImpl implements VoteService{
 
     @Override
     public Optional<Vote> getTodayUserVote(int userId, LocalDate localDate) {
-        log.info("get today user vote{} ", userId);
+        log.info("get today={} user vote{} ", localDate, userId);
         return voteRepo.getTodayUserVote(userId, localDate);
     }
 
     @Transactional
     @Override
-    public Vote create(int userId, int restaurantId) {
+    public Vote create(int userId, Integer restaurantId) {
         Vote todayVote = getTodayUserVote(userId, LocalDate.now()).orElse(null);
         if (todayVote == null) {
-            Vote vote = new Vote(userRepo.getOne(userId),
+            todayVote = new Vote(userRepo.getOne(userId),
                     restaurantRepo.getOne(restaurantId),
                     LocalDate.now());
-            log.info("create vote{} ", vote);
-            return voteRepo.save(vote);
+            log.info("create vote{} ", todayVote);
         }
-        return null;
+        return voteRepo.save(todayVote);
     }
 
     @Transactional
     @Override
-    public Vote update(int userId, int restaurantId) {
+    public Vote update(int userId, Integer restaurantId) {
         Vote todayVote = getTodayUserVote(userId, LocalDate.now()).get();
         todayVote.setRestaurant(restaurantRepo.getOne(restaurantId));
         todayVote.setUser(userRepo.findById(userId).get());
