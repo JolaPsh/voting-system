@@ -17,7 +17,7 @@ public interface RestaurantService {
     List<Restaurant> getAll();
 
     @Secured({"ROLE_ADMIN"})
-    Optional<Restaurant> get(int id) throws NotFoundException;
+    Optional<Restaurant> retrieve(int id) throws NotFoundException;
 
     @Secured({"ROLE_ADMIN"})
     void delete(int id) throws NotFoundException;

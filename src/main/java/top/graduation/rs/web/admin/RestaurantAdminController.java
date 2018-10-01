@@ -14,6 +14,7 @@ import top.graduation.rs.model.Restaurant;
 import top.graduation.rs.service.RestaurantService;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Joanna Pakosh on Авг., 2018
@@ -36,9 +37,9 @@ public class RestaurantAdminController {
     }
 
     @GetMapping("/{id}")
-    public Restaurant retrieve(@PathVariable("id") int id) throws NotFoundException {
+    public Optional<Restaurant> retrieve(@PathVariable("id") int id) throws NotFoundException {
         log.info("get restaurant with id {}", id);
-        return service.get(id).orElse(null);
+        return service.retrieve(id);
     }
 
     @DeleteMapping("/{id}")

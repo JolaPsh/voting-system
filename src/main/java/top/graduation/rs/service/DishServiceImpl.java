@@ -4,7 +4,6 @@ import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import top.graduation.rs.model.Dish;
 import top.graduation.rs.repository.datajpa.DishRepository;
@@ -34,8 +33,7 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    @Secured("ROLE_ADMIN")
-    public Optional<Dish> get(int id) throws NotFoundException {
+    public Optional<Dish> retrieve(int id) throws NotFoundException {
         log.info("get dish with id {}", id);
         return checkNotFoundWithId(repository.findById(id), id);
     }

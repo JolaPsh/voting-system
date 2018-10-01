@@ -15,7 +15,7 @@ public interface DishService {
     List<Dish> getAll();
 
     @Secured({"ROLE_ADMIN"})
-    Optional<Dish> get(int id) throws NotFoundException;
+    Optional<Dish> retrieve(int id) throws NotFoundException;
 
     @Secured({"ROLE_ADMIN"})
     void delete(int id) throws NotFoundException;

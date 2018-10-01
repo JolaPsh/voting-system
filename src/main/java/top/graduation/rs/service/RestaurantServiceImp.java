@@ -33,7 +33,7 @@ public class RestaurantServiceImp implements RestaurantService {
     }
 
     @Override
-    public Optional<Restaurant> get(int id) throws NotFoundException {
+    public Optional<Restaurant> retrieve(int id) throws NotFoundException {
         log.info("get restaurant with id {}", id);
         return checkNotFoundWithId(repository.findById(id), id);
     }
