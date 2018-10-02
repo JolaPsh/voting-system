@@ -61,8 +61,12 @@
 
 **GET all restaurant with dishes:**
 
-`curl -s http://localhost:8080/rest/profile/restaurants/dishes?date=2018-10-04 --user herbert@gmail.com:herbert`
+`curl -s http://localhost:8080/rest/profile/restaurants/dishes?date=2018-09-30 --user dominik@gmail.com:12345678`
 
 **CREATE(UPDATE) vote:**
 
 `curl -s -X POST -d ' {"user_id": 1009, "restaurant_id": 1002"} ' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/rest/profile/vote/1004 --user dominik@gmail.com:12345678`
+
+**GET restaurants by title:**
+
+`curl -s http://localhost:8080/rest/profile/restaurants/searchByTitle?title=ocal --user herbert@gmail.com:herbert`

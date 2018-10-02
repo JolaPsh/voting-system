@@ -3,6 +3,7 @@ package top.graduation.rs.web.user;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,17 +31,23 @@ public class RootController {
     @Autowired
     private RestaurantService service;
 
-    // getAll and getRestaurantsWithDishes --> into one method
     @GetMapping
     public ResponseEntity<List<Restaurant>> getAll() {
         log.info("get all restaurants {}");
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/dishes")
-    public ResponseEntity<List<Restaurant>> getRestaurantsWithDishes(
-            @RequestParam(value = "date", required = false, defaultValue = "true") boolean date) {
+    @GetMapping("/dishes")
+    public ResponseEntity<List<Restaurant>> getRestaurantsWithDishes(@RequestParam("date")
+                                                                     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         log.info("get all restaurants with dishes, localDate ={}", date);
-        return new ResponseEntity<>(service.getRestaurantsWithDishes(LocalDate.now()), HttpStatus.OK);
+        List<Restaurant> allRestaurantsWithDishes = service.getRestaurantsWithDishes(date);
+        return new ResponseEntity<>(allRestaurantsWithDishes, HttpStatus.OK);
+    }
+
+    @GetMapping("/searchByTitle")
+    public ResponseEntity<List<Restaurant>> findByTitle(@RequestParam("title") String title) {
+        log.info("find restaurants by title ={}", title);
+        return new ResponseEntity<>(service.findByTitle(title), HttpStatus.OK);
     }
 }

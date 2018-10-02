@@ -29,6 +29,9 @@ public interface RestaurantService {
     void update(Restaurant restaurant, int id) throws NotFoundException;
 
     @Secured({"ROLE_ADMIN", "ROLE_USER"})
+    List<Restaurant> findByTitle(String title);
+
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     List<Restaurant> getRestaurantsWithDishes(LocalDate date);
 
 }

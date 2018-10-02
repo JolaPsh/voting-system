@@ -58,6 +58,12 @@ public class RestaurantServiceImp implements RestaurantService {
     }
 
     @Override
+    public List<Restaurant> findByTitle(String title) {
+        log.info("find restaurants by title ={}", title);
+        return repository.findByTitle(title);
+    }
+
+    @Override
     public List<Restaurant> getRestaurantsWithDishes(LocalDate date) {
         log.info("get all restaurants with dishes {}");
         return repository.getRestaurantsWithDishes(date);

@@ -5,7 +5,7 @@
 This Java project offers a `RESTful API` with basic authentication for admin and regular users. 
 
 
-**Voting system for deciding where to have lunch.** 
+> **Voting system for deciding where to have lunch.** 
 Only one vote per day per person, a person can change his vote until 11 a.m, next vote will be available after 11 a.m. 
 User chooses restaurant based upon today's dish.
 
