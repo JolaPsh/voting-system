@@ -6,21 +6,16 @@ import org.springframework.http.HttpStatus;
  * Created by Joanna Pakosh on Сент., 2018
  */
 public class ErrorInfo {
-    private HttpStatus status;
-    private String url;
-    private String errorMessage;
-    private String[] details;
+    private final HttpStatus status;
+    private final int code;
+    private final String url;
+    private final String errorMessage;
 
     public ErrorInfo(HttpStatus status, String url, String errorMessage) {
         this.status = status;
+        this.code = status.value();
         this.url = url;
         this.errorMessage = errorMessage;
-    }
-
-    public ErrorInfo(CharSequence url, String errorMessage, String... details) {
-        this.url = url.toString();
-        this.errorMessage = errorMessage;
-        this.details = details;
     }
 
     public HttpStatus getStatus() {
@@ -35,7 +30,7 @@ public class ErrorInfo {
         return errorMessage;
     }
 
-    public String[] getDetails() {
-        return details;
+    public int getCode() {
+        return code;
     }
 }
