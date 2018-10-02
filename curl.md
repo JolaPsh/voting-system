@@ -8,7 +8,8 @@
 **Admin**:
 ##
 
-####GET all restaurants:
+#####GET all restaurants:
+
  `curl -s http://localhost:8080/rest/admin/restaurants --user admin@gmail.com:admin `
  ####GET restaurant with id 1001:
  `curl -s http://localhost:8080/rest/admin/restaurants/1001 --user admin@gmail.com:admin`
