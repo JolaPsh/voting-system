@@ -1,7 +1,7 @@
 **REST / Spring Boot / JPA / HSQL**
-
+##
 **Graduation Project of <a href="https://github.com/JolaPsh/topjava">Topjava</a>  Intership** 
-
+##
 This Java project offers a `RESTful API` with basic authentication for admin and regular users. 
 
 
@@ -20,7 +20,7 @@ User chooses restaurant based upon today's dish.
  - JUnit
  - Maven
 
-
+##
 **How to use this program**
 
 **1. Clone a repository:**
