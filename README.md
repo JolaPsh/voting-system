@@ -1,6 +1,6 @@
-##REST / Spring Boot / JPA / HSQL
+**REST / Spring Boot / JPA / HSQL**
 
-##Graduation Project of <a href="https://github.com/JolaPsh/topjava">Topjava</a>  Intership 
+**Graduation Project of <a href="https://github.com/JolaPsh/topjava">Topjava</a>  Intership** 
 
 This Java project offers a `RESTful API` with basic authentication for admin and regular users. 
 
@@ -9,18 +9,19 @@ This Java project offers a `RESTful API` with basic authentication for admin and
 Only one vote per day per person, a person can change his vote until 11 a.m, next vote will be available after 11 a.m. 
 User chooses restaurant based upon today's dish.
 
-**Here you can find task and project requirements <a href="https://github.com/JolaPsh/voting-system/blob/master/graduation.md">graduation.md</a>**
+ **Here you can find task and project requirements <a href="https://github.com/JolaPsh/voting-system/blob/master/graduation.md">graduation.md</a>**
 
-**Technology stack:**
-- Spring Boot
-- Spring Security
-- REST
-- Spring Data JPA
-- HSQL DB
-- JUnit
-- Maven
+ **Technology stack:**
+ - Spring Boot
+ - Spring Security
+ - REST
+ - Spring Data JPA
+ - HSQL DB
+ - JUnit
+ - Maven
 
-##How to use this program
+
+**How to use this program**
 
 **1. Clone a repository:**
 
