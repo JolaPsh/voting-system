@@ -17,7 +17,6 @@ User chooses restaurant based upon today's dish.
  - REST
  - Spring Data JPA
  - HSQL DB
- - JUnit
  - Maven
 
 ##
@@ -34,12 +33,14 @@ User chooses restaurant based upon today's dish.
 **3. Execute initial script to create database schema. If you want, you can use postgresqldb,
 see src/resources/application.properties.**
 
-**4. Run your program or just execute it with Maven:** 
+**4. Set up an environment variable `LOG_FILE` in your OS, specify the path to your project, for example: D:\Git\voting_app.** 
+
+**5. Run your program or just execute it with Maven:** 
 
 ```sh
 mvn spring-boot:run
 ```
 
-**5. Use Postman to test this API, you can add it from Google Chrome Web Store or
+**6. Use Postman to test this API, you can add it from Google Chrome Web Store or
 use another REST Client Tool on your own. See also examples of curl commands <a href="https://github.com/JolaPsh/voting-system/blob/master/curl.md">curl.md</a>** 
 ##
