@@ -33,7 +33,7 @@ CREATE TABLE user_roles
   user_id INTEGER NOT NULL,
   role    VARCHAR(255),
   CONSTRAINT user_roles_idx UNIQUE (user_id, role),
-  FOREIGN KEY (user_id) REFERENCES USERS (id)
+  FOREIGN KEY (user_id) REFERENCES users (id)
     ON DELETE CASCADE
 );
 
@@ -43,7 +43,7 @@ CREATE TABLE dishes (
   date_time     DATE DEFAULT now() NOT NULL,
   price         INTEGER                 NOT NULL,
   restaurant_id INTEGER                 NOT NULL,
-  FOREIGN KEY (restaurant_id) REFERENCES RESTAURANTS (id) ON DELETE CASCADE
+  FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
 );
 
 CREATE TABLE votes (
@@ -51,8 +51,8 @@ CREATE TABLE votes (
   user_id       INTEGER                 NOT NULL,
   restaurant_id INTEGER                 NOT NULL,
   date_time     DATE DEFAULT now() NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES USERS (id)
+  FOREIGN KEY (user_id) REFERENCES users (id)
     ON DELETE CASCADE,
-  FOREIGN KEY (restaurant_id) REFERENCES RESTAURANTS (id)
+  FOREIGN KEY (restaurant_id) REFERENCES restaurants (id)
     ON DELETE CASCADE
 );

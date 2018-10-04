@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "dishes")
 public class Dish extends AbstractNamedEntity {
-    @Column(name = "date_time", nullable = false)
+    @Column(name = "date", nullable = false)
     @NotNull
     private LocalDate date;
     @Column(name = "price", nullable = false)

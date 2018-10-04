@@ -1,21 +1,20 @@
-DELETE FROM user_roles;
+/*DELETE FROM votes;
+DELETE FROM dishes;*/
+/*DELETE FROM users_roles;
+DELETE FROM restaurants;*/
 DELETE FROM users;
-DELETE FROM dishes;
-DELETE FROM votes;
-DELETE FROM restaurants;
 
 ALTER SEQUENCE global_seq
 RESTART WITH 1000;
 
-INSERT INTO restaurants (title, location) VALUES
+/*INSERT INTO restaurants (title, location) VALUES
   ('Local', '33 Dark Spurt, Lviv'),
   ('Panorama', '44 Zankoveckoj street, Lviv'),
   ('Kruivka', '11 Mykolaja street, Ternopil'),
   ('Varenuku', '101 Filbert street, Lviv'),
   ('Frontos', '2 Chapel street, Lviv'),
   ('Shekspire', '17 Kosmonavtov street, Lviv'),
-  ('Fransua', '44 Lenina street, Lviv');
-
+  ('Fransua', '44 Lenina street, Lviv');*/
 /*
  *  Encrypted passwords(bcrypt algorithm):
  *  herbert --> $2a$10$clfm6bvwKgyWFVG/tcbXh.MpIzd5GNZkJrcjfFrCv9KAxafTrRe7.
@@ -27,12 +26,13 @@ INSERT INTO users (name, email, password) VALUES
   ('Herbert', 'herbert@gmail.com', '$2a$10$clfm6bvwKgyWFVG/tcbXh.MpIzd5GNZkJrcjfFrCv9KAxafTrRe7.'),
   ('Dominik', 'dominik@gmail.com', '$2a$10$OUxYxa/tvEZqZikdR57ASuGthGKKKXcaY9O3sj8POVo2BOjTYDrLK');
 
-INSERT INTO user_roles (user_id, role) VALUES
+/*INSERT INTO users_roles (user_id, role) VALUES
   (1009, 'ROLE_USER'),
   (1008, 'ROLE_USER'),
-  (1007, 'ROLE_ADMIN');
+  (1007, 'ROLE_ADMIN');*/
 
-INSERT INTO dishes (name, price, restaurant_id) VALUES
+
+/*INSERT INTO dishes (name, price, restaurant_id) VALUES
   ('Calamari', 33, 1000),
   ('Meat balls + Deruny', 112, 1004),
   ('Cabbage rolls', 52, 1002),
@@ -47,7 +47,7 @@ INSERT INTO dishes (name, price, restaurant_id) VALUES
   ('Champagne', 50, 1005),
   ('Pizza', 45, 1002),
   ('French fries', 30, 1001),
-  ('Cutlet + spaghetti', 62, 1003);
+  ('Cutlet + spaghetti', 62, 1003);*/
 
 /*INSERT INTO votes (user_id, restaurant_id) VALUES
   (1007, 1001),

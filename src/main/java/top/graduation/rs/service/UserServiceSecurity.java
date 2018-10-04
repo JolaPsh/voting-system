@@ -24,11 +24,6 @@ public class UserServiceSecurity implements UserDetailsService {
     @Autowired
     private UserRepository repository;
 
-    /**
-     * Returns user with specified email;
-     * @param email of user that should be returned
-     * @return user with specified email;
-     */
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
