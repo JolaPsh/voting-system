@@ -6,7 +6,7 @@ This Java project offers a `RESTful API` with basic authentication for admin and
 
 
 > **Voting system for deciding where to have lunch.** 
-Only one vote per day per person, a person can change his vote until 11 a.m, next vote will be available after 11 a.m. 
+Only one vote per day per person, a person can change his vote until 11 a.m.
 User chooses restaurant based upon today's dish.
 
  **Here you can find task and project requirements <a href="https://github.com/JolaPsh/voting-system/blob/master/graduation.md">graduation.md</a>**
