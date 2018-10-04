@@ -31,12 +31,15 @@ User chooses restaurant based upon today's dish.
 
 **2. Open the project using the IDE**
 
-**3. Run your program or just execute it with Maven:** 
+**3. Execute initial script to create database schema. If you want, you can use postgresqldb,
+see src/resources/application.properties.**
+
+**4. Run your program or just execute it with Maven:** 
 
 ```sh
 mvn spring-boot:run
 ```
 
-**4. Use Postman to test this API, you can add it from Google Chrome Web Store or
+**5. Use Postman to test this API, you can add it from Google Chrome Web Store or
 use another REST Client Tool on your own. See also examples of curl commands <a href="https://github.com/JolaPsh/voting-system/blob/master/curl.md">curl.md</a>** 
 ##
