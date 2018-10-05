@@ -40,7 +40,7 @@ CREATE TABLE users_roles
 CREATE TABLE dishes (
   id            INTEGER PRIMARY KEY  DEFAULT nextval('global_seq'),
   name          VARCHAR(255)            NOT NULL,
-  date_time     DATE DEFAULT now() NOT NULL,
+  date     DATE DEFAULT now() NOT NULL,
   price         INTEGER                 NOT NULL,
   restaurant_id INTEGER                 NOT NULL,
   FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
@@ -50,7 +50,7 @@ CREATE TABLE votes (
   id            INTEGER PRIMARY KEY  DEFAULT nextval('global_seq'),
   user_id       INTEGER                 NOT NULL,
   restaurant_id INTEGER                 NOT NULL,
-  date_time     DATE DEFAULT now() NOT NULL,
+  date     DATE DEFAULT now() NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users (id)
     ON DELETE CASCADE,
   FOREIGN KEY (restaurant_id) REFERENCES restaurants (id)
