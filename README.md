@@ -1,6 +1,6 @@
-REST / Spring Boot / JPA / HSQL
+**REST / Spring Boot / JPA / HSQL**
 ##
-Graduation Project of <a href="https://github.com/JolaPsh/topjava">Topjava</a>  Intership
+**Graduation Project of <a href="https://github.com/JolaPsh/topjava">Topjava</a>  Intership**
 ##
 This Java project offers a `RESTful API` with basic authentication for admin and regular users. 
 
