@@ -26,7 +26,7 @@ import java.util.List;
 public class RootController {
 
     private static final Logger log = LoggerFactory.getLogger(RootController.class);
-    static final String REST_URL = "/rest/profile/restaurants";
+    public static final String REST_URL = "/rest/profile/restaurants";
 
     @Autowired
     private RestaurantService service;

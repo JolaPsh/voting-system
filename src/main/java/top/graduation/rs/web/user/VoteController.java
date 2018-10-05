@@ -25,7 +25,7 @@ import java.util.List;
 @RequestMapping(value = VoteController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class VoteController {
     private static final Logger log = LoggerFactory.getLogger(RestaurantAdminController.class);
-    static final String REST_URL = "/rest/profile/vote";
+    public static final String REST_URL = "/rest/profile/vote";
 
     private static final LocalTime TIME_EXPIRED = LocalTime.of(11, 0);
 
