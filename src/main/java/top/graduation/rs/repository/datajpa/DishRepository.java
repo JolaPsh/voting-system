@@ -14,7 +14,12 @@ import java.util.List;
  * Created by Joanna Pakosh on Сент., 2018
  */
 
+@Transactional(readOnly = true)
 public interface DishRepository extends JpaRepository<Dish, Integer> {
+
+    @Transactional
+    @Override
+    Dish save(Dish dish);
 
     @Transactional
     @Modifying

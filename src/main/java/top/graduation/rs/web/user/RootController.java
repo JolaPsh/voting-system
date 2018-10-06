@@ -38,7 +38,7 @@ public class RootController {
     }
 
     @GetMapping("/dishes")
-    public ResponseEntity<List<Restaurant>> getRestaurantsWithDishes(@RequestParam("date")
+    public ResponseEntity<List<Restaurant>> getRestaurantsWithDishes(@RequestParam(value = "date", required = false)
                                                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         log.info("get all restaurants with dishes, localDate ={}", date);
         List<Restaurant> allRestaurantsWithDishes = service.getRestaurantsWithDishes(date);

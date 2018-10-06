@@ -61,7 +61,7 @@
 
 **GET all restaurant with dishes:**
 
-`curl -s http://localhost:8080/rest/profile/restaurants/dishes?date=2018-09-30 --user dominik@gmail.com:12345678`
+`curl -s http://localhost:8080/rest/profile/restaurants/dishes?date=2018-10-06 --user dominik@gmail.com:12345678`
 
 **CREATE(UPDATE) vote:**
 

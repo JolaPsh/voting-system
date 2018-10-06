@@ -14,7 +14,16 @@ import java.util.List;
  * Created by Joanna Pakosh on Авг., 2018
  */
 
+@Transactional(readOnly = true)
 public interface RestaurantRepository extends JpaRepository<Restaurant, Integer> {
+
+    @Override
+    @Query("SELECT r FROM Restaurant r ORDER BY r.title")
+    List<Restaurant> findAll();
+
+    @Transactional
+    @Override
+    Restaurant save(Restaurant restaurant);
 
     @Transactional
     @Modifying
@@ -24,7 +33,6 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
     @Query("SELECT r FROM Restaurant r WHERE r.title LIKE CONCAT('%', :title, '%')")
     List<Restaurant> findByTitle(@Param("title") String title);
 
-    @Transactional(readOnly = true)
-    @Query("SELECT r.id, r.location, r.title, d.name, d.price FROM Dish d JOIN d.restaurant r WHERE d.date=:date")
+    @Query("SELECT r.id, r.title, r.location, d.name, d.price FROM Dish d JOIN d.restaurant r WHERE d.date=:date ORDER BY r.title")
     List<Restaurant> getRestaurantsWithDishes(@Param("date") LocalDate date);
 }
