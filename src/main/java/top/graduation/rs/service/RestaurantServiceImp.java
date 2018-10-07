@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import top.graduation.rs.model.Restaurant;
 import top.graduation.rs.repository.datajpa.RestaurantRepository;
 
+import javax.cache.annotation.CacheResult;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +28,7 @@ public class RestaurantServiceImp implements RestaurantService {
     private RestaurantRepository repository;
 
     @Override
+    @CacheResult(cacheName = "restaurants")
     public List<Restaurant> getAll() {
         log.info("get all restaurants {}");
         return repository.findAll();
@@ -45,6 +47,7 @@ public class RestaurantServiceImp implements RestaurantService {
     }
 
     @Override
+    @CacheResult(cacheName = "restaurants")
     public Restaurant create(Restaurant newRestaurant) {
         log.info("create restaurant {}", newRestaurant);
         return repository.save(newRestaurant);
@@ -58,12 +61,14 @@ public class RestaurantServiceImp implements RestaurantService {
     }
 
     @Override
+    @CacheResult(cacheName = "restaurants")
     public List<Restaurant> findByTitle(String title) {
         log.info("find restaurants by title ={}", title);
         return repository.findByTitle(title);
     }
 
     @Override
+    @CacheResult(cacheName = "restaurants")
     public List<Restaurant> getRestaurantsWithDishes(LocalDate date) {
         log.info("get all restaurants with dishes {}");
         return repository.getRestaurantsWithDishes(date);
