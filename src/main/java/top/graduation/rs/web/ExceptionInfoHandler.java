@@ -31,7 +31,7 @@ public class ExceptionInfoHandler  {
     @ResponseStatus(value = HttpStatus.CONFLICT)  // 409
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ErrorInfo handleConflict(HttpServletRequest req, DataIntegrityViolationException exc) {
-        String msg = "Only one vote per person per day is allowed. Try again after 11 AM.";
+        String msg = "Only one vote per person per day is allowed. Try again later.";
         return logAndGetErrorInfo(HttpStatus.CONFLICT, req,  msg, exc, true);
     }
 

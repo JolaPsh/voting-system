@@ -2,6 +2,7 @@ package top.graduation.rs.service;
 
 import org.springframework.security.access.annotation.Secured;
 import top.graduation.rs.model.Vote;
+import top.graduation.rs.to.VoteTo;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,10 +17,10 @@ public interface VoteService {
     Optional<Vote> getTodayUserVote(int userId, LocalDate localDate);
 
     @Secured({"ROLE_USER"})
-    Vote create(int userId, Integer restaurantId);
+    VoteTo create(int userId, int restaurantId);
 
     @Secured({"ROLE_USER"})
-    Vote update(int userId, Integer restaurantId);
+    VoteTo createOrUpdate(int userId, int restaurantId);
 
     @Secured({"ROLE_ADMIN", "ROLE_USER"})
     List<Vote> getUserVoteHistory(int userId);

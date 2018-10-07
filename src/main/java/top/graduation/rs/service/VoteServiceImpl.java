@@ -3,12 +3,14 @@ package top.graduation.rs.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import top.graduation.rs.model.Vote;
 import top.graduation.rs.repository.datajpa.RestaurantRepository;
 import top.graduation.rs.repository.datajpa.UserRepository;
 import top.graduation.rs.repository.datajpa.VoteRepository;
+import top.graduation.rs.to.VoteTo;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -39,26 +41,35 @@ public class VoteServiceImpl implements VoteService {
 
     @Transactional
     @Override
-    public Vote create(int userId, Integer restaurantId) {
+    public VoteTo create (int userId, int restaurantId) {
         Vote todayVote = getTodayUserVote(userId, LocalDate.now()).orElse(null);
-        if (todayVote == null) {
-            todayVote = new Vote(userRepo.getOne(userId),
-                    restaurantRepo.getOne(restaurantId),
-                    LocalDate.now());
-            log.info("create vote{} ", todayVote);
+        if (todayVote!=null){
+            throw  new DataIntegrityViolationException("");
         }
-        return voteRepo.save(todayVote);
+       Vote newVote = new Vote(userRepo.getOne(userId),
+               restaurantRepo.getOne(restaurantId),
+               LocalDate.now());
+        VoteTo voteTo = new VoteTo(newVote, true);
+        voteRepo.save(voteTo.getVote());
+        log.info("create vote{} ", voteTo);
+        return voteTo;
     }
 
     @Transactional
     @Override
-    public Vote update(int userId, Integer restaurantId) {
-        Vote todayVote = getTodayUserVote(userId, LocalDate.now()).get();
-        todayVote.setRestaurant(restaurantRepo.getOne(restaurantId));
-        todayVote.setUser(userRepo.findById(userId).get());
-        todayVote.setDate(LocalDate.now());
+    public VoteTo createOrUpdate(int userId, int restaurantId) {
+        Vote newVote = new Vote(userRepo.getOne(userId),
+                restaurantRepo.getOne(restaurantId),
+                LocalDate.now());
+        VoteTo todayVote = voteRepo.getTodayUserVote(userId, LocalDate.now())
+                .map(v->  {
+                    v.setRestaurant(restaurantRepo.getOne(restaurantId));
+                    return new VoteTo(v, false);
+                })
+                .orElseGet(() -> new VoteTo(newVote, true));
+        voteRepo.save(todayVote.getVote());
         log.info("update vote{}", todayVote);
-        return voteRepo.save(todayVote);
+        return todayVote;
     }
 
     @Override

@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import top.graduation.rs.model.Restaurant;
 import top.graduation.rs.model.Vote;
 import top.graduation.rs.service.VoteService;
+import top.graduation.rs.to.VoteTo;
 import top.graduation.rs.web.SecurityUtil;
 import top.graduation.rs.web.admin.RestaurantAdminController;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -36,16 +36,16 @@ public class VoteController {
      *  User vote code: 201 Created, 200 Updated, 409 Conflict
      */
     @PostMapping(value = "/{id}")
-    public ResponseEntity<Restaurant> vote(@PathVariable("id") Integer restaurantId) {
+    public ResponseEntity<Restaurant> vote(@PathVariable("id") int restaurantId) {
         int userId = SecurityUtil.authUserId();
         boolean acceptVote = LocalTime.now().isBefore(TIME_EXPIRED);
-        boolean isVoted = service.getTodayUserVote(userId, LocalDate.now()).isPresent();
-        Vote newVote = acceptVote ? (isVoted ? service.update(userId, restaurantId)
-                : service.create(userId, restaurantId)) : service.create(userId, restaurantId);
+        // user can update his vote until 11 a.m
+        VoteTo newVote = acceptVote? service.createOrUpdate(userId, restaurantId) : service.create(userId, restaurantId);
         log.info("user with {} id voted for restaurant {}", userId, restaurantId);
-        return new ResponseEntity<>(newVote.getRestaurant(),
-                isVoted ? (acceptVote ? HttpStatus.OK : HttpStatus.CONFLICT) : HttpStatus.CREATED);
+        return new ResponseEntity<>(newVote.getVote().getRestaurant(),
+               newVote.isCreated()? HttpStatus.CREATED : (acceptVote ? HttpStatus.OK : HttpStatus.CONFLICT));
     }
+
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Vote>> getUserVoteHistory(@PathVariable("id") int id) {
