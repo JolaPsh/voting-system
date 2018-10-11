@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.springframework.context.annotation.Bean;
 
 /**
  * Created by Joanna Pakosh on Сент., 2018
@@ -25,6 +26,7 @@ public class JacksonObjectMapper extends ObjectMapper{
         setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
 
+    @Bean
     public static ObjectMapper getMapper() {
         return MAPPER;
     }

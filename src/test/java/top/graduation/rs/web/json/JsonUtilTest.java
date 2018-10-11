@@ -5,9 +5,7 @@ import top.graduation.rs.model.Restaurant;
 
 import java.util.List;
 
-import static top.graduation.rs.RestaurantTestData.RESTAURANT2;
-import static top.graduation.rs.RestaurantTestData.RESTAURANTS;
-import static top.graduation.rs.TestUtil.assertMatch;
+import static top.graduation.rs.RestaurantTestData.*;
 
 /**
  * Created by Joanna Pakosh on Окт., 2018
