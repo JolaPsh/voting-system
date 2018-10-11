@@ -30,6 +30,6 @@ public class RestaurantTestData {
     }
 
     public static Restaurant getCreated() {
-        return  new Restaurant(RES_ID+7, "Alibaba", "67 Vyhovskoho street, Lviv");
+        return  new Restaurant(RES_ID+27, "Alibaba", "67 Vyhovskoho street, Lviv");
     }
 }

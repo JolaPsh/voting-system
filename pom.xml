@@ -23,6 +23,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!--JSON-->
         <jackson-json.version>2.9.6</jackson-json.version>
+        <jsonassert.version>1.5.0</jsonassert.version>
         <!--Database-->
         <hsqldb.version>2.3.2</hsqldb.version>
         <!--Tools-->
@@ -89,6 +90,18 @@
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>${jackson-json.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.skyscreamer</groupId>
+            <artifactId>jsonassert</artifactId>
+            <version>${jsonassert.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <version>5.0.7.RELEASE</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
