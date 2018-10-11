@@ -5,7 +5,6 @@ import top.graduation.rs.model.Restaurant;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static top.graduation.rs.model.AbstractBaseEntity.START_SEQ;
 
 /**
@@ -26,8 +25,11 @@ public class RestaurantTestData {
     public static final List<Restaurant> RESTAURANTS = Arrays.asList(RESTAURANT1, RESTAURANT2, RESTAURANT3,
             RESTAURANT4, RESTAURANT5, RESTAURANT6, RESTAURANT7);
 
-    public static void assertMatch(Restaurant actual, Restaurant expected) {
-        assertThat(actual).isEqualToIgnoringGivenFields(expected);
+    public static Restaurant getUpdated(){
+        return new Restaurant(RES_ID+6, RESTAURANT7.getTitle(), "33 Nekrasova Street, Lviv");
     }
 
+    public static Restaurant getCreated() {
+        return  new Restaurant(RES_ID+7, "Alibaba", "67 Vyhovskoho street, Lviv");
+    }
 }

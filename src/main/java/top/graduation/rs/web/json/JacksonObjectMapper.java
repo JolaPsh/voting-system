@@ -11,7 +11,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 /**
  * Created by Joanna Pakosh on Сент., 2018
  */
-public final class JacksonObjectMapper extends ObjectMapper{
+public class JacksonObjectMapper extends ObjectMapper{
 
     private static final ObjectMapper MAPPER = new JacksonObjectMapper();
 
