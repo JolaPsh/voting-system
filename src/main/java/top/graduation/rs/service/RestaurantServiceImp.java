@@ -11,7 +11,6 @@ import top.graduation.rs.repository.datajpa.RestaurantRepository;
 import javax.cache.annotation.CacheResult;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import static top.graduation.rs.util.ValidationUtil.checkNotFoundWithId;
 
@@ -35,9 +34,9 @@ public class RestaurantServiceImp implements RestaurantService {
     }
 
     @Override
-    public Optional<Restaurant> retrieve(int id) throws NotFoundException {
+    public Restaurant retrieve(int id) throws NotFoundException {
         log.info("get restaurant with id {}", id);
-        return checkNotFoundWithId(repository.findById(id), id);
+        return checkNotFoundWithId(repository.findById(id).orElse(null), id);
     }
 
     @Override

@@ -31,7 +31,7 @@ public class RestaurantTestData {
     }
 
     public static Restaurant getCreated() {
-        return new Restaurant(RES_ID + 27, "Alibaba", "67 Vyhovskoho street, Lviv");
+        return new Restaurant(null, "Alibaba", "67 Vyhovskoho street, Lviv");
     }
 
     public static void assertMatch(Restaurant actual, Restaurant expected) {

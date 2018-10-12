@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.web.servlet.ResultActions;
 import top.graduation.rs.model.Restaurant;
 import top.graduation.rs.service.RestaurantService;
 import top.graduation.rs.web.AbstractControllerTest;
@@ -13,8 +14,11 @@ import java.util.Comparator;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static top.graduation.rs.RestaurantTestData.*;
+import static top.graduation.rs.TestUtil.contentJson;
+import static top.graduation.rs.TestUtil.readFromJson;
 
 /**
  * Created by Joanna Pakosh on Сент., 2018
@@ -50,12 +54,14 @@ public class RestaurantAdminControllerTest extends AbstractControllerTest {
     @WithMockUser(username = "admin", roles = "ADMIN")
     @Test
     public void testRetrieve() throws Exception {
-        mockMvc.perform(get(REST_URL + RES_ID + 3)
-                .contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get(REST_URL + (RES_ID + 3)))
                 .andExpect(status().isOk())
-                .andDo(print());
+                .andDo(print())
+                // https://jira.spring.io/browse/SPR-14472
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(contentJson(RESTAURANT4));
 
-        assertMatch(service.retrieve(RES_ID + 3).get(), RESTAURANT4);
+        assertMatch(service.retrieve(RES_ID + 3), RESTAURANT4);
     }
 
     @WithMockUser(username = "admin", roles = "ADMIN")
@@ -74,20 +80,24 @@ public class RestaurantAdminControllerTest extends AbstractControllerTest {
         mockMvc.perform(put(REST_URL + RES_ID + 6)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(updated)))
-                .andExpect(status().isNoContent());
+                .andExpect(status().isOk());
 
-        assertMatch(service.retrieve(RES_ID + 6).get(), updated);
+        assertMatch(service.retrieve(RES_ID + 6), updated);
     }
 
     @WithMockUser(username = "admin", roles = "ADMIN")
     @Test
     public void testCreate() throws Exception {
         Restaurant created = getCreated();
-        mockMvc.perform(post(REST_URL)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
+        ResultActions action = mockMvc.perform(post(REST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(created)))
                 .andExpect(status().isCreated());
 
+        Restaurant returned = readFromJson(action, Restaurant.class);
+        created.setId(returned.getId());
+
+        assertMatch(returned, created);
         assertMatch(service.getAll(), created, RESTAURANT7, RESTAURANT5, RESTAURANT3, RESTAURANT1,
                 RESTAURANT2, RESTAURANT6, RESTAURANT4);
     }

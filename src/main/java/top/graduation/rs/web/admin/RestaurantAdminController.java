@@ -14,7 +14,6 @@ import top.graduation.rs.model.Restaurant;
 import top.graduation.rs.service.RestaurantService;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by Joanna Pakosh on Авг., 2018
@@ -37,7 +36,7 @@ public class RestaurantAdminController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Restaurant> retrieve(@PathVariable("id") int id) throws NotFoundException {
+    public Restaurant retrieve(@PathVariable("id") int id) throws NotFoundException {
         log.info("get restaurant with id {}", id);
         return service.retrieve(id);
     }
@@ -50,12 +49,12 @@ public class RestaurantAdminController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> create(@RequestBody Restaurant restaurant, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<Restaurant> create(@RequestBody Restaurant restaurant, UriComponentsBuilder ucBuilder) {
         log.info("create restaurant {}", restaurant);
-        service.create(restaurant);
+        Restaurant created = service.create(restaurant);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path(REST_URL + "/{id}").buildAndExpand(restaurant.getId()).toUri());
-        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<>(created, headers, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)

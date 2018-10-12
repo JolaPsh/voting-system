@@ -6,7 +6,6 @@ import top.graduation.rs.model.Restaurant;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by Joanna Pakosh on Сент., 2018
@@ -17,7 +16,7 @@ public interface RestaurantService {
     List<Restaurant> getAll();
 
     @Secured({"ROLE_ADMIN"})
-    Optional<Restaurant> retrieve(int id) throws NotFoundException;
+    Restaurant retrieve(int id) throws NotFoundException;
 
     @Secured({"ROLE_ADMIN"})
     void delete(int id) throws NotFoundException;
