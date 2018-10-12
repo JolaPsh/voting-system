@@ -17,7 +17,7 @@ import javax.validation.constraints.Size;
 @Table(name = "restaurants")
 public class Restaurant extends AbstractBaseEntity {
     @Column(name = "title", nullable = false, unique = true)
-    @Size(min = 2, max = 50)
+    @Size(min = 2, max = 70)
     @NotBlank
     private String title;
     @Column(name = "location", nullable = false)

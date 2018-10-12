@@ -58,7 +58,6 @@ public class DishAdminController {
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void update (@RequestBody Dish newDish, @PathVariable("id") int id) throws NotFoundException {
         log.info("update dish {} with id {}", newDish, id);
         service.update(newDish, id);
