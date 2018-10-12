@@ -33,17 +33,17 @@ public class DishTestData {
     public static final Dish DISH_12 = new Dish(DISH_ID + 11, today, "Champagne", 50, RESTAURANT6);
     public static final Dish DISH_13 = new Dish(DISH_ID + 12, today, "Pizza", 45, RESTAURANT3);
     public static final Dish DISH_14 = new Dish(DISH_ID + 13, today, "French fries", 30, RESTAURANT2);
-    public static final Dish DISH15 = new Dish(DISH_ID + 14, today, "Cutlet + spaghetti", 62, RESTAURANT4);
+    public static final Dish DISH_15 = new Dish(DISH_ID + 14, today, "Cutlet + spaghetti", 62, RESTAURANT4);
 
     public static final List<Dish> DISHES = Arrays.asList(DISH_1, DISH_2, DISH_3, DISH_4, DISH_5, DISH_6, DISH_7,
-            DISH_8, DISH_9, DISH_10, DISH_11, DISH_12, DISH_13, DISH_14, DISH15);
+            DISH_8, DISH_9, DISH_10, DISH_11, DISH_12, DISH_13, DISH_14, DISH_15);
 
     public static Dish getUpdated() {
         return new Dish(DISH_ID + 4, today, DISH_5.getName(), 11, RESTAURANT3);
     }
 
     public static Dish getCreated() {
-        return new Dish(DISH_ID+17, today, "Creamy Salmon Soup", 48, RESTAURANT3);
+        return new Dish(null, today, "Creamy Salmon Soup", 48, RESTAURANT3);
     }
 
     public static void assertMatch(Dish actual, Dish expected) {

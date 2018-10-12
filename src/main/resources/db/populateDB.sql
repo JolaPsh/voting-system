@@ -50,5 +50,4 @@ INSERT INTO dishes (name, price, restaurant_id) VALUES
   ('Cutlet + spaghetti', 62, 1003);
 
 INSERT INTO votes (user_id, restaurant_id) VALUES
-  (1008, 1001),
-  (1009, 1002);
+  (1008, 1001);

@@ -25,8 +25,4 @@ public class TestUtil {
     public static <T> ResultMatcher contentJson(T expected) {
         return content().json(writeValue(expected));
     }
-
-    public static <T> ResultMatcher contentJsonArray(T... expected) {
-        return contentJson(expected);
-    }
 }

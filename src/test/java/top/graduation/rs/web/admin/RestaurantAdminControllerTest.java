@@ -75,18 +75,6 @@ public class RestaurantAdminControllerTest extends AbstractControllerTest {
 
     @WithMockUser(username = "admin", roles = "ADMIN")
     @Test
-    public void testUpdate() throws Exception {
-        Restaurant updated = getUpdated();
-        mockMvc.perform(put(REST_URL + RES_ID + 6)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(updated)))
-                .andExpect(status().isOk());
-
-        assertMatch(service.retrieve(RES_ID + 6), updated);
-    }
-
-    @WithMockUser(username = "admin", roles = "ADMIN")
-    @Test
     public void testCreate() throws Exception {
         Restaurant created = getCreated();
         ResultActions action = mockMvc.perform(post(REST_URL)
@@ -98,7 +86,19 @@ public class RestaurantAdminControllerTest extends AbstractControllerTest {
         created.setId(returned.getId());
 
         assertMatch(returned, created);
-        assertMatch(service.getAll(), created, RESTAURANT7, RESTAURANT5, RESTAURANT3, RESTAURANT1,
-                RESTAURANT2, RESTAURANT6, RESTAURANT4);
+        assertMatch(service.getAll(), created, RESTAURANT7, RESTAURANT5, RESTAURANT3,
+                RESTAURANT1, RESTAURANT2, RESTAURANT6, RESTAURANT4);
+    }
+
+    @WithMockUser(username = "admin", roles = "ADMIN")
+    @Test
+    public void testUpdate() throws Exception {
+        Restaurant updated = getUpdated();
+        mockMvc.perform(put(REST_URL + RES_ID + 6)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(updated)))
+                .andExpect(status().isOk());
+
+        assertMatch(service.retrieve(RES_ID + 6), updated);
     }
 }
