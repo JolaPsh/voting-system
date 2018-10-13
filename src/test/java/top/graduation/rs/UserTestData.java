@@ -18,9 +18,9 @@ public class UserTestData {
 
     public static final User ADMIN = new User(ADMIN_ID, "Admin", "admin@gmail.com", LocalDate.now(),
             "admin", false, Collections.singleton(Role.ROLE_ADMIN));
-    public static final User USER1 = new User(USER1_ID, "Herbert", "herbert@gmail.com", LocalDate.now(),
+    public static final User USER_1 = new User(USER1_ID, "Herbert", "herbert@gmail.com", LocalDate.now(),
             "herbert", false, Collections.singleton(Role.ROLE_USER));
-    public static final User USER2 = new User(USER2_ID, "Dominik", "dominik@gmail.com",
+    public static final User USER_2 = new User(USER2_ID, "Dominik", "dominik@gmail.com",
             LocalDate.now(), "12345678", false, Collections.singleton(Role.ROLE_USER));
 
 }

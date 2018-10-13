@@ -14,10 +14,10 @@ public class JsonUtilTest {
 
     @Test
     public void testReadWriteValue() throws Exception {
-        String json = JsonUtil.writeValue(RESTAURANT2);
+        String json = JsonUtil.writeValue(RESTAURANT_2);
         System.out.println(json);
         Restaurant restaurant = JsonUtil.readValue(json, Restaurant.class);
-        assertMatch(restaurant, RESTAURANT2);
+        assertMatch(restaurant, RESTAURANT_2);
     }
 
     @Test

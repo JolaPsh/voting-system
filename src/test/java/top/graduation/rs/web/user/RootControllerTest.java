@@ -55,6 +55,6 @@ public class RootControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print());
 
-        assertMatch(service.findByTitle("ku"), RESTAURANT4);
+        assertMatch(service.findByTitle("ku"), RESTAURANT_4);
     }
 }

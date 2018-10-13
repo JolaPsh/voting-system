@@ -59,9 +59,9 @@ public class RestaurantAdminControllerTest extends AbstractControllerTest {
                 .andDo(print())
                 // https://jira.spring.io/browse/SPR-14472
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(contentJson(RESTAURANT4));
+                .andExpect(contentJson(RESTAURANT_4));
 
-        assertMatch(service.retrieve(RES_ID + 3), RESTAURANT4);
+        assertMatch(service.retrieve(RES_ID + 3), RESTAURANT_4);
     }
 
     @WithMockUser(username = "admin", roles = "ADMIN")
@@ -86,8 +86,8 @@ public class RestaurantAdminControllerTest extends AbstractControllerTest {
         created.setId(returned.getId());
 
         assertMatch(returned, created);
-        assertMatch(service.getAll(), created, RESTAURANT7, RESTAURANT5, RESTAURANT3,
-                RESTAURANT1, RESTAURANT2, RESTAURANT6, RESTAURANT4);
+        assertMatch(service.getAll(), created, RESTAURANT_7, RESTAURANT_5, RESTAURANT_3,
+                RESTAURANT_1, RESTAURANT_2, RESTAURANT_6, RESTAURANT_4);
     }
 
     @WithMockUser(username = "admin", roles = "ADMIN")

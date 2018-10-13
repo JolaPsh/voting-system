@@ -18,6 +18,7 @@ User chooses restaurant based upon today's dish.
  - Spring Data JPA
  - HSQL DB
  - Maven
+ - JUnit
 
 ##
 **How to use this program**
