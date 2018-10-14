@@ -53,9 +53,9 @@ public class RestaurantServiceImp implements RestaurantService {
     }
 
     @Override
+    @CacheResult(cacheName = "restaurants")
     public void update(Restaurant newRestaurant, int id) throws IllegalArgumentException, NotFoundException {
         log.info("update restaurant {} with id {}", newRestaurant, id);
-        newRestaurant.setId(id);
         checkNotFoundWithId(repository.save(newRestaurant), id);
     }
 

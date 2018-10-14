@@ -25,6 +25,6 @@
         <heap>1</heap>
     </cache-template>
 
-    <cache alias="restaurants" uses-template="expiryCache"/>
+    <cache alias="restaurants" uses-template="singleNonExpiryCache"/>
 
 </config>
