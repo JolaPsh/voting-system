@@ -29,7 +29,6 @@ public class DishAdminControllerTest extends AbstractControllerTest {
     private DishService service;
 
     @WithMockUser(username = "herbert", roles = "USER")
-
     @Test
     public void testGetUnAuth() throws Exception {
         mockMvc.perform(get(REST_URL + DISH_ID + 4))
@@ -58,7 +57,7 @@ public class DishAdminControllerTest extends AbstractControllerTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(contentJson(DISH_6));
 
-        assertMatch(service.retrieve(DISH_ID + 5).get(), DISH_6);
+        assertMatch(service.retrieve(DISH_ID + 5), DISH_6);
     }
 
     @WithMockUser(username = "admin", roles = "ADMIN")
@@ -96,6 +95,6 @@ public class DishAdminControllerTest extends AbstractControllerTest {
                 .content(JsonUtil.writeValue(updated)))
                 .andExpect(status().isOk());
 
-        assertMatch(service.retrieve(DISH_ID + 4).get(), updated);
+        assertMatch(service.retrieve(DISH_ID + 4), updated);
     }
 }

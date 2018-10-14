@@ -9,7 +9,6 @@ import top.graduation.rs.model.Dish;
 import top.graduation.rs.repository.datajpa.DishRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 import static top.graduation.rs.util.ValidationUtil.checkNotFoundWithId;
 
@@ -33,9 +32,9 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public Optional<Dish> retrieve(int id) throws NotFoundException {
+    public Dish retrieve(int id) throws NotFoundException {
         log.info("get dish with id {}", id);
-        return checkNotFoundWithId(repository.findById(id), id);
+        return checkNotFoundWithId(repository.findById(id).orElse(null), id);
     }
 
     @Override
@@ -53,7 +52,11 @@ public class DishServiceImpl implements DishService {
     @Override
     public void update(Dish newDish, int id) throws NotFoundException {
         log.info("update dish {} with id {}", newDish, id);
-        newDish.setId(id);
         checkNotFoundWithId(repository.save(newDish), id);
+    }
+
+    @Override
+    public Object[] getDishHistory(int id) {
+        return repository.getDishHistory(id);
     }
 }

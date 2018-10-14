@@ -14,7 +14,6 @@ import top.graduation.rs.model.Dish;
 import top.graduation.rs.service.DishService;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by Joanna Pakosh on Сент., 2018
@@ -36,7 +35,7 @@ public class DishAdminController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Dish> retrieve(@PathVariable("id") int id) throws NotFoundException {
+    public Dish retrieve(@PathVariable("id") int id) throws NotFoundException {
         log.info("get dish with id {}", id);
         return service.retrieve(id);
     }
