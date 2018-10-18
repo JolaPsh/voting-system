@@ -35,6 +35,9 @@ public class DishTestData {
     public static final Dish DISH_14 = new Dish(DISH_ID + 13, today, "French fries", 30, RESTAURANT_2);
     public static final Dish DISH_15 = new Dish(DISH_ID + 14, today, "Cutlet + spaghetti", 62, RESTAURANT_4);
 
+    public static final Object[] DISH_HISTORY_13 = new Object[] {
+            new Object [] {LocalDate.now(), "French fries", 30, "Panorama", "herbert@gmail.com"}};
+
     public static final List<Dish> DISHES = Arrays.asList(DISH_1, DISH_2, DISH_3, DISH_4, DISH_5, DISH_6, DISH_7,
             DISH_8, DISH_9, DISH_10, DISH_11, DISH_12, DISH_13, DISH_14, DISH_15);
 

@@ -27,7 +27,7 @@ public interface DishRepository extends JpaRepository<Dish, Integer> {
     @Query("SELECT d FROM Dish d WHERE d.restaurant=:restaurant")
     Dish findByRestaurant(@Param("restaurant") Restaurant restaurant);
 
-    @Query("SELECT d.date, d.name, d.price, r.title, u.email FROM Dish d, Vote v " +
-            "JOIN v.user u JOIN d.restaurant r WHERE v.date=d.date AND d.id=:id")
+    @Query("SELECT d.date, d.name, d.price, r.title, u.email FROM Vote v, Dish d JOIN d.restaurant r JOIN v.user u " +
+            "WHERE v.restaurant=d.restaurant AND d.id=:id")
     Object[] getDishHistory(@Param("id") int id);
 }

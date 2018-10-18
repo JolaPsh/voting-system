@@ -6,6 +6,7 @@ import top.graduation.rs.web.json.JsonUtil;
 
 import java.io.UnsupportedEncodingException;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static top.graduation.rs.web.json.JsonUtil.writeValue;
 
@@ -24,5 +25,9 @@ public class TestUtil {
 
     public static <T> ResultMatcher contentJson(T expected) {
         return content().json(writeValue(expected));
+    }
+
+    public static void assertMatch(Object[] actual, Object[] expected){
+        assertThat(actual).isEqualTo(expected);
     }
 }
