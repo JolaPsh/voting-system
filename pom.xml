@@ -25,7 +25,8 @@
         <hsqldb.version>2.3.2</hsqldb.version>
         <!--Tools-->
         <ehcache.version>3.5.2</ehcache.version>
-
+        <!--JSON-->
+        <jackson-json.version>2.9.6</jackson-json.version>
     </properties>
     <dependencies>
         <dependency>
@@ -78,6 +79,12 @@
             <artifactId>spring-security-test</artifactId>
             <version>5.0.7.RELEASE</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-hibernate5</artifactId>
+            <version>${jackson-json.version}</version>
         </dependency>
     </dependencies>
 

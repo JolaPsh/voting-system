@@ -1,7 +1,5 @@
 package top.graduation.rs.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -12,7 +10,6 @@ import javax.validation.constraints.Size;
  * Created by Joanna Pakosh on Июль, 2018
  */
 
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "restaurants")
 public class Restaurant extends AbstractBaseEntity {
