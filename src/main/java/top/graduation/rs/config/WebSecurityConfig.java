@@ -18,11 +18,8 @@ import top.graduation.rs.service.UserServiceSecurity;
  */
 
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled=true, prePostEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
     @Autowired
     private UserServiceSecurity userServiceSecurity;
@@ -43,8 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasAuthority(Role.ROLE_ADMIN.getAuthority())
                 .antMatchers("/profile/**").hasAuthority(Role.ROLE_USER.getAuthority())
                 .and().csrf().disable()
-                .httpBasic()
-                .authenticationEntryPoint(restAuthenticationEntryPoint);
+                .httpBasic();
     }
 
     /*

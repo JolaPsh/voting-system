@@ -31,7 +31,7 @@ User chooses restaurant based upon today's dish.
 
 **2. Open the project using the IDE**
 
-**3. Execute initial script to create database schema. If you want, you can use postgresqldb, see src/resources/application.properties.**
+**3. Execute initial script to create database schema, see src/resources/init_hsqldb.sql**
 
 **4. Set up an environment variable `LOG_FILE` in your OS, specify the path to your project, for example: D:\Git\voting_app.** 
 
