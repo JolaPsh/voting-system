@@ -3,14 +3,14 @@
     <!-- To enable JMX Management-->
     <jmxConfigurator/>
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_FILE}/log/topjava.log</file>
+        <file>log_file.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
         <charset>UTF-8</charset>
             <pattern>%d{dd-MM-yyyy HH:mm:ss} %-5level %logger{50}.%M:%L - %msg%n</pattern>
         </encoder>
         <!--rollover daily and when the file reaches 10 MegaBytes-->
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}./log/topjava.%i.log</fileNamePattern>
+            <fileNamePattern>log/log_file_%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <maxFileSize>10MB</maxFileSize>
         </rollingPolicy>
     </appender>
