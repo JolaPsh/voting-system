@@ -34,15 +34,15 @@ public class VoteServiceImpl implements VoteService {
     private VoteRepository voteRepo;
 
     @Override
-    public Optional<Vote> getTodayUserVote(int userId, LocalDate localDate) {
-        log.info("get today={} user vote{} ", localDate, userId);
-        return voteRepo.getTodayUserVote(userId, localDate);
+    public Optional<Vote> getTodayUserVote(int userId) {
+        log.info("get today={} user vote{} ", LocalDate.now(), userId);
+        return voteRepo.getTodayUserVote(userId);
     }
 
     @Transactional
     @Override
     public VoteTo create (int userId, int restaurantId) {
-        Vote todayVote = getTodayUserVote(userId, LocalDate.now()).orElse(null);
+        Vote todayVote = getTodayUserVote(userId).orElse(null);
         if (todayVote!=null){
             throw  new DataIntegrityViolationException("");
         }
@@ -61,7 +61,7 @@ public class VoteServiceImpl implements VoteService {
         Vote newVote = new Vote(userRepo.getOne(userId),
                 restaurantRepo.getOne(restaurantId),
                 LocalDate.now());
-        VoteTo todayVote = voteRepo.getTodayUserVote(userId, LocalDate.now())
+        VoteTo todayVote = voteRepo.getTodayUserVote(userId)
                 .map(v->  {
                     v.setRestaurant(restaurantRepo.getOne(restaurantId));
                     return new VoteTo(v, false);

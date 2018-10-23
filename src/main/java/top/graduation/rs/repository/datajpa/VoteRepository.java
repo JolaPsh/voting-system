@@ -6,7 +6,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import top.graduation.rs.model.Vote;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,9 +20,9 @@ public interface VoteRepository extends JpaRepository<Vote, Integer> {
     @Transactional
     Vote save(Vote vote);
 
-    @Transactional(readOnly = true)  //AND YEAR(dateTime)=YEAR(NOW()) AND MONTH(dateTime)=MONTH(NOW()) AND DAY(dateTime)=DAY(NOW())")
-    @Query("SELECT v FROM Vote v WHERE v.user.id=:userId AND v.date=:date")
-    Optional<Vote> getTodayUserVote(@Param("userId") int userId, @Param("date") LocalDate date);
+    @Transactional(readOnly = true)
+    @Query("SELECT v FROM Vote v WHERE v.user.id=:userId AND (YEAR(v.date)=YEAR(NOW()) AND MONTH(v.date)=MONTH(NOW()) AND DAY(v.date)=DAY(NOW()))")
+    Optional<Vote> getTodayUserVote(@Param("userId") int userId);
 
     @Query("SELECT v.id, u.email, r.title, v.date FROM Vote v JOIN v.user u JOIN v.restaurant r WHERE u.id=:userId")
     List<Object[]> getUserVoteHistory(@Param("userId") int userId);
