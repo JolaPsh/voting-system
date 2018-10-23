@@ -38,9 +38,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
                 .antMatchers("/admin/**").hasAuthority(Role.ROLE_ADMIN.getAuthority())
-                .antMatchers("/profile/**").hasAuthority(Role.ROLE_USER.getAuthority())
-                .and().csrf().disable()
-                .httpBasic();
+                .antMatchers("/rest/**").authenticated()
+                .and().httpBasic()
+                .and().csrf().disable();
     }
 
     /*

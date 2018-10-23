@@ -73,7 +73,7 @@ public class VoteServiceImpl implements VoteService {
     }
 
     @Override
-    public List<Vote> getUserVoteHistory(int userId) {
+    public List<Object[]> getUserVoteHistory(int userId) {
         log.info("get vote history for user with id {}", userId);
         return voteRepo.getUserVoteHistory(userId);
     }

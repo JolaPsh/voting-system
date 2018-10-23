@@ -23,5 +23,5 @@ public interface VoteService {
     VoteTo createOrUpdate(int userId, int restaurantId);
 
     @Secured({"ROLE_ADMIN", "ROLE_USER"})
-    List<Vote> getUserVoteHistory(int userId);
+    List<Object[]> getUserVoteHistory(int userId);
 }

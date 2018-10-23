@@ -8,7 +8,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import top.graduation.rs.model.Restaurant;
-import top.graduation.rs.model.Vote;
 import top.graduation.rs.service.VoteService;
 import top.graduation.rs.to.VoteTo;
 import top.graduation.rs.web.SecurityUtil;
@@ -25,7 +24,7 @@ import java.util.List;
 @RequestMapping(value = VoteController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class VoteController {
     private static final Logger log = LoggerFactory.getLogger(RestaurantAdminController.class);
-    public static final String REST_URL = "/rest/profile/vote";
+    public static final String REST_URL = "/rest/vote";
 
     private static final LocalTime TIME_EXPIRED = LocalTime.of(11, 0);
 
@@ -48,7 +47,7 @@ public class VoteController {
 
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Vote>> getUserVoteHistory(@PathVariable("id") int id) {
+    public ResponseEntity<List<Object[]>> getUserVoteHistory(@PathVariable("id") int id) {
         int userId = SecurityUtil.authUserId();
         log.info("vote history for user with id {}", userId);
             // Another user doesn't have permission to access your vote history

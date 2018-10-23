@@ -26,5 +26,5 @@ public interface VoteRepository extends JpaRepository<Vote, Integer> {
     Optional<Vote> getTodayUserVote(@Param("userId") int userId, @Param("date") LocalDate date);
 
     @Query("SELECT v.id, u.email, r.title, v.date FROM Vote v JOIN v.user u JOIN v.restaurant r WHERE u.id=:userId")
-    List<Vote> getUserVoteHistory(@Param("userId") int userId);
+    List<Object[]> getUserVoteHistory(@Param("userId") int userId);
 }
