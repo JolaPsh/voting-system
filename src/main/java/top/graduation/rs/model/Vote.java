@@ -2,13 +2,13 @@ package top.graduation.rs.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * Created by Joanna Pakosh on Июль, 2018
  */
 @Entity
-@Table(name = "votes")
+@Table(name = "votes", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "date"}, name = "user_unique_vote_idx")})
 public class Vote extends AbstractBaseEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
@@ -20,19 +20,19 @@ public class Vote extends AbstractBaseEntity {
     private Restaurant restaurant;
     @Column(name = "date", unique = true)
     @NotNull
-    private LocalDate date;
+    private Date date;
 
     public Vote() {
     }
 
-    public Vote(Integer id, User user, Restaurant restaurant, LocalDate date) {
+    public Vote(Integer id, User user, Restaurant restaurant, Date date) {
         super(id);
         this.user = user;
         this.restaurant = restaurant;
         this.date = date;
     }
 
-    public Vote(User user, Restaurant restaurant, LocalDate date) {
+    public Vote(User user, Restaurant restaurant, Date date) {
         this.user = user;
         this.restaurant = restaurant;
         this.date = date;
@@ -46,7 +46,7 @@ public class Vote extends AbstractBaseEntity {
         return restaurant;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
@@ -58,7 +58,7 @@ public class Vote extends AbstractBaseEntity {
         this.restaurant = restaurant;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

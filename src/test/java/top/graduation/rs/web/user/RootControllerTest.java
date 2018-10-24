@@ -1,6 +1,5 @@
 package top.graduation.rs.web.user;
 
-
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -9,6 +8,7 @@ import top.graduation.rs.model.Restaurant;
 import top.graduation.rs.service.RestaurantService;
 import top.graduation.rs.web.AbstractControllerTest;
 
+import java.time.LocalDate;
 import java.util.Comparator;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -26,28 +26,19 @@ public class RootControllerTest extends AbstractControllerTest {
     @Autowired
     private RestaurantService service;
 
-    @WithMockUser(username = "herbert", roles = "USER")
-    @Test
-    public void getAll() throws Exception{
-        mockMvc.perform(get(REST_URL)
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andDo(print());
-
-        RESTAURANTS.sort(Comparator.comparing(Restaurant::getTitle));
-        assertMatch(service.getAll(), RESTAURANTS);
-    }
-
-    @WithMockUser(username = "herbert", roles = "USER")
+    @WithMockUser(username = "Herbert", roles = "USER")
     @Test
     public void getRestaurantsWithDishes() throws Exception{
         mockMvc.perform(get(REST_URL+"dishes")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(print());
+
+        RESTAURANTS.sort(Comparator.comparing(Restaurant::getTitle));
+        assertMatch(service.getRestaurantsWithDishes(LocalDate.now()), RESTAURANTS);
         }
 
-    @WithMockUser(username = "herbert", roles = "USER")
+    @WithMockUser(username = "Herbert", roles = "USER")
     @Test
     public void findByTitle() throws Exception{
         mockMvc.perform(get(REST_URL+"searchByTitle?title=ku")

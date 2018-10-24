@@ -49,7 +49,7 @@ public class DishAdminController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Dish> create(@RequestBody Dish dish, UriComponentsBuilder ucBuilder) {
-        log.info("create restaurant {}", dish);
+        log.info("create dish {}", dish);
         Dish created = service.create(dish);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path(REST_URL + "/{id}").buildAndExpand(dish.getId()).toUri());

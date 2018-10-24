@@ -21,7 +21,7 @@ public interface VoteRepository extends JpaRepository<Vote, Integer> {
     Vote save(Vote vote);
 
     @Transactional(readOnly = true)
-    @Query("SELECT v FROM Vote v WHERE v.user.id=:userId AND (YEAR(v.date)=YEAR(NOW()) AND MONTH(v.date)=MONTH(NOW()) AND DAY(v.date)=DAY(NOW()))")
+    @Query("SELECT v FROM Vote v WHERE v.user.id=:userId AND v.date=CURRENT_DATE")
     Optional<Vote> getTodayUserVote(@Param("userId") int userId);
 
     @Query("SELECT v.id, u.email, r.title, v.date FROM Vote v JOIN v.user u JOIN v.restaurant r WHERE u.id=:userId")

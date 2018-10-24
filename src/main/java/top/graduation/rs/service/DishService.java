@@ -24,7 +24,4 @@ public interface DishService {
 
     @Secured({"ROLE_ADMIN"})
     void update(Dish dish, int id) throws NotFoundException;
-
-    @Secured({"ROLE_ADMIN", "ROLE_USER"})
-    Object[] getDishHistory(int id);
 }

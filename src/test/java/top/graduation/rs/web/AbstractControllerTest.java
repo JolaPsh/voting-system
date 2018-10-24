@@ -35,13 +35,14 @@ public abstract class AbstractControllerTest {
 
     protected MockMvc mockMvc;
 
+    @Autowired
+    protected UserServiceSecurity serviceSecurity;
+
     @Before
     public void setup() {
         mockMvc = MockMvcBuilders
-                .webAppContextSetup(context).addFilter(CHARACTER_ENCODING_FILTER)
+                .webAppContextSetup(context)
+                .addFilter(CHARACTER_ENCODING_FILTER)
                 .build();
     }
-
-    @Autowired
-    private UserServiceSecurity serviceSecurity;
 }

@@ -27,15 +27,8 @@ public class RestaurantServiceImp implements RestaurantService {
     private RestaurantRepository repository;
 
     @Override
-    @CacheResult(cacheName = "restaurants")
-    public List<Restaurant> getAll() {
-        log.info("get all restaurants {}");
-        return repository.findAll();
-    }
-
-    @Override
     public Restaurant retrieve(int id) throws NotFoundException {
-        log.info("get restaurant with id {}", id);
+        log.info("restaurant with id {}", id);
         return checkNotFoundWithId(repository.findById(id).orElse(null), id);
     }
 
@@ -60,7 +53,6 @@ public class RestaurantServiceImp implements RestaurantService {
     }
 
     @Override
-    @CacheResult(cacheName = "restaurants")
     public List<Restaurant> findByTitle(String title) {
         log.info("find restaurants by title ={}", title);
         return repository.findByTitle(title);
@@ -71,5 +63,11 @@ public class RestaurantServiceImp implements RestaurantService {
     public List<Restaurant> getRestaurantsWithDishes(LocalDate date) {
         log.info("get all restaurants with dishes {}");
         return repository.getRestaurantsWithDishes(date);
+    }
+
+    @Override
+    public List<Restaurant> getAll() {
+        log.info("get all restaurants {}");
+        return repository.getAll();
     }
 }

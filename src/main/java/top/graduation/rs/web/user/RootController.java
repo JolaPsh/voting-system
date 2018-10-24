@@ -31,12 +31,6 @@ public class RootController {
     @Autowired
     private RestaurantService service;
 
-    @GetMapping
-    public ResponseEntity<List<Restaurant>> getAll() {
-        log.info("get all restaurants {}");
-        return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
-    }
-
     @GetMapping("/dishes")
     public ResponseEntity<List<Restaurant>> getRestaurantsWithDishes(@RequestParam(value = "date", required = false)
                                                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {

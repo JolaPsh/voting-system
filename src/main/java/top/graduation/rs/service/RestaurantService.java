@@ -12,8 +12,6 @@ import java.util.List;
  */
 
 public interface RestaurantService {
-    @Secured({"ROLE_ADMIN", "ROLE_USER"})
-    List<Restaurant> getAll();
 
     @Secured({"ROLE_ADMIN"})
     Restaurant retrieve(int id) throws NotFoundException;
@@ -33,4 +31,6 @@ public interface RestaurantService {
     @Secured({"ROLE_ADMIN", "ROLE_USER"})
     List<Restaurant> getRestaurantsWithDishes(LocalDate date);
 
+    @Secured({"ROLE_ADMIN"})
+    List<Restaurant> getAll();
 }

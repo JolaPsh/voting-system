@@ -33,20 +33,19 @@ public class RestaurantAdminControllerTest extends AbstractControllerTest {
 
     @WithMockUser(username = "herbert", roles = "USER")
     @Test
-    public void testGetUnAuth() throws Exception {
-        mockMvc.perform(get(REST_URL + RES_ID + 4))
+    public void testGetForbidden() throws Exception {
+        mockMvc.perform(get(REST_URL + (RES_ID + 4)))
                 .andDo(print())
                 .andExpect(status().isForbidden());
     }
 
-    @WithMockUser(username = "admin", roles = "ADMIN")
+   @WithMockUser(username = "admin", roles = "ADMIN")
     @Test
     public void testGetAll() throws Exception {
         mockMvc.perform(get(REST_URL)
-                .contentType(MediaType.APPLICATION_JSON))
+               .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(print());
-
         RESTAURANTS.sort(Comparator.comparing(Restaurant::getTitle));
         assertMatch(service.getAll(), RESTAURANTS);
     }
@@ -86,8 +85,6 @@ public class RestaurantAdminControllerTest extends AbstractControllerTest {
         created.setId(returned.getId());
 
         assertMatch(returned, created);
-        assertMatch(service.getAll(), created, RESTAURANT_7, RESTAURANT_5, RESTAURANT_3,
-                RESTAURANT_1, RESTAURANT_2, RESTAURANT_6, RESTAURANT_4);
     }
 
     @WithMockUser(username = "admin", roles = "ADMIN")

@@ -30,7 +30,7 @@ public class RestaurantAdminController {
     private RestaurantService service;
 
     @GetMapping
-    public ResponseEntity<List<Restaurant>> getAll() {
+    public ResponseEntity<List<Restaurant>> getAll(){
         log.info("get all restaurants {}");
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }

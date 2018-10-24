@@ -54,9 +54,4 @@ public class DishServiceImpl implements DishService {
         log.info("update dish {} with id {}", newDish, id);
         checkNotFoundWithId(repository.save(newDish), id);
     }
-
-    @Override
-    public Object[] getDishHistory(int id) {
-        return repository.getDishHistory(id);
-    }
 }

@@ -1,20 +1,30 @@
 DELETE FROM votes;
-DELETE FROM dishes;
 DELETE FROM users_roles;
 DELETE FROM restaurants;
+DELETE FROM dishes;
 DELETE FROM users;
 
-ALTER SEQUENCE global_seq
-RESTART WITH 1000;
+ALTER SEQUENCE global_seq RESTART WITH 1000;
 
-INSERT INTO restaurants (title, location) VALUES
-  ('Local', '33 Dark Spurt, Lviv'),
-  ('Panorama', '44 Zankoveckoj street, Lviv'),
-  ('Kruivka', '11 Mykolaja street, Ternopil'),
-  ('Varenuku', '101 Filbert street, Lviv'),
-  ('Frontos', '2 Chapel street, Lviv'),
-  ('Shekspire', '17 Kosmonavtov street, Lviv'),
-  ('Fransua', '44 Lenina street, Lviv');
+INSERT INTO dishes (name, price) VALUES
+  ('Calamari', 33),
+  ('Meat balls + Deruny', 112),
+  ('Cabbage rolls', 52),
+  ('Omelette', 27),
+  ('Casserole', 72),
+  ('Fish and chips', 108),
+  ('Mint tea', 25),
+  ('Champagne', 50),
+  ('Cutlet + spaghetti', 62);
+
+INSERT INTO restaurants (title, location, dish_id) VALUES
+  ('Local', '33 Dark Spurt, Lviv', 1000),
+  ('Panorama', '44 Zankoveckoj street, Lviv', 1001),
+  ('Kruivka', '11 Mykolaja street, Ternopil', 1002),
+  ('Varenuku', '101 Filbert street, Lviv', 1003),
+  ('Frontos', '2 Chapel street, Lviv', 1004),
+  ('Shekspire', '17 Kosmonavtov street, Lviv', 1005),
+  ('Fransua', '44 Lenina street, Lviv', 1006);
 /*
  *  Encrypted passwords(bcrypt algorithm):
  *  admin --> $2a$10$nkIkAuiTPDwI1apyvvkALuGjLzlH4z6drw.P4.kRTzWnV7c5eai9K
@@ -27,27 +37,9 @@ INSERT INTO users (name, email, password) VALUES
   ('Dominik', 'dominik@gmail.com', '$2a$10$d1nYOalJluNlt5K/BPUnlOKT5A3LZ7irNzR2..vuorxd3SXkOwsSm');
 
 INSERT INTO users_roles (user_id, role) VALUES
-  (1009, 'ROLE_USER'),
-  (1008, 'ROLE_USER'),
-  (1007, 'ROLE_ADMIN');
-
-
-INSERT INTO dishes (name, price, restaurant_id) VALUES
-  ('Calamari', 33, 1000),
-  ('Meat balls + Deruny', 112, 1004),
-  ('Cabbage rolls', 52, 1002),
-  ('Black tea', 10, 1002),
-  ('Grape juice', 11, 1004),
-  ('Cocoa', 15, 1000),
-  ('Omelette', 27, 1002),
-  ('Casserole', 72, 1006),
-  ('Coffe', 12, 1000),
-  ('Fish and chips', 108, 1002),
-  ('Mint tea', 25, 1003),
-  ('Champagne', 50, 1005),
-  ('Pizza', 45, 1002),
-  ('French fries', 30, 1001),
-  ('Cutlet + spaghetti', 62, 1003);
+  (1018, 'ROLE_USER'),
+  (1017, 'ROLE_USER'),
+  (1016, 'ROLE_ADMIN');
 
 INSERT INTO votes (user_id, restaurant_id) VALUES
-  (1008, 1001);
+  (1017, 1009);

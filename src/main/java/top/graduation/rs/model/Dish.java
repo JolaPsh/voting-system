@@ -2,7 +2,10 @@ package top.graduation.rs.model;
 
 import org.hibernate.validator.constraints.Range;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -11,7 +14,7 @@ import java.time.LocalDate;
  */
 
 @Entity
-@Table(name = "dishes")
+@Table(name = "dishes", uniqueConstraints = {@UniqueConstraint(columnNames="name", name = "dish_name_idx")})
 public class Dish extends AbstractNamedEntity {
     @Column(name = "date", nullable = false)
     @NotNull
@@ -19,19 +22,14 @@ public class Dish extends AbstractNamedEntity {
     @Column(name = "price", nullable = false)
     @Range(min = 10, max = 50000)
     private int price;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "restaurant_id", nullable = false)
-    @NotNull
-    private Restaurant restaurant;
 
     public Dish() {
     }
 
-    public Dish(Integer id, LocalDate date, String name, int price, Restaurant restaurant) {
+    public Dish(Integer id, LocalDate date, String name, int price) {
         super(id, name);
         this.date = date;
         this.price = price;
-        this.restaurant = restaurant;
     }
 
     public LocalDate getDate() {
@@ -50,14 +48,6 @@ public class Dish extends AbstractNamedEntity {
         this.price = price;
     }
 
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
-
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
-
     @Override
     public String toString() {
         return "Dish{" +
@@ -65,7 +55,6 @@ public class Dish extends AbstractNamedEntity {
                 ", name='" + name + '\'' +
                 ", date=" + date +
                 ", price=" + price +
-                ", restaurant=" + restaurant +
                 '}';
     }
 }

@@ -12,7 +12,7 @@ import top.graduation.rs.repository.datajpa.UserRepository;
 import top.graduation.rs.repository.datajpa.VoteRepository;
 import top.graduation.rs.to.VoteTo;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +35,7 @@ public class VoteServiceImpl implements VoteService {
 
     @Override
     public Optional<Vote> getTodayUserVote(int userId) {
-        log.info("get today={} user vote{} ", LocalDate.now(), userId);
+        log.info("get today={} user vote{} ", new Date(), userId);
         return voteRepo.getTodayUserVote(userId);
     }
 
@@ -48,7 +48,7 @@ public class VoteServiceImpl implements VoteService {
         }
        Vote newVote = new Vote(userRepo.getOne(userId),
                restaurantRepo.getOne(restaurantId),
-               LocalDate.now());
+               new Date());
         VoteTo voteTo = new VoteTo(newVote, true);
         voteRepo.save(voteTo.getVote());
         log.info("create vote{} ", voteTo);
@@ -60,7 +60,7 @@ public class VoteServiceImpl implements VoteService {
     public VoteTo createOrUpdate(int userId, int restaurantId) {
         Vote newVote = new Vote(userRepo.getOne(userId),
                 restaurantRepo.getOne(restaurantId),
-                LocalDate.now());
+                new Date());
         VoteTo todayVote = voteRepo.getTodayUserVote(userId)
                 .map(v->  {
                     v.setRestaurant(restaurantRepo.getOne(restaurantId));

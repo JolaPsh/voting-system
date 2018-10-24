@@ -11,7 +11,6 @@ import top.graduation.rs.model.Restaurant;
 import top.graduation.rs.service.VoteService;
 import top.graduation.rs.to.VoteTo;
 import top.graduation.rs.web.SecurityUtil;
-import top.graduation.rs.web.admin.RestaurantAdminController;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -23,7 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = VoteController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class VoteController {
-    private static final Logger log = LoggerFactory.getLogger(RestaurantAdminController.class);
+    private static final Logger log = LoggerFactory.getLogger(VoteController.class);
     public static final String REST_URL = "/rest/vote";
 
     private static final LocalTime TIME_EXPIRED = LocalTime.of(11, 0);

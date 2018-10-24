@@ -83,7 +83,7 @@ public class DishAdminControllerTest extends AbstractControllerTest {
 
         assertMatch(returned, created);
         assertMatch(service.getAll(), DISH_1, DISH_2, DISH_3, DISH_4, DISH_5, DISH_6, DISH_7,
-                DISH_8, DISH_9, DISH_10, DISH_11, DISH_12, DISH_13, DISH_14, DISH_15, created);
+                DISH_8, DISH_9, created);
     }
 
     @WithMockUser(username = "admin", roles = "ADMIN")
