@@ -1,7 +1,9 @@
 **REST / Spring Boot / JPA / HSQL**
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/547f888903bd478ebdf52cf4c59ef6b7)](https://www.codacy.com/app/JolaPsh/voting-system?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=JolaPsh/voting-system&amp;utm_campaign=Badge_Grade)
 ##
 **Graduation Project of <a href="https://github.com/JolaPsh/topjava">Topjava</a>  Intership**
 ##
+
 This Java project offers a `RESTful API` with basic authentication for admin and regular users. 
 
 
