@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import top.graduation.rs.model.Restaurant;
 import top.graduation.rs.service.VoteService;
+import top.graduation.rs.to.VoteHistory;
 import top.graduation.rs.to.VoteTo;
 import top.graduation.rs.web.SecurityUtil;
 
@@ -44,13 +45,10 @@ public class VoteController {
                newVote.isCreated()? HttpStatus.CREATED : (acceptVote ? HttpStatus.OK : HttpStatus.CONFLICT));
     }
 
-
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Object[]>> getUserVoteHistory(@PathVariable("id") int id) {
+    @GetMapping("/history")
+    public List<VoteHistory> getUserVotes(){
         int userId = SecurityUtil.authUserId();
-        log.info("vote history for user with id {}", userId);
-            // Another user doesn't have permission to access your vote history
-        return new ResponseEntity<>(service.getUserVoteHistory(userId),
-                userId != id? HttpStatus.FORBIDDEN :HttpStatus.OK);
+        log.info("get voteHistory for user with id ={}", userId);
+        return service.getUserVotes(userId);
     }
 }

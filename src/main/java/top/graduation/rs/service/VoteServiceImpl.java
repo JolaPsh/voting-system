@@ -10,11 +10,13 @@ import top.graduation.rs.model.Vote;
 import top.graduation.rs.repository.datajpa.RestaurantRepository;
 import top.graduation.rs.repository.datajpa.UserRepository;
 import top.graduation.rs.repository.datajpa.VoteRepository;
+import top.graduation.rs.to.VoteHistory;
 import top.graduation.rs.to.VoteTo;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Created by Joanna Pakosh on Сент., 2018
@@ -73,8 +75,14 @@ public class VoteServiceImpl implements VoteService {
     }
 
     @Override
-    public List<Object[]> getUserVoteHistory(int userId) {
-        log.info("get vote history for user with id {}", userId);
-        return voteRepo.getUserVoteHistory(userId);
+    public List<VoteHistory> getUserVotes(int userId) {
+        log.info("get voteHistory for user with id ={}", userId);
+        return voteRepo.getVotesByUser(userId).
+                stream().map(
+                v -> new VoteHistory(v.getId(),
+                        v.getDate(),
+                        v.getRestaurant().getTitle(),
+                        v.getRestaurant().getDish().getName())
+        ).collect(Collectors.toList());
     }
 }

@@ -51,9 +51,9 @@
 ##
 **User:**
 ##
-**GET user vote history:**
+**GET vote history for user with id 1017:**
 
-`curl -s http://localhost:8080/rest/vote/1017 --user herbert@gmail.com:herbert`
+`curl -s http://localhost:8080/rest/vote/history --user herbert@gmail.com:herbert`
 
 **GET all restaurants:**
 
@@ -65,7 +65,7 @@
 
 **CREATE(UPDATE) vote:**
 
-`curl -s -X POST -d ' {"user_id": 1018, "restaurant_id": 1010"} ' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/rest/vote/1010 --user dominik@gmail.com:12345678`
+`curl -s -X POST -d ' {"restaurant_id": 1010"} ' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/rest/vote/1010 --user dominik@gmail.com:12345678`
 
 **GET restaurants by title:**
 

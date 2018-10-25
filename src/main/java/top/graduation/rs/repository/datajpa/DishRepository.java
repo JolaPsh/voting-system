@@ -22,7 +22,4 @@ public interface DishRepository extends JpaRepository<Dish, Integer> {
     @Modifying
     @Query("DELETE FROM Dish d WHERE d.id=:id")
     int delete(@Param("id") int id);
-
-/*    @Query("SELECT r FROM Restaurant r JOIN FETCH r.dish")
-    Dish findByRestaurant(@Param("restaurant") Restaurant restaurant);*/
 }

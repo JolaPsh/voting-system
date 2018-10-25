@@ -33,5 +33,8 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
     List<Restaurant> findByTitle(@Param("title") String title);
 
     @Query("SELECT r FROM Restaurant r JOIN FETCH r.dish WHERE r.dish.date=?1 ORDER BY r.title")
-    List<Restaurant> getRestaurantsWithDishes(@Param("date") LocalDate date);
+    List<Restaurant> getRestaurantsWithDishes(LocalDate date);
+
+    @Query("SELECT r FROM Restaurant r JOIN FETCH r.dish WHERE r.dish.id=?1")
+    Restaurant findByDish(int dishId);
 }

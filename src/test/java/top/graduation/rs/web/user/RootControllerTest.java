@@ -19,6 +19,7 @@ import static top.graduation.rs.RestaurantTestData.*;
 /**
  * Created by Joanna Pakosh on Окт., 2018
  */
+@WithMockUser(username = "Herbert", roles = "USER")
 public class RootControllerTest extends AbstractControllerTest {
 
     private static final String REST_URL = RootController.REST_URL + "/";
@@ -26,7 +27,6 @@ public class RootControllerTest extends AbstractControllerTest {
     @Autowired
     private RestaurantService service;
 
-    @WithMockUser(username = "Herbert", roles = "USER")
     @Test
     public void getRestaurantsWithDishes() throws Exception{
         mockMvc.perform(get(REST_URL+"dishes")
@@ -38,7 +38,6 @@ public class RootControllerTest extends AbstractControllerTest {
         assertMatch(service.getRestaurantsWithDishes(LocalDate.now()), RESTAURANTS);
         }
 
-    @WithMockUser(username = "Herbert", roles = "USER")
     @Test
     public void findByTitle() throws Exception{
         mockMvc.perform(get(REST_URL+"searchByTitle?title=ku")
