@@ -7,11 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Joanna Pakosh on Июль, 2018
@@ -26,7 +22,7 @@ public class User extends AbstractNamedEntity {
     private String email;
     @Column(name = "registered", columnDefinition = "timestamp default now()")
     @NotNull
-    private LocalDate registered;
+    private Date registered;
     @Column(name = "password", nullable = false)
     @NotBlank
     @Size(min = 5, max = 60)
@@ -34,7 +30,7 @@ public class User extends AbstractNamedEntity {
     @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
     private boolean enabled = true;
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
@@ -50,16 +46,11 @@ public class User extends AbstractNamedEntity {
         this(u.getId(), u.getName(), u.getEmail(), u.getRegistered(), u.getPassword(), u.isEnabled(), u.getRoles());
     }
 
-    public User(Integer id, String name, String email, LocalDate registered, String password, boolean enabled, Set<Role> roles) {
-        super(id, name);
-        this.email = email;
-        this.registered = registered;
-        this.password = password;
-        this.enabled = enabled;
-        this.roles = roles;
+    public User(Integer id, String name, String email,  String password, Role role, Role... roles) {
+        this(id, name, email, new Date(), password, true, EnumSet.of(role, roles));
     }
 
-    public User(Integer id, String name, String email, LocalDate registered, String password, boolean enabled, Collection<Role> roles) {
+    public User(Integer id, String name, String email, Date registered, String password, boolean enabled, Collection<Role> roles) {
         super(id, name);
         this.email = email;
         this.registered = registered;
@@ -76,11 +67,11 @@ public class User extends AbstractNamedEntity {
         this.email = email;
     }
 
-    public LocalDate getRegistered() {
+    public Date getRegistered() {
         return registered;
     }
 
-    public void setRegistered(LocalDate registered) {
+    public void setRegistered(Date registered) {
         this.registered = registered;
     }
 

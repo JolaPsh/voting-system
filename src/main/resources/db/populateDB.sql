@@ -1,5 +1,5 @@
 DELETE FROM votes;
-DELETE FROM users_roles;
+DELETE FROM user_roles;
 DELETE FROM restaurants;
 DELETE FROM dishes;
 DELETE FROM users;
@@ -36,7 +36,7 @@ INSERT INTO users (name, email, password) VALUES
   ('Herbert', 'herbert@gmail.com', '$2a$10$38QCKfvthp4JuEg1Rar7je4KHF9mVoaH0dZpGdP/BCMOeq/.scZx2'),
   ('Dominik', 'dominik@gmail.com', '$2a$10$d1nYOalJluNlt5K/BPUnlOKT5A3LZ7irNzR2..vuorxd3SXkOwsSm');
 
-INSERT INTO users_roles (user_id, role) VALUES
+INSERT INTO user_roles (user_id, role) VALUES
   (1018, 'ROLE_USER'),
   (1017, 'ROLE_USER'),
   (1016, 'ROLE_ADMIN');

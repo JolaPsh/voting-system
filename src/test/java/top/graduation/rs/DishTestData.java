@@ -16,7 +16,7 @@ import static top.graduation.rs.model.AbstractBaseEntity.START_SEQ;
 public class DishTestData {
 
     public static final int DISH_ID = START_SEQ;
-    public static final LocalDate today = LocalDate.now();
+    private static final LocalDate today = LocalDate.now();
 
     public static final Dish DISH_1 = new Dish(DISH_ID, today, "Calamari", 33);
     public static final Dish DISH_2 = new Dish(DISH_ID + 1, today, "Meat balls + Deruny", 112);
@@ -27,9 +27,6 @@ public class DishTestData {
     public static final Dish DISH_7 = new Dish(DISH_ID + 6, today, "Mint tea", 25);
     public static final Dish DISH_8 = new Dish(DISH_ID + 7, today, "Champagne", 50);
     public static final Dish DISH_9 = new Dish(DISH_ID + 8, today, "Cutlet + spaghetti", 62);
-
-    public static final Object[] DISH_HISTORY_13 = new Object[] {
-            new Object [] {LocalDate.now(), "French fries", 30, "Panorama", "herbert@gmail.com"}};
 
     public static final List<Dish> DISHES = Arrays.asList(DISH_1, DISH_2, DISH_3, DISH_4, DISH_5, DISH_6,
             DISH_7, DISH_8, DISH_9);
@@ -43,7 +40,8 @@ public class DishTestData {
     }
 
     public static void assertMatch(Dish actual, Dish expected) {
-        assertThat(actual).isEqualTo(expected);}
+        assertThat(actual).isEqualTo(expected);
+    }
 
     public static void assertMatch(Iterable<Dish> actual, Dish... expected) {
         assertMatch(actual, Arrays.asList(expected));

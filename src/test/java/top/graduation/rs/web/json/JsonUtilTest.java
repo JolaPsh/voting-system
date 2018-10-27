@@ -1,6 +1,6 @@
 package top.graduation.rs.web.json;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import top.graduation.rs.model.Restaurant;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import static top.graduation.rs.RestaurantTestData.*;
 public class JsonUtilTest {
 
     @Test
-    public void testReadWriteValue() throws Exception {
+    void testReadWriteValue() throws Exception {
         String json = JsonUtil.writeValue(RESTAURANT_2);
         System.out.println(json);
         Restaurant restaurant = JsonUtil.readValue(json, Restaurant.class);
@@ -21,7 +21,7 @@ public class JsonUtilTest {
     }
 
     @Test
-    public void testReadWriteValues() throws Exception {
+    void testReadWriteValues() throws Exception {
         String json = JsonUtil.writeValue(RESTAURANTS);
         System.out.println(json);
         List<Restaurant> restaurants = JsonUtil.readValues(json, Restaurant.class);

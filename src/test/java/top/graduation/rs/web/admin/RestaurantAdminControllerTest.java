@@ -1,9 +1,8 @@
 package top.graduation.rs.web.admin;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.ResultActions;
 import top.graduation.rs.model.Restaurant;
 import top.graduation.rs.service.RestaurantService;
@@ -17,66 +16,70 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static top.graduation.rs.RestaurantTestData.*;
-import static top.graduation.rs.TestUtil.contentJson;
-import static top.graduation.rs.TestUtil.readFromJson;
+import static top.graduation.rs.TestUtil.*;
+import static top.graduation.rs.UserTestData.ADMIN;
+import static top.graduation.rs.UserTestData.USER_2;
 
 /**
  * Created by Joanna Pakosh on Сент., 2018
  */
 
-public class RestaurantAdminControllerTest extends AbstractControllerTest {
+class RestaurantAdminControllerTest extends AbstractControllerTest {
 
     private static final String REST_URL = RestaurantAdminController.REST_URL + "/";
 
     @Autowired
     private RestaurantService service;
 
-    @WithMockUser(username = "herbert", roles = "USER")
     @Test
-    public void testGetForbidden() throws Exception {
-        mockMvc.perform(get(REST_URL + (RES_ID + 4)))
+    void testGetForbidden() throws Exception {
+        mockMvc.perform(get(REST_URL + (RES_ID + 4))
+                .with(userAuth(USER_2)))
                 .andDo(print())
                 .andExpect(status().isForbidden());
     }
 
-   @WithMockUser(username = "admin", roles = "ADMIN")
     @Test
-    public void testGetAll() throws Exception {
+    void testGetAll() throws Exception {
         mockMvc.perform(get(REST_URL)
-               .contentType(MediaType.APPLICATION_JSON))
+                .with(userAuth(ADMIN))
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(print());
+
+        mockAuthorize(ADMIN);
         RESTAURANTS.sort(Comparator.comparing(Restaurant::getTitle));
         assertMatch(service.getAll(), RESTAURANTS);
     }
 
-    @WithMockUser(username = "admin", roles = "ADMIN")
     @Test
-    public void testRetrieve() throws Exception {
-        mockMvc.perform(get(REST_URL + (RES_ID + 3)))
+    void testRetrieve() throws Exception {
+        mockMvc.perform(get(REST_URL + (RES_ID + 3))
+                .with(userAuth(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 // https://jira.spring.io/browse/SPR-14472
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(contentJson(RESTAURANT_4));
 
+        mockAuthorize(ADMIN);
         assertMatch(service.retrieve(RES_ID + 3), RESTAURANT_4);
     }
 
-    @WithMockUser(username = "admin", roles = "ADMIN")
     @Test
-    public void testDelete() throws Exception {
+    void testDelete() throws Exception {
         mockMvc.perform(delete(REST_URL + RES_ID)
+                .with(userAuth(ADMIN))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent())
                 .andDo(print());
     }
 
-    @WithMockUser(username = "admin", roles = "ADMIN")
     @Test
-    public void testCreate() throws Exception {
+     void testCreate() throws Exception {
         Restaurant created = getCreated();
         ResultActions action = mockMvc.perform(post(REST_URL)
+                .with(userAuth(ADMIN))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(created)))
                 .andExpect(status().isCreated());
@@ -85,17 +88,21 @@ public class RestaurantAdminControllerTest extends AbstractControllerTest {
         created.setId(returned.getId());
 
         assertMatch(returned, created);
+        mockAuthorize(ADMIN);
+        assertMatch(service.getAll(), created, RESTAURANT_7, RESTAURANT_5, RESTAURANT_3, RESTAURANT_1, RESTAURANT_2,
+                RESTAURANT_6, RESTAURANT_4);
     }
 
-    @WithMockUser(username = "admin", roles = "ADMIN")
     @Test
-    public void testUpdate() throws Exception {
+    void testUpdate() throws Exception {
         Restaurant updated = getUpdated();
         mockMvc.perform(put(REST_URL + RES_ID + 6)
+                .with(userAuth(ADMIN))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(updated)))
                 .andExpect(status().isOk());
 
+        mockAuthorize(ADMIN);
         assertMatch(service.retrieve(RES_ID + 6), updated);
     }
 }

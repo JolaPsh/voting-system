@@ -1,9 +1,8 @@
 package top.graduation.rs.web.user;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import top.graduation.rs.model.Restaurant;
 import top.graduation.rs.service.RestaurantService;
 import top.graduation.rs.web.AbstractControllerTest;
@@ -15,12 +14,15 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static top.graduation.rs.RestaurantTestData.*;
+import static top.graduation.rs.TestUtil.*;
+import static top.graduation.rs.UserTestData.USER_1;
+import static top.graduation.rs.UserTestData.USER_2;
 
 /**
  * Created by Joanna Pakosh on Окт., 2018
  */
-@WithMockUser(username = "Herbert", roles = "USER")
-public class RootControllerTest extends AbstractControllerTest {
+
+class RootControllerTest extends AbstractControllerTest {
 
     private static final String REST_URL = RootController.REST_URL + "/";
 
@@ -28,23 +30,28 @@ public class RootControllerTest extends AbstractControllerTest {
     private RestaurantService service;
 
     @Test
-    public void getRestaurantsWithDishes() throws Exception{
-        mockMvc.perform(get(REST_URL+"dishes")
+    void getRestaurantsWithDishes() throws Exception {
+        mockMvc.perform(get(REST_URL + "dishes")
+                .with(userAuth(USER_1))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(print());
 
+        mockAuthorize(USER_1);
         RESTAURANTS.sort(Comparator.comparing(Restaurant::getTitle));
         assertMatch(service.getRestaurantsWithDishes(LocalDate.now()), RESTAURANTS);
-        }
+    }
 
     @Test
-    public void findByTitle() throws Exception{
-        mockMvc.perform(get(REST_URL+"searchByTitle?title=ku")
+    void findByTitle() throws Exception {
+        mockMvc.perform(get(REST_URL + "searchByTitle?title=ku")
+                .with(userAuth(USER_2))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andDo(print());
+                .andDo(print())
+                .andExpect(contentJsonArray(RESTAURANT_4));
 
+        mockAuthorize(USER_2);
         assertMatch(service.findByTitle("ku"), RESTAURANT_4);
     }
 }

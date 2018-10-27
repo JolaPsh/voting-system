@@ -1,7 +1,7 @@
 DROP TABLE votes IF EXISTS;
 DROP TABLE restaurants IF EXISTS;
 DROP TABLE dishes IF EXISTS;
-DROP TABLE users_roles IF EXISTS;
+DROP TABLE user_roles IF EXISTS;
 DROP TABLE users IF EXISTS;
 
 DROP SEQUENCE GLOBAL_SEQ IF EXISTS;
@@ -29,7 +29,7 @@ CREATE TABLE users
 CREATE UNIQUE INDEX users_unique_email_idx
   ON USERS (email);
 
-CREATE TABLE users_roles
+CREATE TABLE user_roles
 (
   user_id INTEGER NOT NULL,
   role    VARCHAR(255),

@@ -49,4 +49,14 @@ public class VoteHistory {
     public void setDishName(String dishName) {
         this.dishName = dishName;
     }
+
+    @Override
+    public String toString() {
+        return "VoteHistory{" +
+                "voteId=" + voteId +
+                ", date=" + date +
+                ", restaurantTitle='" + restaurantTitle + '\'' +
+                ", dishName='" + dishName + '\'' +
+                '}';
+    }
 }
