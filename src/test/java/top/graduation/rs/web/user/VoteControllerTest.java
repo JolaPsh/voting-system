@@ -12,11 +12,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static top.graduation.rs.RestaurantTestData.RESTAURANT_2;
 import static top.graduation.rs.RestaurantTestData.RES_ID;
-import static top.graduation.rs.TestUtil.*;
+import static top.graduation.rs.TestUtil.contentJson;
+import static top.graduation.rs.TestUtil.userAuth;
 import static top.graduation.rs.UserTestData.USER_1;
 import static top.graduation.rs.UserTestData.USER_2;
-import static top.graduation.rs.VoteTestData.VOTE_HISTORY_USER_1;
-import static top.graduation.rs.VoteTestData.assertMatch;
 
 /**
  * Created by Joanna Pakosh on Окт., 2018
@@ -54,8 +53,5 @@ class VoteControllerTest extends AbstractControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(print());
-
-        mockAuthorize(USER_1);
-        assertMatch(service.getUserVotes(1017), VOTE_HISTORY_USER_1);
     }
 }
