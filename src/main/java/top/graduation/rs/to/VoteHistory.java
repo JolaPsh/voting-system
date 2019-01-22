@@ -1,6 +1,10 @@
 package top.graduation.rs.to;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
+import top.graduation.rs.model.Dish;
 
 /**
  * Created by Joanna Pakosh on Окт., 2018
@@ -9,13 +13,11 @@ public class VoteHistory {
     private int voteId;
     private Date date;
     private String restaurantTitle;
-    private String dishName;
 
-    public VoteHistory(int voteId, Date date, String restaurantTitle, String dishName) {
+    public VoteHistory(int voteId, Date date, String restaurantTitle) {
         this.voteId = voteId;
         this.date = date;
         this.restaurantTitle = restaurantTitle;
-        this.dishName = dishName;
     }
 
     public int getVoteId() {
@@ -41,22 +43,13 @@ public class VoteHistory {
     public void setRestaurantTitle(String restaurantTitle) {
         this.restaurantTitle = restaurantTitle;
     }
-
-    public String getDishName() {
-        return dishName;
-    }
-
-    public void setDishName(String dishName) {
-        this.dishName = dishName;
-    }
-
-    @Override
+   
+	@Override
     public String toString() {
         return "VoteHistory{" +
                 "voteId=" + voteId +
                 ", date=" + date +
                 ", restaurantTitle='" + restaurantTitle + '\'' +
-                ", dishName='" + dishName + '\'' +
                 '}';
     }
 }

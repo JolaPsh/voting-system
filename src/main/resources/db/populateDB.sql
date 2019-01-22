@@ -1,30 +1,31 @@
 DELETE FROM votes;
 DELETE FROM user_roles;
-DELETE FROM restaurants;
 DELETE FROM dishes;
+DELETE FROM restaurants;
 DELETE FROM users;
 
 ALTER SEQUENCE global_seq RESTART WITH 1000;
 
-INSERT INTO dishes (name, price) VALUES
-  ('Calamari', 33),
-  ('Meat balls + Deruny', 112),
-  ('Cabbage rolls', 52),
-  ('Omelette', 27),
-  ('Casserole', 72),
-  ('Fish and chips', 108),
-  ('Mint tea', 25),
-  ('Champagne', 50),
-  ('Cutlet + spaghetti', 62);
+INSERT INTO restaurants (title, location) VALUES
+  ('Local', '33 Dark Spurt, Lviv'),
+  ('Panorama', '44 Zankoveckoj street, Lviv'),
+  ('Kruivka', '11 Mykolaja street, Ternopil'),
+  ('Varenuku', '101 Filbert street, Lviv'),
+  ('Frontos', '2 Chapel street, Lviv'),
+  ('Shekspire', '17 Kosmonavtov street, Lviv'),
+  ('Fransua', '44 Lenina street, Lviv');
+  
+INSERT INTO dishes (name, price, restaurant_id) VALUES
+  ('Calamari', 33, 1001),
+  ('Meat balls + Deruny', 112, 1000),
+  ('Cabbage rolls', 52, 1002),
+  ('Omelette', 27, 1000),
+  ('Casserole', 72, 1003),
+  ('Fish and chips', 108, 1004),
+  ('Mint tea', 25, 1005),
+  ('Champagne', 50, 1004),
+  ('Cutlet + spaghetti', 62, 1001);
 
-INSERT INTO restaurants (title, location, dish_id) VALUES
-  ('Local', '33 Dark Spurt, Lviv', 1000),
-  ('Panorama', '44 Zankoveckoj street, Lviv', 1001),
-  ('Kruivka', '11 Mykolaja street, Ternopil', 1002),
-  ('Varenuku', '101 Filbert street, Lviv', 1003),
-  ('Frontos', '2 Chapel street, Lviv', 1004),
-  ('Shekspire', '17 Kosmonavtov street, Lviv', 1005),
-  ('Fransua', '44 Lenina street, Lviv', 1006);
 /*
  *  Encrypted passwords(bcrypt algorithm):
  *  admin --> $2a$10$nkIkAuiTPDwI1apyvvkALuGjLzlH4z6drw.P4.kRTzWnV7c5eai9K
@@ -42,4 +43,4 @@ INSERT INTO user_roles (user_id, role) VALUES
   (1016, 'ROLE_ADMIN');
 
 INSERT INTO votes (user_id, restaurant_id) VALUES
-  (1017, 1009);
+  (1017, 1001);

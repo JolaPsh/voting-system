@@ -30,7 +30,7 @@ public class RootController {
 
     @Autowired
     private RestaurantService service;
-
+    
     @GetMapping("/dishes")
     public ResponseEntity<List<Restaurant>> getRestaurantsWithDishes(@RequestParam(value = "date", required = false)
                                                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {

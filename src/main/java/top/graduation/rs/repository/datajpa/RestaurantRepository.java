@@ -32,9 +32,9 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
     @Query("SELECT r FROM Restaurant r WHERE r.title LIKE CONCAT('%', :title, '%')")
     List<Restaurant> findByTitle(@Param("title") String title);
 
-    @Query("SELECT r FROM Restaurant r JOIN FETCH r.dish WHERE r.dish.date=?1 ORDER BY r.title")
+    @Query("SELECT r FROM Restaurant r LEFT JOIN FETCH r.dishes d WHERE d.date=?1 ORDER BY r.title")
     List<Restaurant> getRestaurantsWithDishes(LocalDate date);
-
-    @Query("SELECT r FROM Restaurant r JOIN FETCH r.dish WHERE r.dish.id=?1")
-    Restaurant findByDish(int dishId);
+     
+    /*@Query("SELECT d.restaurant FROM Restaurant r JOIN FETCH r.dishes WHERE r.dishes.id=?1")
+    Restaurant findByDish(@Param("dishId")int dishId);*/
 }

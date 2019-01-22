@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import top.graduation.rs.model.Vote;
 import top.graduation.rs.repository.datajpa.RestaurantRepository;
 import top.graduation.rs.repository.datajpa.UserRepository;
@@ -13,6 +14,7 @@ import top.graduation.rs.repository.datajpa.VoteRepository;
 import top.graduation.rs.to.VoteHistory;
 import top.graduation.rs.to.VoteTo;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -76,13 +78,12 @@ public class VoteServiceImpl implements VoteService {
 
     @Override
     public List<VoteHistory> getUserVotes(int userId) {
-        log.info("get voteHistory for user with id ={}", userId);
+        log.info("get voteHistory for user with id ={}", userId);        
         return voteRepo.getVotesByUser(userId).
-                stream().map(
+                stream().map(		
                 v -> new VoteHistory(v.getId(),
                         v.getDate(),
-                        v.getRestaurant().getTitle(),
-                        v.getRestaurant().getDish().getName())
-        ).collect(Collectors.toList());
+                        v.getRestaurant().getTitle()))
+                .collect(Collectors.toList());
     }
 }
