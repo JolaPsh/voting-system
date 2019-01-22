@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -27,6 +28,8 @@
 		<ehcache.version>3.5.2</ehcache.version>
 		<!--JSON -->
 		<jackson-json.version>2.9.6</jackson-json.version>
+		<junit.jupiter.version>5.3.2</junit.jupiter.version>
+		<junit.platform-launcher.version>1.3.2 </junit.platform-launcher.version>
 		<!-- most recent failsafe and surefire plugin versions -->
 		<maven-failsafe-plugin.version>2.22.0</maven-failsafe-plugin.version>
 		<maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
@@ -54,12 +57,20 @@
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
+			<version>${junit.jupiter.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- and the engine for surefire and failsafe -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit.jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-launcher</artifactId>
+			<version>${junit.platform-launcher.version}</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -119,6 +130,12 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>${maven-failsafe-plugin.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire-plugin.version}</version>
 			</plugin>
 		</plugins>
 	</build>

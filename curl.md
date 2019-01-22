@@ -47,7 +47,6 @@
 **UPDATE dish:** 
 
 `curl -s -X PUT -d '{"id": 1013, "date":"2018-09-20", "name":"Mint tea", "price": 20, "restaurant" : {"id": 1005, "title": "Shekspire", "location": "17 Kosmonavtov street, Lviv"}}' -H 'Content-Type: application/json' http://localhost:8080/rest/admin/dishes/1013 --user admin@gmail.com:admin`
-`curl -s -X PUT -d '{"id": 1013, "date":"2018-09-20", "name":"Mint tea", "price": 20, "restaurant_id" : 1005}' -H 'Content-Type: application/json' http://localhost:8080/rest/admin/dishes/1013 --user admin@gmail.com:admin`
 
 ##
 **User:**
