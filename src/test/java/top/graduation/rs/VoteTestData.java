@@ -2,12 +2,10 @@ package top.graduation.rs;
 
 import top.graduation.rs.model.Vote;
 import top.graduation.rs.to.VoteHistory;
-
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static top.graduation.rs.RestaurantTestData.RESTAURANT_1;
 import static top.graduation.rs.UserTestData.USER_1;
@@ -22,8 +20,7 @@ public class VoteTestData {
     public static final Vote VOTE_1 = new Vote(VOTE_ID, USER_1, RESTAURANT_1, new Date());
     public static final VoteHistory VOTE_1_USER_1 = new VoteHistory(VOTE_1.getId(),
             getDateWithoutTime(new Date()),
-            VOTE_1.getRestaurant().getTitle(),
-            VOTE_1.getRestaurant().getDish().getName());
+            VOTE_1.getRestaurant().getTitle());
 
     public static final List<VoteHistory> VOTE_HISTORY_USER_1 = Arrays.asList(VOTE_1_USER_1);
 
