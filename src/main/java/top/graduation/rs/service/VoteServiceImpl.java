@@ -1,5 +1,10 @@
 package top.graduation.rs.service;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +18,6 @@ import top.graduation.rs.repository.datajpa.UserRepository;
 import top.graduation.rs.repository.datajpa.VoteRepository;
 import top.graduation.rs.to.VoteHistory;
 import top.graduation.rs.to.VoteTo;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Created by Joanna Pakosh on Сент., 2018
@@ -78,9 +77,9 @@ public class VoteServiceImpl implements VoteService {
 
     @Override
     public List<VoteHistory> getUserVotes(int userId) {
-        log.info("get voteHistory for user with id ={}", userId);        
+        log.info("get voteHistory for user with id ={}", userId);
         return voteRepo.getVotesByUser(userId).
-                stream().map(		
+                stream().map(
                 v -> new VoteHistory(v.getId(),
                         v.getDate(),
                         v.getRestaurant().getTitle()))

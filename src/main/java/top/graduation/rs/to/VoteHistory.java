@@ -1,10 +1,6 @@
 package top.graduation.rs.to;
 
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
-
-import top.graduation.rs.model.Dish;
 
 /**
  * Created by Joanna Pakosh on Окт., 2018
@@ -43,7 +39,7 @@ public class VoteHistory {
     public void setRestaurantTitle(String restaurantTitle) {
         this.restaurantTitle = restaurantTitle;
     }
-   
+
 	@Override
     public String toString() {
         return "VoteHistory{" +
