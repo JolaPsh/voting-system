@@ -1,11 +1,5 @@
 package top.graduation.rs.web.user;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import top.graduation.rs.service.VoteService;
-import top.graduation.rs.web.AbstractControllerTest;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -17,6 +11,11 @@ import static top.graduation.rs.TestUtil.userAuth;
 import static top.graduation.rs.UserTestData.USER_1;
 import static top.graduation.rs.UserTestData.USER_2;
 
+import org.junit.jupiter.api.Test;
+import org.springframework.http.MediaType;
+
+import top.graduation.rs.web.AbstractControllerTest;
+
 /**
  * Created by Joanna Pakosh on Окт., 2018
  */
@@ -24,9 +23,6 @@ import static top.graduation.rs.UserTestData.USER_2;
 class VoteControllerTest extends AbstractControllerTest {
 
     private static final String REST_URL = VoteController.REST_URL + "/";
-
-    @Autowired
-    private VoteService service;
 
     @Test
     void testGetUnAuthorized() throws Exception {
