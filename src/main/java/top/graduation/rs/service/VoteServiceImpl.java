@@ -3,7 +3,6 @@ package top.graduation.rs.service;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +15,6 @@ import top.graduation.rs.model.Vote;
 import top.graduation.rs.repository.datajpa.RestaurantRepository;
 import top.graduation.rs.repository.datajpa.UserRepository;
 import top.graduation.rs.repository.datajpa.VoteRepository;
-import top.graduation.rs.to.VoteHistory;
 import top.graduation.rs.to.VoteTo;
 
 /**
@@ -37,15 +35,15 @@ public class VoteServiceImpl implements VoteService {
     private VoteRepository voteRepo;
 
     @Override
-    public Optional<Vote> getTodayUserVote(int userId) {
-        log.info("get today={} user vote{} ", new Date(), userId);
-        return voteRepo.getTodayUserVote(userId);
+    public Optional<Vote> getTodayUserVote(int userId, Date date) {
+        log.info("get today={} vote, user with id ={} ", date, userId);
+        return voteRepo.getTodayUserVote(userId, date);
     }
 
     @Transactional
     @Override
     public VoteTo create (int userId, int restaurantId) {
-        Vote todayVote = getTodayUserVote(userId).orElse(null);
+        Vote todayVote = getTodayUserVote(userId, new Date()).orElse(null);
         if (todayVote!=null){
             throw  new DataIntegrityViolationException("");
         }
@@ -64,7 +62,7 @@ public class VoteServiceImpl implements VoteService {
         Vote newVote = new Vote(userRepo.getOne(userId),
                 restaurantRepo.getOne(restaurantId),
                 new Date());
-        VoteTo todayVote = voteRepo.getTodayUserVote(userId)
+        VoteTo todayVote = voteRepo.getTodayUserVote(userId, new Date())
                 .map(v->  {
                     v.setRestaurant(restaurantRepo.getOne(restaurantId));
                     return new VoteTo(v, false);
@@ -75,14 +73,10 @@ public class VoteServiceImpl implements VoteService {
         return todayVote;
     }
 
-    @Override
-    public List<VoteHistory> getUserVotes(int userId) {
-        log.info("get voteHistory for user with id ={}", userId);
-        return voteRepo.getVotesByUser(userId).
-                stream().map(
-                v -> new VoteHistory(v.getId(),
-                        v.getDate(),
-                        v.getRestaurant().getTitle()))
-                .collect(Collectors.toList());
-    }
+	@Override
+	public List<Vote> getVotesBetween(int userId, Date startDate, Date endDate) {
+		log.info("get voteHistory for user with id ={}", userId);
+		return voteRepo.getVotesBetween(userId, startDate!=null ? startDate : new Date(1, 1, 1),
+				endDate!=null? endDate : new Date(3000, 1, 1));
+	}
 }
