@@ -1,5 +1,9 @@
 package top.graduation.rs.web;
 
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+
+import javax.annotation.PostConstruct;
+
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,11 +14,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
+
+import top.graduation.rs.service.DishService;
+import top.graduation.rs.service.RestaurantService;
 import top.graduation.rs.service.UserServiceSecurity;
-
-import javax.annotation.PostConstruct;
-
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import top.graduation.rs.service.VoteService;
 
 /**
  * Created by Joanna Pakosh on Сент., 2018
@@ -40,6 +44,15 @@ public abstract class AbstractControllerTest {
 
     @Autowired
     protected UserServiceSecurity serviceSecurity;
+
+    @Autowired
+    protected RestaurantService restaurantService;
+
+    @Autowired
+    protected DishService dishService;
+
+    @Autowired
+    protected VoteService voteService;
 
     @PostConstruct
     public void setup() {

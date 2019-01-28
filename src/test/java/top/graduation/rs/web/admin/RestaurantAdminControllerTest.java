@@ -1,24 +1,40 @@
 package top.graduation.rs.web.admin;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.ResultActions;
-import top.graduation.rs.model.Restaurant;
-import top.graduation.rs.service.RestaurantService;
-import top.graduation.rs.web.AbstractControllerTest;
-import top.graduation.rs.web.json.JsonUtil;
-
-import java.util.Comparator;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static top.graduation.rs.RestaurantTestData.*;
-import static top.graduation.rs.TestUtil.*;
+import static top.graduation.rs.RestaurantTestData.RESTAURANTS;
+import static top.graduation.rs.RestaurantTestData.RESTAURANT_1;
+import static top.graduation.rs.RestaurantTestData.RESTAURANT_2;
+import static top.graduation.rs.RestaurantTestData.RESTAURANT_3;
+import static top.graduation.rs.RestaurantTestData.RESTAURANT_4;
+import static top.graduation.rs.RestaurantTestData.RESTAURANT_5;
+import static top.graduation.rs.RestaurantTestData.RESTAURANT_6;
+import static top.graduation.rs.RestaurantTestData.RESTAURANT_7;
+import static top.graduation.rs.RestaurantTestData.RES_ID;
+import static top.graduation.rs.RestaurantTestData.assertMatch;
+import static top.graduation.rs.RestaurantTestData.getCreated;
+import static top.graduation.rs.RestaurantTestData.getUpdated;
+import static top.graduation.rs.TestUtil.contentJson;
+import static top.graduation.rs.TestUtil.mockAuthorize;
+import static top.graduation.rs.TestUtil.readFromJson;
+import static top.graduation.rs.TestUtil.userAuth;
 import static top.graduation.rs.UserTestData.ADMIN;
 import static top.graduation.rs.UserTestData.USER_2;
+
+import java.util.Comparator;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.ResultActions;
+
+import top.graduation.rs.model.Restaurant;
+import top.graduation.rs.web.AbstractControllerTest;
+import top.graduation.rs.web.json.JsonUtil;
 
 /**
  * Created by Joanna Pakosh on Сент., 2018
@@ -27,9 +43,6 @@ import static top.graduation.rs.UserTestData.USER_2;
 class RestaurantAdminControllerTest extends AbstractControllerTest {
 
     private static final String REST_URL = RestaurantAdminController.REST_URL + "/";
-
-    @Autowired
-    private RestaurantService service;
 
     @Test
     void testGetForbidden() throws Exception {
@@ -49,7 +62,7 @@ class RestaurantAdminControllerTest extends AbstractControllerTest {
 
         mockAuthorize(ADMIN);
         RESTAURANTS.sort(Comparator.comparing(Restaurant::getTitle));
-        assertMatch(service.getAll(), RESTAURANTS);
+        assertMatch(restaurantService.getAll(), RESTAURANTS);
     }
 
     @Test
@@ -63,7 +76,7 @@ class RestaurantAdminControllerTest extends AbstractControllerTest {
                 .andExpect(contentJson(RESTAURANT_4));
 
         mockAuthorize(ADMIN);
-        assertMatch(service.retrieve(RES_ID + 3), RESTAURANT_4);
+        assertMatch(restaurantService.retrieve(RES_ID + 3), RESTAURANT_4);
     }
 
     @Test
@@ -89,7 +102,7 @@ class RestaurantAdminControllerTest extends AbstractControllerTest {
 
         assertMatch(returned, created);
         mockAuthorize(ADMIN);
-        assertMatch(service.getAll(), created, RESTAURANT_7, RESTAURANT_5, RESTAURANT_3, RESTAURANT_1, RESTAURANT_2,
+        assertMatch(restaurantService.getAll(), created, RESTAURANT_7, RESTAURANT_5, RESTAURANT_3, RESTAURANT_1, RESTAURANT_2,
                 RESTAURANT_6, RESTAURANT_4);
     }
 
@@ -103,6 +116,6 @@ class RestaurantAdminControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk());
 
         mockAuthorize(ADMIN);
-        assertMatch(service.retrieve(RES_ID + 6), updated);
+        assertMatch(restaurantService.retrieve(RES_ID + 6), updated);
     }
 }
