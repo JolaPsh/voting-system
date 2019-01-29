@@ -1,0 +1,17 @@
+# https://docs.travis-ci.com/user/languages/java/
+language: java
+jdk: oraclejdk8
+
+#https://dzone.com/articles/travis-ci-tutorial-java-projects
+cache:
+  directories:
+  - $HOME/.m2
+
+# https://docs.travis-ci.com/user/customizing-the-build#Building-Specific-Branches
+branches:
+  only:
+  - master
+
+#https://docs.travis-ci.com/user/environment-variables#Default-Environment-Variables
+env:
+- VOTING_SYSTEM_ROOT=$TRAVIS_BUILD_DIR
