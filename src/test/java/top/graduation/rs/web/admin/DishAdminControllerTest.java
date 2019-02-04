@@ -21,12 +21,10 @@ import static top.graduation.rs.UserTestData.ADMIN;
 import static top.graduation.rs.UserTestData.USER_1;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
 import top.graduation.rs.model.Dish;
-import top.graduation.rs.service.DishService;
 import top.graduation.rs.web.AbstractControllerTest;
 import top.graduation.rs.web.json.JsonUtil;
 
@@ -37,9 +35,6 @@ import top.graduation.rs.web.json.JsonUtil;
 class DishAdminControllerTest extends AbstractControllerTest {
 
     private static final String REST_URL = DishAdminController.REST_URL + "/";
-
-    @Autowired
-    private DishService service;
 
     @Test
     void testGetForbidden() throws Exception {
@@ -58,7 +53,7 @@ class DishAdminControllerTest extends AbstractControllerTest {
                 .andDo(print());
 
         mockAuthorize(ADMIN);
-        assertMatch(service.getAll(), DISHES);
+        assertMatch(dishService.getAll(), DISHES);
     }
 
     @Test
@@ -72,7 +67,7 @@ class DishAdminControllerTest extends AbstractControllerTest {
                 .andExpect(contentJson(DISH_6));
 
         mockAuthorize(ADMIN);
-        assertMatch(service.retrieve(DISH_ID + 5), DISH_6);
+        assertMatch(dishService.retrieve(DISH_ID + 5), DISH_6);
     }
 
     @Test
@@ -98,7 +93,7 @@ class DishAdminControllerTest extends AbstractControllerTest {
 
         assertMatch(returned, created);
         mockAuthorize(ADMIN);
-  //      assertMatch(service.getAll(), DISH_1, DISH_2, DISH_3, DISH_4, DISH_5, DISH_6, DISH_7, DISH_8,DISH_9, created);
+  //      assertMatch(dishService.getAll(), DISH_1, DISH_2, DISH_3, DISH_4, DISH_5, DISH_6, DISH_7, DISH_8,DISH_9, created);
     }
 
     @Test
@@ -111,6 +106,6 @@ class DishAdminControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk());
 
         mockAuthorize(ADMIN);
-        assertMatch(service.retrieve(DISH_ID+4), updated);
+        assertMatch(dishService.retrieve(DISH_ID+4), updated);
     }
 }

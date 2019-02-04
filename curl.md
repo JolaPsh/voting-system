@@ -66,10 +66,6 @@
 
 `curl -s http://localhost:8080/rest/restaurants/dishes --user dominik@gmail.com:12345678`
 
-**GET all restaurant with dishes for date:**
-
-`curl -s http://localhost:8080/rest/restaurants/dishes?date=2019-01-2 --user dominik@gmail.com:12345678`
-
 **CREATE(UPDATE) vote:**
 
 `curl -s -X POST -d ' {"restaurant_id": 1004"} ' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/rest/vote/1004 --user dominik@gmail.com:12345678`

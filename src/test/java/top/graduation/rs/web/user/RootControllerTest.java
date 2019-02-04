@@ -11,10 +11,8 @@ import static top.graduation.rs.TestUtil.userAuth;
 import static top.graduation.rs.UserTestData.USER_2;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
-import top.graduation.rs.service.RestaurantService;
 import top.graduation.rs.web.AbstractControllerTest;
 
 /**
@@ -24,9 +22,6 @@ import top.graduation.rs.web.AbstractControllerTest;
 class RootControllerTest extends AbstractControllerTest {
 
     private static final String REST_URL = RootController.REST_URL + "/";
-
-    @Autowired
-    private RestaurantService service;
 
 /*    @Test
     void getRestaurantsWithDishes() throws Exception {
@@ -51,6 +46,6 @@ class RootControllerTest extends AbstractControllerTest {
                 .andExpect(contentJsonArray(RESTAURANT_4));
 
         mockAuthorize(USER_2);
-        assertMatch(service.findByTitle("ku"), RESTAURANT_4);
+        assertMatch(restaurantService.findByTitle("ku"), RESTAURANT_4);
     }
 }
