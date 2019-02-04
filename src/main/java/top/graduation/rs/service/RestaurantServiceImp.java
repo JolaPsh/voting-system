@@ -1,18 +1,19 @@
 package top.graduation.rs.service;
 
-import javassist.NotFoundException;
+import static top.graduation.rs.util.ValidationUtil.checkNotFoundWithId;
+
+import java.util.List;
+
+import javax.cache.annotation.CacheResult;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import top.graduation.rs.model.Restaurant;
 import top.graduation.rs.repository.datajpa.RestaurantRepository;
-
-import javax.cache.annotation.CacheResult;
-import java.time.LocalDate;
-import java.util.List;
-
-import static top.graduation.rs.util.ValidationUtil.checkNotFoundWithId;
+import top.graduation.rs.util.exceptions.NotFoundException;
 
 /**
  * Created by Joanna Pakosh on Сент., 2018
@@ -60,9 +61,9 @@ public class RestaurantServiceImp implements RestaurantService {
 
     @Override
     @CacheResult(cacheName = "restaurants")
-    public List<Restaurant> getRestaurantsWithDishes(LocalDate date) {
+    public List<Restaurant> getRestaurantsWithDishes() {
         log.info("get all restaurants with dishes {}");
-        return repository.getRestaurantsWithDishes(date);
+        return repository.getRestaurantsWithDishes();
     }
 
     @Override

@@ -1,6 +1,6 @@
 package top.graduation.rs.model;
 
-import org.hibernate.validator.constraints.Range;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +11,9 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
-import java.time.LocalDate;
+import org.hibernate.validator.constraints.Range;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 /**
  * Created by Joanna Pakosh on Июль, 2018
@@ -28,6 +30,8 @@ public class Dish extends AbstractNamedEntity {
 	private int price;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "restaurant_id", nullable = false)
+	@JsonBackReference
+	@NotNull
 	private Restaurant restaurant;
 
 	public Dish() {
@@ -39,8 +43,7 @@ public class Dish extends AbstractNamedEntity {
 		this.price = price;
 	}
 
-	public Dish(Integer id, LocalDate date, String name, int price,
-			Restaurant restaurant) {
+	public Dish(Integer id, LocalDate date, String name, int price, Restaurant restaurant) {
 		super(id, name);
 		this.date = date;
 		this.price = price;
@@ -73,8 +76,7 @@ public class Dish extends AbstractNamedEntity {
 
 	@Override
 	public String toString() {
-		return "Dish{" + "id=" + id + ", name='" + name + '\'' + ", date="
-				+ date + ", price=" + price + ", restaurant=" + restaurant
-				+ '}';
+		return "Dish{" + "id=" + id + ", name='" + name + '\'' + ", date=" + date + ", price=" + price + ", restaurant="
+				+ restaurant + '}';
 	}
 }

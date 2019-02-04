@@ -1,16 +1,17 @@
 package top.graduation.rs.service;
 
-import javassist.NotFoundException;
+import static top.graduation.rs.util.ValidationUtil.checkNotFoundWithId;
+
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import top.graduation.rs.model.Dish;
 import top.graduation.rs.repository.datajpa.DishRepository;
-
-import java.util.List;
-
-import static top.graduation.rs.util.ValidationUtil.checkNotFoundWithId;
+import top.graduation.rs.util.exceptions.NotFoundException;
 
 
 /**

@@ -1,9 +1,10 @@
 package top.graduation.rs.web.user;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,11 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import top.graduation.rs.View;
 import top.graduation.rs.model.Restaurant;
 import top.graduation.rs.service.RestaurantService;
-
-import java.time.LocalDate;
-import java.util.List;
 
 /**
  * Created by Joanna Pakosh on Сент., 2018
@@ -30,12 +32,12 @@ public class RootController {
 
     @Autowired
     private RestaurantService service;
-    
+
+	@JsonView(View.SummaryWithDishes.class)
     @GetMapping("/dishes")
-    public ResponseEntity<List<Restaurant>> getRestaurantsWithDishes(@RequestParam(value = "date", required = false)
-                                                                     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        log.info("get all restaurants with dishes, localDate ={}", date);
-        List<Restaurant> allRestaurantsWithDishes = service.getRestaurantsWithDishes(date);
+    public ResponseEntity<List<Restaurant>> getRestaurantsWithDishes() {
+        log.info("get all restaurants with dishes : {} ", service.getRestaurantsWithDishes());
+        List<Restaurant> allRestaurantsWithDishes = service.getRestaurantsWithDishes();
         return new ResponseEntity<>(allRestaurantsWithDishes, HttpStatus.OK);
     }
 

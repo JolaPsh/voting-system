@@ -15,7 +15,10 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonView;
+
+import top.graduation.rs.View;
 
 /**
  * Created by Joanna Pakosh on Июль, 2018
@@ -27,16 +30,19 @@ public class Restaurant extends AbstractBaseEntity {
 	@Column(name = "title", nullable = false, unique = true)
 	@Size(min = 2, max = 70)
 	@NotBlank
+	@JsonView(View.Summary.class)
 	private String title;
 	@Column(name = "location", nullable = false)
 	@Size(min = 2, max = 300)
 	@NotBlank
+	@JsonView(View.Summary.class)
 	private String location;
 	@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
-	@JsonBackReference
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="restaurant")
 	@OrderBy("date DESC")
-	protected List<Dish> dishes;
+	@JsonManagedReference
+	@JsonView(View.SummaryWithDishes.class)
+	private List<Dish> dishes;
 
 	public Restaurant() {
 	}

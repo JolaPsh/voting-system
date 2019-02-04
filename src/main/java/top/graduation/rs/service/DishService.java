@@ -1,10 +1,11 @@
 package top.graduation.rs.service;
 
-import javassist.NotFoundException;
-import org.springframework.security.access.annotation.Secured;
-import top.graduation.rs.model.Dish;
-
 import java.util.List;
+
+import org.springframework.security.access.annotation.Secured;
+
+import top.graduation.rs.model.Dish;
+import top.graduation.rs.util.exceptions.NotFoundException;
 
 /**
  * Created by Joanna Pakosh on Сент., 2018
