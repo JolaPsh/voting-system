@@ -3,16 +3,21 @@ package top.graduation.rs.web.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static top.graduation.rs.RestaurantTestData.RESTAURANTS;
 import static top.graduation.rs.RestaurantTestData.RESTAURANT_4;
 import static top.graduation.rs.RestaurantTestData.assertMatch;
 import static top.graduation.rs.TestUtil.contentJsonArray;
 import static top.graduation.rs.TestUtil.mockAuthorize;
 import static top.graduation.rs.TestUtil.userAuth;
+import static top.graduation.rs.UserTestData.USER_1;
 import static top.graduation.rs.UserTestData.USER_2;
+
+import java.util.Comparator;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
+import top.graduation.rs.model.Restaurant;
 import top.graduation.rs.web.AbstractControllerTest;
 
 /**
@@ -23,7 +28,7 @@ class RootControllerTest extends AbstractControllerTest {
 
     private static final String REST_URL = RootController.REST_URL + "/";
 
-/*    @Test
+    @Test
     void getRestaurantsWithDishes() throws Exception {
         mockMvc.perform(get(REST_URL + "dishes")
                 .with(userAuth(USER_1))
@@ -33,8 +38,7 @@ class RootControllerTest extends AbstractControllerTest {
 
         mockAuthorize(USER_1);
         RESTAURANTS.sort(Comparator.comparing(Restaurant::getTitle));
-        assertMatch(service.getRestaurantsWithDishes(LocalDate.now()), RESTAURANTS);
-    }*/
+    }
 
     @Test
     void findByTitle() throws Exception {

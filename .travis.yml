@@ -15,3 +15,9 @@ branches:
 #https://docs.travis-ci.com/user/environment-variables#Default-Environment-Variables
 env:
 - VOTING_SYSTEM_ROOT=$TRAVIS_BUILD_DIR
+-DB=hsql
+
+# https://docs.travis-ci.com/user/database-setup/#PostgreSQL
+before_script:
+- psql -c 'create database topjava' -U postgres
+- psql -c 'create user "user"; grant all privileges on database topjava to "user"' -U postgres
