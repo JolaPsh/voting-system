@@ -38,6 +38,7 @@ class RootControllerTest extends AbstractControllerTest {
 
         mockAuthorize(USER_1);
         RESTAURANTS.sort(Comparator.comparing(Restaurant::getTitle));
+        assertMatch(restaurantService.getRestaurantsWithDishes(), RESTAURANTS);
     }
 
     @Test

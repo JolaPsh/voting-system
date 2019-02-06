@@ -21,7 +21,7 @@ INSERT INTO dishes (name, price, restaurant_id) VALUES
   ('Cabbage rolls', 52, 1002),
   ('Omelette', 27, 1000),
   ('Casserole', 72, 1003),
-  ('Fish and chips', 108, 1004),
+  ('Fish and chips', 108, 1006),
   ('Mint tea', 25, 1005),
   ('Champagne', 50, 1004),
   ('Cutlet + spaghetti', 62, 1001);

@@ -92,8 +92,6 @@ class DishAdminControllerTest extends AbstractControllerTest {
        created.setId(returned.getId());
 
         assertMatch(returned, created);
-        mockAuthorize(ADMIN);
-  //      assertMatch(dishService.getAll(), DISH_1, DISH_2, DISH_3, DISH_4, DISH_5, DISH_6, DISH_7, DISH_8,DISH_9, created);
     }
 
     @Test

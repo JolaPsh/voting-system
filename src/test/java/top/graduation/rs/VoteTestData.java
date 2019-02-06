@@ -31,18 +31,4 @@ public class VoteTestData {
     public static void assertMatch(Iterable<Vote> actual, Iterable<Vote> expected) {
         assertThat(actual).isEqualTo(expected);
     }
-
-/*    public static void assertMatch(List<Vote> actual, List<Vote> expected) {
-        assertThat(actual).isEqualTo(expected);
-    }*/
-
-/*    private static Date getDateWithoutTime(final Date dateOnly) {
-        final Calendar cal = Calendar.getInstance();
-        cal.clear(Calendar.HOUR_OF_DAY);
-        cal.clear(Calendar.MINUTE);
-        cal.clear(Calendar.SECOND);
-        cal.clear(Calendar.MILLISECOND);
-        cal.setTime(dateOnly);
-        return dateOnly;
-    }*/
 }

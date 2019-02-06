@@ -4,6 +4,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static top.graduation.rs.DishTestData.TODAY;
 import static top.graduation.rs.RestaurantTestData.RESTAURANT_2;
 import static top.graduation.rs.RestaurantTestData.RES_ID;
 import static top.graduation.rs.TestUtil.contentJson;
@@ -50,14 +51,14 @@ class VoteControllerTest extends AbstractControllerTest {
 
 	@Test
 	void getTodayUserVote() throws Exception {
-		mockMvc.perform(get(REST_URL+"?date="+ new Date())
+		mockMvc.perform(get(REST_URL+"?date="+ TODAY)
 				.with(userAuth(USER_1))
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andDo(print());
 
 		mockAuthorize(USER_1);
-		assertMatch(voteService.getTodayUserVote(1017, new Date()).orElse(null), VOTE_1);
+	    assertMatch(voteService.getTodayUserVote(1017, new Date()).orElse(null), VOTE_1);
 	}
 
 	@Test
