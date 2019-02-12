@@ -1,8 +1,8 @@
 package top.graduation.rs.model;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
 import java.util.EnumSet;
 import java.util.Set;
 
@@ -40,7 +40,7 @@ public class User extends AbstractNamedEntity {
 	@Column(name = "registered", columnDefinition = "timestamp default now()")
 	@NotNull
 	@JsonIgnore
-	private Date registered;
+	private LocalDate registered;
 	@Column(name = "password", nullable = false)
 	@NotBlank
 	@Size(min = 5, max = 60)
@@ -67,10 +67,10 @@ public class User extends AbstractNamedEntity {
 	}
 
 	public User(Integer id, String name, String email, String password, Role role, Role... roles) {
-		this(id, name, email, new Date(), password, true, EnumSet.of(role, roles));
+		this(id, name, email, LocalDate.now(), password, true, EnumSet.of(role, roles));
 	}
 
-	public User(Integer id, String name, String email, Date registered, String password, boolean enabled,
+	public User(Integer id, String name, String email, LocalDate registered, String password, boolean enabled,
 			Collection<Role> roles) {
 		super(id, name);
 		this.email = email;
@@ -88,11 +88,11 @@ public class User extends AbstractNamedEntity {
 		this.email = email;
 	}
 
-	public Date getRegistered() {
+	public LocalDate getRegistered() {
 		return registered;
 	}
 
-	public void setRegistered(Date registered) {
+	public void setRegistered(LocalDate registered) {
 		this.registered = registered;
 	}
 

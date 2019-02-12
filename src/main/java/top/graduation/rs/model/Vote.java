@@ -1,8 +1,15 @@
 package top.graduation.rs.model;
 
-import javax.persistence.*;
+import java.time.LocalDate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 /**
  * Created by Joanna Pakosh on Июль, 2018
@@ -20,19 +27,19 @@ public class Vote extends AbstractBaseEntity {
     private Restaurant restaurant;
     @Column(name = "date", unique = true)
     @NotNull
-    private Date date;
+    private LocalDate date;
 
     public Vote() {
     }
 
-    public Vote(Integer id, User user, Restaurant restaurant, Date date) {
+    public Vote(Integer id, User user, Restaurant restaurant, LocalDate date) {
         super(id);
         this.user = user;
         this.restaurant = restaurant;
         this.date = date;
     }
 
-    public Vote(User user, Restaurant restaurant, Date date) {
+    public Vote(User user, Restaurant restaurant, LocalDate date) {
         this.user = user;
         this.restaurant = restaurant;
         this.date = date;
@@ -46,7 +53,7 @@ public class Vote extends AbstractBaseEntity {
         return restaurant;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
@@ -58,7 +65,7 @@ public class Vote extends AbstractBaseEntity {
         this.restaurant = restaurant;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
