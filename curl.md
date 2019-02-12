@@ -53,14 +53,13 @@
 ##
 
 **GET vote for user and date:**
-`curl -s http://localhost:8080/rest/vote?date=2019-01-27 --user herbert@gmail.com:herbert`
+`curl -s http://localhost:8080/rest/vote?date=2019-02-12 --user herbert@gmail.com:herbert`
 
 **GET vote history for user with id 1017:**
 
 `curl -s http://localhost:8080/rest/vote/history --user herbert@gmail.com:herbert`
 
-`curl -s http://localhost:8080/rest/vote/history?endDate=2019-01-28T22:00:00.000+0000 --user herbert@gmail.com:herbert`
-
+`curl -s http://localhost:8080/rest/vote/history?endDate=2019-03-28 --user herbert@gmail.com:herbert`
 
 **GET all restaurants:**
 

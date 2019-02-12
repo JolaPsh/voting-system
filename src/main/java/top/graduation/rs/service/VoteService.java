@@ -1,6 +1,6 @@
 package top.graduation.rs.service;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +14,7 @@ import top.graduation.rs.to.VoteTo;
  */
 public interface VoteService {
 
-    Optional<Vote> getTodayUserVote(int userId, Date date);
+    Optional<Vote> getTodayUserVote(int userId, LocalDate date);
 
     @Secured({"ROLE_USER"})
     VoteTo create(int userId, int restaurantId);
@@ -23,5 +23,5 @@ public interface VoteService {
     VoteTo createOrUpdate(int userId, int restaurantId);
 
     @Secured({"ROLE_USER"})
-    List<Vote> getVotesBetween(int userId, Date startDate, Date endDate);
+    List<Vote> getVotesBetween(int userId, LocalDate startDate, LocalDate endDate);
 }

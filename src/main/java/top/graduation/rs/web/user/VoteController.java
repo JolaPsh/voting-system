@@ -1,9 +1,8 @@
 package top.graduation.rs.web.user;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,17 +55,17 @@ public class VoteController {
 	}
 
 	@GetMapping
-	public Optional<Vote> getUserVoteForDate(
-			@RequestParam(value = "date", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date) {
+	public Vote getUserVoteForDate(
+			@RequestParam(value = "date", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
 		int userId = SecurityUtil.authUserId();
 		log.info("get vote for user with id ={}, day ={}", userId, date);
-		return service.getTodayUserVote(userId, date);
+		return service.getTodayUserVote(userId, date).get();
 	}
 
 	@GetMapping("/history")
 	public List<Vote> getVotesBetween(
-			@RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
-			@RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
+			@RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+			@RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
 		int userId = SecurityUtil.authUserId();
 		log.info("get voteHistory for user with id ={}", userId);
 		return service.getVotesBetween(userId, startDate, endDate);

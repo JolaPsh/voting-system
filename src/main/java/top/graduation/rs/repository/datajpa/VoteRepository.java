@@ -1,6 +1,6 @@
 package top.graduation.rs.repository.datajpa;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,8 +24,8 @@ public interface VoteRepository extends JpaRepository<Vote, Integer> {
 
     @Transactional(readOnly = true)
     @Query("SELECT v FROM Vote v WHERE v.user.id=:userId AND v.date=:date")
-    Optional<Vote> getTodayUserVote(@Param("userId") int userId, @Param("date") Date date);
+    Optional<Vote> getTodayUserVote(@Param("userId") int userId, @Param("date") LocalDate date);
 
     @Query("SELECT v from Vote v WHERE v.user.id=:userId AND v.date BETWEEN :startDate AND :endDate ORDER BY v.date DESC")
-    List<Vote> getVotesBetween(@Param("userId") int userId, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List<Vote> getVotesBetween(@Param("userId") int userId, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }
