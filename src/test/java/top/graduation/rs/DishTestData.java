@@ -8,9 +8,9 @@ import static top.graduation.rs.RestaurantTestData.RESTAURANT_4;
 import static top.graduation.rs.RestaurantTestData.RESTAURANT_5;
 import static top.graduation.rs.RestaurantTestData.RESTAURANT_6;
 import static top.graduation.rs.RestaurantTestData.RESTAURANT_7;
+import static top.graduation.rs.TestUtil.TODAY;
 import static top.graduation.rs.model.AbstractBaseEntity.START_SEQ;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,7 +23,6 @@ import top.graduation.rs.model.Dish;
 public class DishTestData {
 
     public static final int DISH_ID = START_SEQ + 7;
-    public static final LocalDate TODAY = LocalDate.now();
 
     public static final Dish DISH_1 = new Dish(DISH_ID, TODAY, "Calamari", 33, RESTAURANT_2);
     public static final Dish DISH_2 = new Dish(DISH_ID + 1, TODAY, "Meat balls + Deruny", 112, RESTAURANT_1);

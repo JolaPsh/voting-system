@@ -37,7 +37,7 @@ class DishAdminControllerTest extends AbstractControllerTest {
     private static final String REST_URL = DishAdminController.REST_URL + "/";
 
     @Test
-    void testGetForbidden() throws Exception {
+    public void testGetForbidden() throws Exception {
         mockMvc.perform(get(REST_URL + DISH_ID + 4)
                 .with(userAuth(USER_1)))
                 .andDo(print())
@@ -45,7 +45,7 @@ class DishAdminControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    void testGetAll() throws Exception {
+    public void testGetAll() throws Exception {
         mockMvc.perform(get(REST_URL)
                 .with(userAuth(ADMIN))
                 .contentType(MediaType.APPLICATION_JSON))
@@ -57,7 +57,7 @@ class DishAdminControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    void testRetrieve() throws Exception {
+    public void testRetrieve() throws Exception {
         mockMvc.perform(get(REST_URL + (DISH_ID + 5))
                 .with(userAuth(ADMIN)))
                 .andExpect(status().isOk())
@@ -71,16 +71,18 @@ class DishAdminControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    void testDelete() throws Exception {
+    public void testDelete() throws Exception {
         mockMvc.perform(delete(REST_URL + DISH_ID)
                 .with(userAuth(ADMIN))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent())
                 .andDo(print());
+
+        assertMatch(dishService.getAll());
     }
 
     @Test
-    void testCreate() throws Exception {
+    public void testCreate() throws Exception {
         Dish created = getCreated();
         ResultActions action = mockMvc.perform(post(REST_URL)
                 .with(userAuth(ADMIN))
@@ -95,7 +97,7 @@ class DishAdminControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    void testUpdate() throws Exception {
+    public void testUpdate() throws Exception {
         Dish updated = getUpdated();
         mockMvc.perform(put(REST_URL + DISH_ID + 4)
                 .with(userAuth(ADMIN))
